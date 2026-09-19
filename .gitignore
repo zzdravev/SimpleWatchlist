@@ -3,4 +3,4 @@ __pycache__/
 *.pyc
 .env
 .streamlit/secrets.toml
-.DS_Store
+.DS_Stored
