@@ -128,6 +128,27 @@ def get_financial_data(tickers):
 
             # Analyst context (already fetched above; no extra network cost)
             info = info_by_ticker.get(ticker, {})
+
+            # Extended-hours quote. Pre/post-market prints are thin and volatile, so
+            # they are reported for reference only and never feed the indicators
+            # above, which stay on settled regular-session closes.
+            market_state = info.get('marketState') or 'UNKNOWN'
+            if market_state.startswith('PRE'):
+                ext_price = _num(info, 'preMarketPrice')
+                ext_change = _num(info, 'preMarketChangePercent')
+            elif market_state.startswith('POST') or market_state == 'CLOSED':
+                ext_price = _num(info, 'postMarketPrice')
+                ext_change = _num(info, 'postMarketChangePercent')
+            else:
+                ext_price = ext_change = np.nan
+
+            if pd.notna(ext_price):
+                extended = f"{ext_price:.2f}"
+                if pd.notna(ext_change):
+                    extended += f" ({ext_change:+.2f}%)"
+            else:
+                extended = "N/A"
+
             target_median = _num(info, 'targetMedianPrice')
             if pd.isna(target_median):
                 target_median = _num(info, 'targetMeanPrice')
@@ -143,6 +164,7 @@ def get_financial_data(tickers):
             results.append({
                 "Ticker": ticker,
                 "Price": round(current_price, 2),
+                "Ext": extended,
                 "Signal": price_signal,
                 "Conviction": conviction,
                 "RSI (14)": round(current_rsi, 2),
@@ -156,6 +178,7 @@ def get_financial_data(tickers):
                 "Target Low": round(target_low, 2) if pd.notna(target_low) else np.nan,
                 "Target High": round(target_high, 2) if pd.notna(target_high) else np.nan,
                 "Analyst Rec": recommendation,
+                "Market": market_state,
             })
         except Exception as e:
             errors.append(f"{ticker}: processing error ({e})")
