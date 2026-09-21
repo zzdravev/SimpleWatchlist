@@ -127,7 +127,9 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
         return f"background-color: {background}; color: {text};"
 
     def highlight_upside(val):
-        if not isinstance(val, (int, float)) or pd.isnull(val):
+        try:
+            val = float(str(val).rstrip("%"))
+        except ValueError:
             return ""
         if abs(val) > IMPLAUSIBLE_UPSIDE:
             # Grey rather than deep green, so a stale target does not read as the
@@ -175,20 +177,23 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
             format="%.2f", help=f"Upper Bollinger band (20, 2). {price_help}"),
         "Strong TP": st.column_config.NumberColumn(
             format="%.2f", help=f"Upper band plus half an ATR. {price_help}"),
-        "Upside %": st.column_config.NumberColumn(
-            format="%+.2f%%",
+        # Text rather than numbers: these are missing often enough that a null number
+        # column would print "None" across the table.
+        "Upside %": st.column_config.TextColumn(
+            alignment="right",
             help="Distance from the price to the median analyst target. Above "
                  f"{IMPLAUSIBLE_UPSIDE}% the cell turns grey, because a target that far away is "
                  "almost certainly stale rather than an opportunity.",
         ),
-        "Target Median": st.column_config.NumberColumn(
-            format="%.2f",
+        "Target Median": st.column_config.TextColumn(
+            alignment="right",
             help="Median 12-month analyst target, more robust to outliers than the mean.",
         ),
-        "Target Low": st.column_config.NumberColumn(
-            format="%.2f", help="Lowest 12-month analyst target. A wide low-to-high spread means analysts disagree."),
-        "Target High": st.column_config.NumberColumn(
-            format="%.2f", help="Highest 12-month analyst target."),
+        "Target Low": st.column_config.TextColumn(
+            alignment="right",
+            help="Lowest 12-month analyst target. A wide low-to-high spread means analysts disagree."),
+        "Target High": st.column_config.TextColumn(
+            alignment="right", help="Highest 12-month analyst target."),
         "Analyst Rec": st.column_config.TextColumn(
             help="Consensus recommendation, with the number of contributing analysts in brackets.",
         ),

@@ -20,6 +20,14 @@ def _num(info, key):
     return float(value) if isinstance(value, (int, float)) else np.nan
 
 
+def _fmt(value, signed=False, suffix=""):
+    """Analyst figures are missing often enough that they are rendered as text:
+    Streamlit prints a null in a number column as the literal word "None"."""
+    if pd.isna(value):
+        return "N/A"
+    return f"{value:+.2f}{suffix}" if signed else f"{value:.2f}{suffix}"
+
+
 def _fetch_ticker_info(ticker):
     """Fetch analyst info for a single ticker (runs in parallel)."""
     try:
@@ -55,6 +63,21 @@ def get_financial_data(tickers):
             info_by_ticker[ticker] = info
             if err:
                 errors.append(f"{ticker}: could not fetch analyst data ({err})")
+
+    # Yahoo answers with an empty payload instead of an error when it refuses a request,
+    # which would otherwise show up as silently blank analyst columns. Every valid symbol
+    # carries marketState, ETFs included, so its absence means a real miss. The quote
+    # endpoint needs an authenticated handshake and Yahoo restricts it from datacenter
+    # addresses, so this is expected to be persistent on hosted deployments.
+    missing_quotes = sorted(t for t in tickers if not info_by_ticker.get(t, {}).get('marketState'))
+    if missing_quotes and len(missing_quotes) == len(tickers):
+        errors.append(
+            "Yahoo returned no quote details, so analyst targets, market state and extended-hours "
+            "prices are unavailable. Its authenticated endpoint is usually blocked for hosted apps "
+            "and rate-limited elsewhere. Prices, signals and indicators are unaffected."
+        )
+    elif missing_quotes:
+        errors.append("No quote details for: " + ", ".join(missing_quotes))
 
     results = []
 
@@ -173,10 +196,10 @@ def get_financial_data(tickers):
                 "Strong Dip": round(strong_dip, 2),
                 "Mod TP": round(mod_tp, 2),
                 "Strong TP": round(strong_tp, 2),
-                "Upside %": round(upside, 2) if pd.notna(upside) else np.nan,
-                "Target Median": round(target_median, 2) if pd.notna(target_median) else np.nan,
-                "Target Low": round(target_low, 2) if pd.notna(target_low) else np.nan,
-                "Target High": round(target_high, 2) if pd.notna(target_high) else np.nan,
+                "Upside %": _fmt(upside, signed=True, suffix="%"),
+                "Target Median": _fmt(target_median),
+                "Target Low": _fmt(target_low),
+                "Target High": _fmt(target_high),
                 "Analyst Rec": recommendation,
                 "Market": market_state,
             })
