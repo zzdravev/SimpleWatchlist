@@ -1,0 +1,13 @@
+probe run (UTC): 2026-09-21T09:42:02+00:00
+
+--- chart endpoint: prices and indicators ---
+rows=5 columns=15
+RESULT: chart endpoint OK
+
+--- quoteSummary: market state and analyst data ---
+NVDA: keys=189 marketState='PRE' targetMedianPrice=315.0 analysts=59
+AAPL: keys=187 marketState='PRE' targetMedianPrice=340.0 analysts=39
+KO: keys=187 marketState='PRE' targetMedianPrice=96.0 analysts=23
+
+RESULT: quoteSummary reachable for 3/3 tickers
+VERDICT: USABLE FROM CI
