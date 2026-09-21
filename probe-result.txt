@@ -1,13 +1,10 @@
-probe run (UTC): 2026-09-21T09:42:02+00:00
+probe run (UTC): 2026-09-21T09:48:38+00:00
+watchlist size: 14
 
---- chart endpoint: prices and indicators ---
-rows=5 columns=15
-RESULT: chart endpoint OK
+sequential, round 1          14/14 ok     2.2s
+parallel x8, round 1         14/14 ok     0.3s
+parallel x8, round 2         14/14 ok     0.3s
+parallel x8, round 3         14/14 ok     0.3s
 
---- quoteSummary: market state and analyst data ---
-NVDA: keys=189 marketState='PRE' targetMedianPrice=315.0 analysts=59
-AAPL: keys=187 marketState='PRE' targetMedianPrice=340.0 analysts=39
-KO: keys=187 marketState='PRE' targetMedianPrice=96.0 analysts=23
-
-RESULT: quoteSummary reachable for 3/3 tickers
-VERDICT: USABLE FROM CI
+TOTAL: 56/56 successful quoteSummary calls across 4 rounds (30s apart)
+VERDICT: STABLE UNDER LOAD
