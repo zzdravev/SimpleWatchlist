@@ -1,0 +1,37 @@
+name: Yahoo probe
+
+# Manual, plus a run when the probe itself changes, so it reports once on push.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/yahoo-probe.yml
+      - .github/scripts/yahoo_probe.py
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --quiet yfinance
+
+      # Keep going on failure: a refusal from Yahoo is itself the result.
+      - name: Run probe
+        run: python .github/scripts/yahoo_probe.py > probe-result.txt 2>&1 || true
+
+      - name: Publish result
+        run: |
+          cat probe-result.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add probe-result.txt
+          git diff --staged --quiet || git commit -m "Yahoo probe result [skip ci]"
+          git push
