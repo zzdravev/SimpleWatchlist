@@ -28,6 +28,8 @@ FIELDS = ["targetMedianPrice", "targetMeanPrice", "targetLowPrice", "targetHighP
 
 
 def fetch(ticker):
+    """None when Yahoo refused. An empty dict means it answered but the ticker has
+    no analyst coverage, which is normal for an ETF and not a failure."""
     try:
         info = yf.Ticker(ticker).info
     except Exception as e:
@@ -40,13 +42,14 @@ def fetch(ticker):
 
     entry = {field: info[field] for field in FIELDS if info.get(field) is not None}
     print(f"{ticker}: {len(entry)} fields")
-    return ticker, entry or None
+    return ticker, entry
 
 
 def main():
     with ThreadPoolExecutor(max_workers=8) as pool:
         results = dict(pool.map(fetch, DEFAULT_TICKERS))
 
+    answered = sorted(t for t, entry in results.items() if entry is not None)
     collected = {t: entry for t, entry in results.items() if entry}
 
     # An empty result means Yahoo refused everything; keeping the previous record
@@ -60,6 +63,9 @@ def main():
         json.dumps(
             {
                 "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                # Everything Yahoo answered for, so the app can tell "no analyst
+                # coverage" apart from "never looked at".
+                "checked": answered,
                 "tickers": collected,
             },
             indent=2,

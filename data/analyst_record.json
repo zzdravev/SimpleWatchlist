@@ -1,5 +1,21 @@
 {
-  "generated": "2026-09-21T10:07:12+00:00",
+  "checked": [
+    "AAPL",
+    "AMZN",
+    "AVGO",
+    "CVX",
+    "GOOGL",
+    "JNJ",
+    "JPM",
+    "KO",
+    "META",
+    "MSFT",
+    "NVDA",
+    "O",
+    "TSLA",
+    "VUAA.L"
+  ],
+  "generated": "2026-09-21T10:20:24+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 39,

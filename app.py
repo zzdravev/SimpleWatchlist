@@ -1,6 +1,15 @@
+from datetime import date
+
 import streamlit as st
 import pandas as pd
 from engine import DEFAULT_TICKERS, get_financial_data
+
+
+def short_date(value):
+    try:
+        return date.fromisoformat(str(value)[:10]).strftime("%d %b")
+    except ValueError:
+        return "an earlier run"
 
 st.set_page_config(page_title="Simple Watchlist", layout="wide")
 
@@ -210,14 +219,22 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
         .map(highlight_upside, subset=["Upside %"])
     )
 
-    caption = (f"Market state: {', '.join(market_states) or 'unknown'}. "
-               "Ext is the latest pre/post-market quote; indicators and signals use "
-               "regular-session closes only.")
+    # Only what cannot be learned elsewhere: how current the prices are, and where
+    # the analyst figures came from. Column meanings live in the header tooltips
+    # and the expander below, so they are not repeated here.
     meta = st.session_state.get("meta") or {}
+    parts = []
+    if meta.get("last_close"):
+        parts.append(f"Prices to {short_date(meta['last_close'])}")
     if meta.get("record_used"):
-        generated = str(meta.get("record_generated") or "")[:10] or "an earlier run"
-        caption += f" Analyst columns come from the daily record of {generated}."
-    st.caption(caption)
+        parts.append(f"analyst data from the record of {short_date(meta.get('record_generated'))}")
+    elif not meta.get("quotes_refused"):
+        parts.append("analyst data live")
+    if market_states:
+        parts.append(f"market {', '.join(market_states).lower()}")
+    if meta.get("quotes_refused"):
+        parts.append("Ext unavailable on this deployment")
+    st.caption(" · ".join(parts))
     st.dataframe(styled_df, width="stretch", height=560, hide_index=True, row_height=28,
                  column_config=column_config)
 else:

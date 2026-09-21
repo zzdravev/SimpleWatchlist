@@ -72,7 +72,11 @@ def get_financial_data(tickers):
     errors = []
     record = load_analyst_record()
     record_tickers = record.get("tickers", {})
-    meta = {"record_generated": record.get("generated"), "record_used": False}
+    # Tickers the record job looked at, including those that legitimately have no
+    # analyst coverage, so an ETF is not reported as a failure.
+    record_checked = set(record.get("checked", record_tickers))
+    meta = {"record_generated": record.get("generated"), "record_used": False,
+            "quotes_refused": False, "last_close": None}
 
     raw_data = yf.download(tickers, period="1y", interval="1d", group_by="ticker", auto_adjust=True)
 
@@ -92,14 +96,9 @@ def get_financial_data(tickers):
     # endpoint needs an authenticated handshake and Yahoo restricts it from datacenter
     # addresses, so this is expected to be persistent on hosted deployments.
     missing_quotes = sorted(t for t in tickers if not info_by_ticker.get(t, {}).get('marketState'))
-    if missing_quotes and len(missing_quotes) == len(tickers):
-        errors.append(
-            "Yahoo returned no quote details, so analyst targets, market state and extended-hours "
-            "prices are unavailable. Its authenticated endpoint is usually blocked for hosted apps "
-            "and rate-limited elsewhere. Prices, signals and indicators are unaffected."
-        )
-    elif missing_quotes:
-        errors.append("No quote details for: " + ", ".join(missing_quotes))
+    # Only a wholesale refusal means the endpoint is unreachable here; one bad symbol
+    # says nothing about the deployment.
+    meta["quotes_refused"] = len(missing_quotes) == len(tickers) and bool(tickers)
 
     results = []
 
@@ -114,6 +113,10 @@ def get_financial_data(tickers):
             high = df['High']
             low = df['Low']
             current_price = close.iloc[-1]
+
+            last_bar = str(df.index[-1])[:10]
+            if meta["last_close"] is None or last_bar > meta["last_close"]:
+                meta["last_close"] = last_bar
 
             # RSI (14), Wilder smoothing - matches TradingView / Yahoo
             delta = close.diff()
@@ -234,6 +237,18 @@ def get_financial_data(tickers):
         except Exception as e:
             errors.append(f"{ticker}: processing error ({e})")
             print(f"Error processing {ticker}: {e}")
+
+    # Only a refusal the record cannot cover is worth a warning, and only for a ticker
+    # that otherwise worked: one that failed outright already said so above. Where the
+    # record fills in, the caption reports it, so a warning still means something broke.
+    priced = {row["Ticker"] for row in results}
+    uncovered = [t for t in missing_quotes if t not in record_checked and t in priced]
+    if uncovered:
+        errors.append(
+            "Yahoo returned no analyst data for " + ", ".join(uncovered) +
+            ". Its authenticated endpoint is usually blocked for hosted apps and rate-limited "
+            "elsewhere. Prices, signals and indicators are unaffected."
+        )
 
     final_df = pd.DataFrame(results)
     _data_cache[cache_key] = (now, final_df, errors, meta)
