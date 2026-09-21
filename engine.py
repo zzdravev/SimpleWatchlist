@@ -1,12 +1,30 @@
+import json
 import pandas as pd
 import yfinance as yf
 import numpy as np
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
 
 # Cache lifetime in seconds (300 seconds = 5 minutes)
 CACHE_EXPIRY_SECONDS = 300
 _data_cache = {}
+
+DEFAULT_TICKERS = ["NVDA", "VUAA.L", "KO", "JNJ", "O", "META", "GOOGL", "MSFT",
+                   "TSLA", "AAPL", "AMZN", "JPM", "AVGO", "CVX"]
+
+# Written daily by .github/workflows/analyst-record.yml. Yahoo refuses the
+# authenticated quote endpoint from Streamlit Cloud but answers it from CI, so the
+# slow-moving analyst figures are collected there and read back from disk here.
+RECORD_PATH = Path(__file__).with_name("data") / "analyst_record.json"
+
+
+def load_analyst_record():
+    try:
+        with open(RECORD_PATH, encoding="utf-8") as handle:
+            return json.load(handle)
+    except (OSError, ValueError):
+        return {}
 
 
 def _wilder_rma(series, period):
@@ -40,17 +58,21 @@ def _fetch_ticker_info(ticker):
 def get_financial_data(tickers):
     """
     Download and process data for a list of tickers, with built-in caching.
-    Returns (DataFrame, list of errors) where each error is a string.
+    Returns (DataFrame, list of errors, meta) where meta reports whether the
+    daily analyst record was needed and how old it is.
     """
     now = datetime.now()
     cache_key = tuple(sorted(tickers))
 
     if cache_key in _data_cache:
-        cached_time, cached_df, cached_errors = _data_cache[cache_key]
+        cached_time, cached_df, cached_errors, cached_meta = _data_cache[cache_key]
         if (now - cached_time).total_seconds() < CACHE_EXPIRY_SECONDS:
-            return cached_df, cached_errors
+            return cached_df, cached_errors, cached_meta
 
     errors = []
+    record = load_analyst_record()
+    record_tickers = record.get("tickers", {})
+    meta = {"record_generated": record.get("generated"), "record_used": False}
 
     raw_data = yf.download(tickers, period="1y", interval="1d", group_by="ticker", auto_adjust=True)
 
@@ -149,8 +171,14 @@ def get_financial_data(tickers):
             else:
                 conviction = "-"
 
-            # Analyst context (already fetched above; no extra network cost)
+            # Analyst context (already fetched above; no extra network cost). When the
+            # quote endpoint was refused, fall back to the daily record for the figures
+            # that change slowly. Market state and extended hours are deliberately not
+            # filled in: a day-old value there would be misleading rather than stale.
             info = info_by_ticker.get(ticker, {})
+            if not info.get('marketState') and ticker in record_tickers:
+                info = {**record_tickers[ticker], **info}
+                meta["record_used"] = True
 
             # Extended-hours quote. Pre/post-market prints are thin and volatile, so
             # they are reported for reference only and never feed the indicators
@@ -208,5 +236,5 @@ def get_financial_data(tickers):
             print(f"Error processing {ticker}: {e}")
 
     final_df = pd.DataFrame(results)
-    _data_cache[cache_key] = (now, final_df, errors)
-    return final_df, errors
+    _data_cache[cache_key] = (now, final_df, errors, meta)
+    return final_df, errors, meta

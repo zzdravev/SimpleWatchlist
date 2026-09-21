@@ -1,0 +1,46 @@
+name: Analyst record
+
+on:
+  schedule:
+    # 06:00 UTC on weekdays: after the previous US close, before the European morning.
+    - cron: "0 6 * * 1-5"
+  workflow_dispatch:
+  # Run once when the job itself changes, so a change is verified immediately.
+  push:
+    paths:
+      - .github/workflows/analyst-record.yml
+      - .github/scripts/fetch_analyst_record.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: analyst-record
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --quiet yfinance
+
+      - name: Collect analyst data
+        run: python .github/scripts/fetch_analyst_record.py
+
+      - name: Commit the record
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/analyst_record.json
+          if git diff --staged --quiet; then
+            echo "record unchanged"
+          else
+            git commit -m "Update analyst record [skip ci]"
+            git push
+          fi

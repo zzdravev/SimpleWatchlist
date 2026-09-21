@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-from engine import get_financial_data
+from engine import DEFAULT_TICKERS, get_financial_data
 
 st.set_page_config(page_title="Simple Watchlist", layout="wide")
 
-DEFAULT_TICKERS = "NVDA, VUAA.L, KO, JNJ, O, META, GOOGL, MSFT, TSLA, AAPL, AMZN, JPM, AVGO, CVX"
+DEFAULT_TICKER_TEXT = ", ".join(DEFAULT_TICKERS)
 
 # Analyst targets go stale without being withdrawn: PARA once showed a $24 target
 # against a $0.93 price (+2480%). Past this point the target says nothing useful.
@@ -19,7 +19,7 @@ REQUIRED_COLUMNS = {
 }
 
 if "ticker_input" not in st.session_state:
-    st.session_state.ticker_input = DEFAULT_TICKERS
+    st.session_state.ticker_input = DEFAULT_TICKER_TEXT
 if "show_editor" not in st.session_state:
     st.session_state.show_editor = False
 
@@ -64,7 +64,8 @@ should_refresh = (
 
 if should_refresh:
     with st.spinner("Fetching data from Yahoo Finance..."):
-        st.session_state.df_data, st.session_state.errors = get_financial_data(tickers)
+        (st.session_state.df_data, st.session_state.errors,
+         st.session_state.meta) = get_financial_data(tickers)
         st.session_state.last_tickers = tickers
 
 if st.session_state.get("errors"):
@@ -209,10 +210,14 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
         .map(highlight_upside, subset=["Upside %"])
     )
 
-    st.caption(
-        f"Market state: {', '.join(market_states) or 'unknown'}. "
-        "Ext is the latest pre/post-market quote; indicators and signals use regular-session closes only."
-    )
+    caption = (f"Market state: {', '.join(market_states) or 'unknown'}. "
+               "Ext is the latest pre/post-market quote; indicators and signals use "
+               "regular-session closes only.")
+    meta = st.session_state.get("meta") or {}
+    if meta.get("record_used"):
+        generated = str(meta.get("record_generated") or "")[:10] or "an earlier run"
+        caption += f" Analyst columns come from the daily record of {generated}."
+    st.caption(caption)
     st.dataframe(styled_df, width="stretch", height=560, hide_index=True, row_height=28,
                  column_config=column_config)
 else:

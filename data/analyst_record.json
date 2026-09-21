@@ -1,0 +1,109 @@
+{
+  "generated": "2026-09-21T10:05:31+00:00",
+  "tickers": {
+    "AAPL": {
+      "numberOfAnalystOpinions": 39,
+      "recommendationKey": "buy",
+      "targetHighPrice": 405.0,
+      "targetLowPrice": 215.0,
+      "targetMeanPrice": 328.22205,
+      "targetMedianPrice": 340.0
+    },
+    "AMZN": {
+      "numberOfAnalystOpinions": 59,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 405.0,
+      "targetLowPrice": 230.0,
+      "targetMeanPrice": 328.2244,
+      "targetMedianPrice": 326.0
+    },
+    "AVGO": {
+      "numberOfAnalystOpinions": 47,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 715.0,
+      "targetLowPrice": 215.88,
+      "targetMeanPrice": 531.8468,
+      "targetMedianPrice": 535.0
+    },
+    "CVX": {
+      "numberOfAnalystOpinions": 24,
+      "recommendationKey": "buy",
+      "targetHighPrice": 245.0,
+      "targetLowPrice": 175.0,
+      "targetMeanPrice": 222.66667,
+      "targetMedianPrice": 224.5
+    },
+    "GOOGL": {
+      "numberOfAnalystOpinions": 54,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 515.0,
+      "targetLowPrice": 340.0,
+      "targetMeanPrice": 428.15927,
+      "targetMedianPrice": 429.0
+    },
+    "JNJ": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "buy",
+      "targetHighPrice": 320.0,
+      "targetLowPrice": 190.0,
+      "targetMeanPrice": 277.9091,
+      "targetMedianPrice": 282.0
+    },
+    "JPM": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "buy",
+      "targetHighPrice": 436.0,
+      "targetLowPrice": 305.0,
+      "targetMeanPrice": 375.38095,
+      "targetMedianPrice": 372.0
+    },
+    "KO": {
+      "numberOfAnalystOpinions": 23,
+      "recommendationKey": "buy",
+      "targetHighPrice": 104.0,
+      "targetLowPrice": 75.0,
+      "targetMeanPrice": 94.69565,
+      "targetMedianPrice": 96.0
+    },
+    "META": {
+      "numberOfAnalystOpinions": 56,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 1000.0,
+      "targetLowPrice": 580.0,
+      "targetMeanPrice": 755.2807,
+      "targetMedianPrice": 750.0
+    },
+    "MSFT": {
+      "numberOfAnalystOpinions": 52,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 870.0,
+      "targetLowPrice": 400.0,
+      "targetMeanPrice": 572.91516,
+      "targetMedianPrice": 555.0
+    },
+    "NVDA": {
+      "numberOfAnalystOpinions": 59,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 515.0,
+      "targetLowPrice": 180.0,
+      "targetMeanPrice": 327.7,
+      "targetMedianPrice": 315.0
+    },
+    "O": {
+      "numberOfAnalystOpinions": 20,
+      "recommendationKey": "buy",
+      "targetHighPrice": 74.0,
+      "targetLowPrice": 61.5,
+      "targetMeanPrice": 68.1625,
+      "targetMedianPrice": 68.0
+    },
+    "TSLA": {
+      "numberOfAnalystOpinions": 38,
+      "recommendationKey": "buy",
+      "targetHighPrice": 600.0,
+      "targetLowPrice": 125.0,
+      "targetMeanPrice": 396.93738,
+      "targetMedianPrice": 415.0
+    }
+  }
+}
