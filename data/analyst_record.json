@@ -15,7 +15,7 @@
     "TSLA",
     "VUAA.L"
   ],
-  "generated": "2026-09-21T10:22:28+00:00",
+  "generated": "2026-09-22T10:27:55+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 39,
@@ -26,12 +26,12 @@
       "targetMedianPrice": 340.0
     },
     "AMZN": {
-      "numberOfAnalystOpinions": 59,
+      "numberOfAnalystOpinions": 58,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 405.0,
       "targetLowPrice": 230.0,
-      "targetMeanPrice": 328.2244,
-      "targetMedianPrice": 326.0
+      "targetMeanPrice": 329.20242,
+      "targetMedianPrice": 328.0
     },
     "AVGO": {
       "numberOfAnalystOpinions": 47,
@@ -54,8 +54,8 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 515.0,
       "targetLowPrice": 340.0,
-      "targetMeanPrice": 428.15927,
-      "targetMedianPrice": 429.0
+      "targetMeanPrice": 429.45557,
+      "targetMedianPrice": 430.0
     },
     "JNJ": {
       "numberOfAnalystOpinions": 22,
@@ -86,16 +86,16 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 1000.0,
       "targetLowPrice": 580.0,
-      "targetMeanPrice": 755.2807,
+      "targetMeanPrice": 758.0664,
       "targetMedianPrice": 750.0
     },
     "MSFT": {
       "numberOfAnalystOpinions": 52,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 870.0,
-      "targetLowPrice": 400.0,
-      "targetMeanPrice": 572.91516,
-      "targetMedianPrice": 555.0
+      "targetLowPrice": 440.0,
+      "targetMeanPrice": 575.33826,
+      "targetMedianPrice": 567.5
     },
     "NVDA": {
       "numberOfAnalystOpinions": 59,
@@ -109,9 +109,9 @@
       "numberOfAnalystOpinions": 20,
       "recommendationKey": "buy",
       "targetHighPrice": 74.0,
-      "targetLowPrice": 61.5,
-      "targetMeanPrice": 68.1625,
-      "targetMedianPrice": 68.0
+      "targetLowPrice": 61.0,
+      "targetMeanPrice": 67.6625,
+      "targetMedianPrice": 67.5
     },
     "TSLA": {
       "numberOfAnalystOpinions": 38,
