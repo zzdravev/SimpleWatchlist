@@ -116,7 +116,16 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
             return "background-color: #558b2f; color: white;"
         elif val == "LOW":
             return "background-color: #9e9d24; color: white;"
-        return ""
+        # A distance to the next dip. Deliberately pastel: a triggered signal should
+        # stay visibly stronger than merely being near one.
+        try:
+            distance = float(str(val).split()[0])
+        except ValueError:
+            return ""
+        neutral, near = (245, 245, 245), (197, 225, 165)
+        weight = 1 - min(max(distance, 0) / 3, 1)
+        r, g, b = (round(n + (t - n) * weight) for n, t in zip(neutral, near))
+        return f"background-color: rgb({r}, {g}, {b}); color: #263238;"
 
     # Pastel shades keep the analyst columns visually secondary to the
     # technical signals, which are the ones actually driving decisions.
@@ -169,9 +178,12 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
                  "reason not to add rather than a reason to sell.",
         ),
         "Conviction": st.column_config.TextColumn(
-            help="Strength of a BUY signal, combining the dip with RSI. Over a 5-year backtest "
-                 "of this watchlist, a dip with RSI below 30 returned +12.8% over 60 days "
-                 "against +4.0% for a dip with RSI above 40.",
+            help="For a live dip, how strong it is: HIGH, MEDIUM or LOW by RSI. Over a 5-year "
+                 "backtest of this watchlist, a dip with RSI below 30 returned +12.8% over 60 "
+                 "days against +4.0% for a dip with RSI above 40. Otherwise it shows how far "
+                 "the price still is from the Mod Dip level, measured in ATR so tickers of "
+                 "different volatility compare. Smaller is closer; it is a watch list, not a "
+                 "signal.",
         ),
         "RSI (14)": st.column_config.NumberColumn(
             format="%.2f",
@@ -267,6 +279,13 @@ that signal returned about as much as the average day, so it means "don't add he
 rather than "get out". `Conviction` grades a dip by how oversold RSI is at the same time,
 which is where the edge actually sits: a dip with RSI under 30 returned +12.8% over the
 next 60 days, against +4.0% for a dip with RSI over 40.
+
+A dip is rare — across this whole list one fires on about a third of trading days — so
+the rest of the time `Conviction` shows how far the price still has to fall to reach
+`Mod Dip`, counted in ATR so a quiet stock and a volatile one can be compared. Those
+values are shown in pale green rather than solid, and that is the point: the backtested
+edge comes from dips that actually happened, not from ones that nearly did. Read them as
+"worth watching", never as "nearly a buy".
 
 **Your levels (middle).** `Mod Dip` and `Mod TP` are the Bollinger bands themselves;
 `Strong Dip` and `Strong TP` sit half an ATR beyond them, so they adjust to how volatile

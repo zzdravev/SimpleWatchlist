@@ -161,9 +161,11 @@ def get_financial_data(tickers):
             else:
                 rsi_signal = "NEUTRAL"
 
-            # Conviction combines the band dip with RSI. Over a 5y backtest of this
-            # watchlist, a dip with RSI<30 returned +12.8% over 60 days (82% win rate)
-            # versus +4.0% for a dip with RSI>40.
+            # Conviction grades a dip by RSI. Over a 5y backtest of this watchlist, a
+            # dip with RSI<30 returned +12.8% over 60 days (82% win rate) versus +4.0%
+            # for a dip with RSI>40. A dip fires on only about a third of days across
+            # the whole list, so the rest of the time the column reports the distance
+            # left to one, measured in ATR so that it compares across tickers.
             if "BUY" in price_signal:
                 if current_rsi < 30:
                     conviction = "HIGH"
@@ -171,6 +173,8 @@ def get_financial_data(tickers):
                     conviction = "MEDIUM"
                 else:
                     conviction = "LOW"
+            elif pd.notna(mod_dip) and pd.notna(atr) and atr > 0:
+                conviction = f"{(current_price - mod_dip) / atr:.1f} ATR"
             else:
                 conviction = "-"
 
