@@ -15,7 +15,7 @@
     "TSLA",
     "VUAA.L"
   ],
-  "generated": "2026-09-25T10:42:36+00:00",
+  "generated": "2026-09-28T12:11:32+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 39,
@@ -44,17 +44,17 @@
     "CVX": {
       "numberOfAnalystOpinions": 24,
       "recommendationKey": "buy",
-      "targetHighPrice": 245.0,
+      "targetHighPrice": 250.0,
       "targetLowPrice": 175.0,
-      "targetMeanPrice": 222.16667,
-      "targetMedianPrice": 224.5
+      "targetMeanPrice": 224.33333,
+      "targetMedianPrice": 227.0
     },
     "GOOGL": {
       "numberOfAnalystOpinions": 54,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 515.0,
       "targetLowPrice": 340.0,
-      "targetMeanPrice": 429.45557,
+      "targetMeanPrice": 429.54816,
       "targetMedianPrice": 430.0
     },
     "JNJ": {
@@ -70,24 +70,24 @@
       "recommendationKey": "buy",
       "targetHighPrice": 436.0,
       "targetLowPrice": 305.0,
-      "targetMeanPrice": 374.2381,
-      "targetMedianPrice": 372.0
+      "targetMeanPrice": 375.8095,
+      "targetMedianPrice": 375.0
     },
     "KO": {
       "numberOfAnalystOpinions": 23,
       "recommendationKey": "buy",
       "targetHighPrice": 104.0,
       "targetLowPrice": 75.0,
-      "targetMeanPrice": 94.69565,
-      "targetMedianPrice": 96.0
+      "targetMeanPrice": 94.65217,
+      "targetMedianPrice": 95.0
     },
     "META": {
       "numberOfAnalystOpinions": 57,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 1000.0,
       "targetLowPrice": 580.0,
-      "targetMeanPrice": 786.8021,
-      "targetMedianPrice": 780.0
+      "targetMeanPrice": 790.2688,
+      "targetMedianPrice": 790.0
     },
     "MSFT": {
       "numberOfAnalystOpinions": 52,
@@ -118,8 +118,8 @@
       "recommendationKey": "buy",
       "targetHighPrice": 600.0,
       "targetLowPrice": 125.0,
-      "targetMeanPrice": 396.62158,
-      "targetMedianPrice": 415.0
+      "targetMeanPrice": 395.83212,
+      "targetMedianPrice": 412.5
     }
   }
 }
