@@ -15,7 +15,7 @@
     "TSLA",
     "VUAA.L"
   ],
-  "generated": "2026-10-16T10:15:47+00:00",
+  "generated": "2026-10-19T11:25:16+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 39,
@@ -86,7 +86,7 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 1050.0,
       "targetLowPrice": 580.0,
-      "targetMeanPrice": 813.6503,
+      "targetMeanPrice": 815.28827,
       "targetMedianPrice": 830.0
     },
     "MSFT": {
@@ -94,7 +94,7 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 870.0,
       "targetLowPrice": 440.0,
-      "targetMeanPrice": 596.2187,
+      "targetMeanPrice": 599.23755,
       "targetMedianPrice": 600.0
     },
     "NVDA": {
