@@ -15,22 +15,22 @@
     "TSLA",
     "VUAA.L"
   ],
-  "generated": "2026-10-20T10:31:57+00:00",
+  "generated": "2026-10-21T10:44:27+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 39,
       "recommendationKey": "buy",
       "targetHighPrice": 405.0,
       "targetLowPrice": 215.0,
-      "targetMeanPrice": 329.3759,
-      "targetMedianPrice": 340.0
+      "targetMeanPrice": 328.35025,
+      "targetMedianPrice": 335.0
     },
     "AMZN": {
       "numberOfAnalystOpinions": 58,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 405.0,
       "targetLowPrice": 230.0,
-      "targetMeanPrice": 331.71967,
+      "targetMeanPrice": 331.7243,
       "targetMedianPrice": 329.5
     },
     "AVGO": {
@@ -46,15 +46,15 @@
       "recommendationKey": "buy",
       "targetHighPrice": 253.0,
       "targetLowPrice": 175.0,
-      "targetMeanPrice": 229.625,
-      "targetMedianPrice": 232.0
+      "targetMeanPrice": 230.66667,
+      "targetMedianPrice": 234.5
     },
     "GOOGL": {
       "numberOfAnalystOpinions": 54,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 515.0,
       "targetLowPrice": 340.0,
-      "targetMeanPrice": 430.04816,
+      "targetMeanPrice": 430.33203,
       "targetMedianPrice": 430.0
     },
     "JNJ": {
@@ -74,19 +74,19 @@
       "targetMedianPrice": 372.0
     },
     "KO": {
-      "numberOfAnalystOpinions": 23,
+      "numberOfAnalystOpinions": 24,
       "recommendationKey": "buy",
       "targetHighPrice": 104.0,
       "targetLowPrice": 75.0,
-      "targetMeanPrice": 94.73913,
-      "targetMedianPrice": 96.0
+      "targetMeanPrice": 95.125,
+      "targetMedianPrice": 97.0
     },
     "META": {
       "numberOfAnalystOpinions": 58,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 1050.0,
       "targetLowPrice": 580.0,
-      "targetMeanPrice": 818.9952,
+      "targetMeanPrice": 817.87445,
       "targetMedianPrice": 830.0
     },
     "MSFT": {
@@ -94,7 +94,7 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 870.0,
       "targetLowPrice": 440.0,
-      "targetMeanPrice": 599.27527,
+      "targetMeanPrice": 600.8791,
       "targetMedianPrice": 600.0
     },
     "NVDA": {
@@ -110,7 +110,7 @@
       "recommendationKey": "hold",
       "targetHighPrice": 74.0,
       "targetLowPrice": 59.0,
-      "targetMeanPrice": 64.86905,
+      "targetMeanPrice": 64.63095,
       "targetMedianPrice": 64.0
     },
     "TSLA": {
