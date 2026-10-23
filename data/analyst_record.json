@@ -15,7 +15,7 @@
     "TSLA",
     "VUAA.L"
   ],
-  "generated": "2026-10-22T10:45:41+00:00",
+  "generated": "2026-10-23T10:37:16+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 39,
@@ -30,16 +30,16 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 405.0,
       "targetLowPrice": 230.0,
-      "targetMeanPrice": 331.7243,
+      "targetMeanPrice": 331.71967,
       "targetMedianPrice": 329.5
     },
     "AVGO": {
-      "numberOfAnalystOpinions": 47,
+      "numberOfAnalystOpinions": 48,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 660.0,
       "targetLowPrice": 215.88,
-      "targetMeanPrice": 527.5915,
-      "targetMedianPrice": 535.0
+      "targetMeanPrice": 529.1,
+      "targetMedianPrice": 537.5
     },
     "CVX": {
       "numberOfAnalystOpinions": 24,
@@ -52,9 +52,9 @@
     "GOOGL": {
       "numberOfAnalystOpinions": 54,
       "recommendationKey": "strong_buy",
-      "targetHighPrice": 515.0,
+      "targetHighPrice": 500.0,
       "targetLowPrice": 340.0,
-      "targetMeanPrice": 430.33203,
+      "targetMeanPrice": 429.12222,
       "targetMedianPrice": 430.0
     },
     "JNJ": {
@@ -70,8 +70,8 @@
       "recommendationKey": "buy",
       "targetHighPrice": 425.0,
       "targetLowPrice": 312.0,
-      "targetMeanPrice": 372.56522,
-      "targetMedianPrice": 372.0
+      "targetMeanPrice": 372.26086,
+      "targetMedianPrice": 370.0
     },
     "KO": {
       "numberOfAnalystOpinions": 24,
@@ -85,9 +85,9 @@
       "numberOfAnalystOpinions": 58,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 1050.0,
-      "targetLowPrice": 580.0,
-      "targetMeanPrice": 817.87445,
-      "targetMedianPrice": 830.0
+      "targetLowPrice": 600.0,
+      "targetMeanPrice": 843.48,
+      "targetMedianPrice": 850.0
     },
     "MSFT": {
       "numberOfAnalystOpinions": 53,
@@ -98,11 +98,11 @@
       "targetMedianPrice": 600.0
     },
     "NVDA": {
-      "numberOfAnalystOpinions": 59,
+      "numberOfAnalystOpinions": 58,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 515.0,
       "targetLowPrice": 180.0,
-      "targetMeanPrice": 328.71695,
+      "targetMeanPrice": 328.95346,
       "targetMedianPrice": 315.0
     },
     "O": {
@@ -118,8 +118,8 @@
       "recommendationKey": "buy",
       "targetHighPrice": 600.0,
       "targetLowPrice": 128.11,
-      "targetMeanPrice": 397.83212,
-      "targetMedianPrice": 412.5
+      "targetMeanPrice": 408.35843,
+      "targetMedianPrice": 427.5
     }
   }
 }
