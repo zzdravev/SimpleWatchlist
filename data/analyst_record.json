@@ -15,7 +15,7 @@
     "TSLA",
     "VUAA.L"
   ],
-  "generated": "2026-10-29T11:53:53+00:00",
+  "generated": "2026-10-30T11:46:50+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 38,
@@ -50,12 +50,12 @@
       "targetMedianPrice": 235.0
     },
     "GOOGL": {
-      "numberOfAnalystOpinions": 54,
+      "numberOfAnalystOpinions": 52,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 500.0,
-      "targetLowPrice": 340.0,
-      "targetMeanPrice": 429.67776,
-      "targetMedianPrice": 430.0
+      "targetLowPrice": 325.0,
+      "targetMeanPrice": 408.08655,
+      "targetMedianPrice": 400.0
     },
     "JNJ": {
       "numberOfAnalystOpinions": 22,
@@ -70,15 +70,15 @@
       "recommendationKey": "buy",
       "targetHighPrice": 425.0,
       "targetLowPrice": 312.0,
-      "targetMeanPrice": 372.26086,
-      "targetMedianPrice": 370.0
+      "targetMeanPrice": 373.26086,
+      "targetMedianPrice": 372.0
     },
     "KO": {
       "numberOfAnalystOpinions": 24,
       "recommendationKey": "buy",
       "targetHighPrice": 106.0,
       "targetLowPrice": 80.0,
-      "targetMeanPrice": 97.41667,
+      "targetMeanPrice": 97.54167,
       "targetMedianPrice": 100.0
     },
     "META": {
@@ -90,12 +90,12 @@
       "targetMedianPrice": 850.0
     },
     "MSFT": {
-      "numberOfAnalystOpinions": 53,
+      "numberOfAnalystOpinions": 51,
       "recommendationKey": "strong_buy",
       "targetHighPrice": 870.0,
       "targetLowPrice": 440.0,
-      "targetMeanPrice": 605.1243,
-      "targetMedianPrice": 600.0
+      "targetMeanPrice": 627.72766,
+      "targetMedianPrice": 630.0
     },
     "NVDA": {
       "numberOfAnalystOpinions": 58,
@@ -114,12 +114,12 @@
       "targetMedianPrice": 64.0
     },
     "TSLA": {
-      "numberOfAnalystOpinions": 39,
+      "numberOfAnalystOpinions": 40,
       "recommendationKey": "buy",
       "targetHighPrice": 600.0,
       "targetLowPrice": 128.11,
-      "targetMeanPrice": 410.68256,
-      "targetMedianPrice": 430.0
+      "targetMeanPrice": 411.8155,
+      "targetMedianPrice": 436.0
     }
   }
 }
