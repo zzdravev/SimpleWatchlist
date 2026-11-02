@@ -1,0 +1,104 @@
+ticker,name,sector,group
+AAPL,Apple Inc.,Information Technology,S&P 100
+ABBV,AbbVie,Health Care,S&P 100
+ABT,Abbott Laboratories,Health Care,S&P 100
+ACN,Accenture,Information Technology,S&P 100
+ADBE,Adobe Inc.,Information Technology,S&P 100
+AMAT,Applied Materials,Information Technology,S&P 100
+AMD,Advanced Micro Devices,Information Technology,S&P 100
+AMGN,Amgen,Health Care,S&P 100
+AMT,American Tower,Real Estate,S&P 100
+AMZN,Amazon,Consumer Discretionary,S&P 100
+ANET,Arista Networks,Information Technology,S&P 100
+AVGO,Broadcom,Information Technology,S&P 100
+AXP,American Express,Financials,S&P 100
+BA,Boeing,Industrials,S&P 100
+BAC,Bank of America,Financials,S&P 100
+BKNG,Booking Holdings,Consumer Discretionary,S&P 100
+BLK,BlackRock,Financials,S&P 100
+BMY,Bristol Myers Squibb,Health Care,S&P 100
+BNY,BNY Mellon,Financials,S&P 100
+BRK-B,Berkshire Hathaway (Class B),Financials,S&P 100
+C,Citigroup,Financials,S&P 100
+CAT,Caterpillar Inc.,Industrials,S&P 100
+CMCSA,Comcast,Communication Services,S&P 100
+COF,Capital One,Financials,S&P 100
+COP,ConocoPhillips,Energy,S&P 100
+COST,Costco,Consumer Staples,S&P 100
+CRM,Salesforce,Information Technology,S&P 100
+CSCO,Cisco,Information Technology,S&P 100
+CVS,CVS Health,Health Care,S&P 100
+CVX,Chevron Corporation,Energy,S&P 100
+DE,Deere & Company,Industrials,S&P 100
+DELL,Dell Technologies,Information Technology,S&P 100
+DHR,Danaher Corporation,Health Care,S&P 100
+DIS,Walt Disney Company (The),Communication Services,S&P 100
+DUK,Duke Energy,Utilities,S&P 100
+EMR,Emerson Electric,Industrials,S&P 100
+FDX,FedEx,Industrials,S&P 100
+GD,General Dynamics,Industrials,S&P 100
+GE,GE Aerospace,Industrials,S&P 100
+GEV,GE Vernova,Industrials,S&P 100
+GILD,Gilead Sciences,Health Care,S&P 100
+GM,General Motors,Consumer Discretionary,S&P 100
+GOOG,Alphabet Inc. (Class C),Communication Services,S&P 100
+GOOGL,Alphabet Inc. (Class A),Communication Services,S&P 100
+GS,Goldman Sachs,Financials,S&P 100
+HD,Home Depot,Consumer Discretionary,S&P 100
+IBM,IBM,Information Technology,S&P 100
+INTC,Intel,Information Technology,S&P 100
+INTU,Intuit,Information Technology,S&P 100
+ISRG,Intuitive Surgical,Health Care,S&P 100
+JNJ,Johnson & Johnson,Health Care,S&P 100
+JPM,JPMorgan Chase,Financials,S&P 100
+KO,Coca-Cola Company (The),Consumer Staples,S&P 100
+LIN,Linde plc,Materials,S&P 100
+LLY,Eli Lilly and Company,Health Care,S&P 100
+LMT,Lockheed Martin,Industrials,S&P 100
+LOW,Lowe's,Consumer Discretionary,S&P 100
+LRCX,Lam Research,Information Technology,S&P 100
+MA,Mastercard,Financials,S&P 100
+MCD,McDonald's,Consumer Discretionary,S&P 100
+MDLZ,Mondelēz International,Consumer Staples,S&P 100
+MDT,Medtronic,Health Care,S&P 100
+META,Meta Platforms,Communication Services,S&P 100
+MMM,3M,Industrials,S&P 100
+MO,Altria,Consumer Staples,S&P 100
+MRK,Merck & Co.,Health Care,S&P 100
+MS,Morgan Stanley,Financials,S&P 100
+MSFT,Microsoft,Information Technology,S&P 100
+MU,Micron Technology,Information Technology,S&P 100
+NEE,NextEra Energy,Utilities,S&P 100
+NFLX,"Netflix, Inc.",Communication Services,S&P 100
+NOW,ServiceNow,Information Technology,S&P 100
+NVDA,Nvidia,Information Technology,S&P 100
+O,Realty Income,Real Estate,Added
+ORCL,Oracle Corporation,Information Technology,S&P 100
+PANW,Palo Alto Networks,Information Technology,S&P 100
+PEP,PepsiCo,Consumer Staples,S&P 100
+PFE,Pfizer,Health Care,S&P 100
+PG,Procter & Gamble,Consumer Staples,S&P 100
+PLTR,Palantir Technologies,Information Technology,S&P 100
+PM,Philip Morris International,Consumer Staples,S&P 100
+QCOM,Qualcomm,Information Technology,S&P 100
+RTX,RTX Corporation,Industrials,S&P 100
+SBUX,Starbucks,Consumer Discretionary,S&P 100
+SCHW,Charles Schwab Corporation,Financials,S&P 100
+SNDK,Sandisk,Information Technology,S&P 100
+SO,Southern Company,Utilities,S&P 100
+T,AT&T,Communication Services,S&P 100
+TMO,Thermo Fisher Scientific,Health Care,S&P 100
+TMUS,T-Mobile US,Communication Services,S&P 100
+TSLA,"Tesla, Inc.",Consumer Discretionary,S&P 100
+TXN,Texas Instruments,Information Technology,S&P 100
+UBER,Uber,Industrials,S&P 100
+UNH,UnitedHealth Group,Health Care,S&P 100
+UNP,Union Pacific Corporation,Industrials,S&P 100
+UPS,United Parcel Service,Industrials,S&P 100
+USB,U.S. Bancorp,Financials,S&P 100
+V,Visa Inc.,Financials,S&P 100
+VUAA.L,Vanguard S&P 500 UCITS ETF (Acc),ETF,Added
+VZ,Verizon,Communication Services,S&P 100
+WFC,Wells Fargo,Financials,S&P 100
+WMT,Walmart,Consumer Staples,S&P 100
+XOM,ExxonMobil,Energy,S&P 100
