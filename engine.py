@@ -128,7 +128,10 @@ def get_financial_data(tickers):
     today = market_today()
     meta = {"record_generated": record.get("generated"), "record_used": False,
             "quotes_refused": False, "last_close": None,
-            "events": {t: record_events[t] for t in tickers if t in record_events}}
+            "events": {t: record_events[t] for t in tickers if t in record_events},
+            # Daily series per ticker for the detail panel's chart and returns. Kept
+            # here because the download is already paid for; nothing else re-fetches.
+            "history": {}}
 
     raw_data = yf.download(tickers, period="1y", interval="1d", group_by="ticker", auto_adjust=True)
 
@@ -189,8 +192,14 @@ def get_financial_data(tickers):
 
             # Long-term trend. A year of daily bars leaves about 50 values past the
             # warm-up; a younger listing simply has none and gets no trend marker.
-            sma200 = close.rolling(window=200).mean().iloc[-1]
+            sma200_series = close.rolling(window=200).mean()
+            sma200 = sma200_series.iloc[-1]
             below_trend = pd.notna(sma200) and current_price < sma200
+
+            meta["history"][ticker] = pd.DataFrame({
+                "Close": close, "High": high, "Low": low,
+                "Upper": upper_band, "Lower": lower_band, "SMA200": sma200_series,
+            })
 
             # Dynamic dip / take-profit levels for the DCA strategy
             mod_dip = lower_band.iloc[-1]

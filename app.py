@@ -1,17 +1,10 @@
 import re
-from datetime import date
 
 import streamlit as st
-import pandas as pd
 import browser_store
-from engine import DEFAULT_TICKERS, get_financial_data, market_today
-
-
-def short_date(value):
-    try:
-        return date.fromisoformat(str(value)[:10]).strftime("%d %b")
-    except ValueError:
-        return "an earlier run"
+import ticker_panel
+from engine import DEFAULT_TICKERS, get_financial_data, load_universe, market_today
+from ticker_panel import short_date
 
 st.set_page_config(page_title="Simple Watchlist", layout="wide")
 
@@ -71,82 +64,11 @@ def event_days(label):
     return 0 if match.group(1) == "today" else int(match.group(1))
 
 
-def format_money(value):
-    if not isinstance(value, (int, float)):
-        return None
-    for size, suffix in ((1e12, "T"), (1e9, "B"), (1e6, "M")):
-        if abs(value) >= size:
-            return f"${value / size:.1f}{suffix}"
-    return f"${value:,.0f}"
-
-
-def render_event_panel(ticker, events, today, generated):
-    """Upcoming events for one ticker, shown under the table when its row is selected."""
-    st.markdown(f"##### {ticker} · upcoming events")
-    events = events or {}
-    rows = []
-    names = (("earnings", "Earnings"), ("ex_dividend", "Ex-dividend"),
-             ("dividend_payment", "Dividend payment"))
-    for kind, name in names:
-        event = events.get(kind)
-        if not event:
-            continue
-        when = date.fromisoformat(event["date"])
-        days = (when - today).days
-        if days < 0:
-            continue
-        details = []
-        if kind == "earnings":
-            if event.get("confirmed"):
-                status = "Confirmed"
-                hour = {"bmo": "before the open", "amc": "after the close",
-                        "during": "during market hours"}.get(event.get("hour"))
-                if hour:
-                    details.append(hour)
-            else:
-                status = "Estimated"
-                if event.get("latest"):
-                    details.append(f"window to {date.fromisoformat(event['latest']).strftime('%d %b')}")
-            sources = [f"{src} {date.fromisoformat(event[key]).strftime('%d %b')}"
-                       for src, key in (("Yahoo", "yahoo"), ("Finnhub", "finnhub")) if event.get(key)]
-            # A one-day gap is Finnhub running early, not a real disagreement.
-            if len(sources) == 2 and abs((date.fromisoformat(event["yahoo"])
-                                          - date.fromisoformat(event["finnhub"])).days) > 1:
-                details.append("sources differ: " + ", ".join(sources))
-            if isinstance(event.get("eps_estimate"), (int, float)):
-                details.append(f"EPS est. {event['eps_estimate']:.2f}")
-            revenue = format_money(event.get("revenue_estimate"))
-            if revenue:
-                details.append(f"revenue est. {revenue}")
-        elif kind == "ex_dividend":
-            status = "Announced"
-            details.append("buy before this date to receive the next dividend")
-        else:
-            status = "Announced"
-        rows.append({
-            "Event": name,
-            "Date": when.strftime("%a %d %b %Y"),
-            "In": "today" if days == 0 else f"{days} days",
-            "Status": status,
-            "Details": " · ".join(details),
-        })
-    if rows:
-        st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
-    else:
-        st.caption("No earnings or dividend dates known for the next 120 days.")
-    if generated:
-        st.caption(
-            f"Collected {short_date(generated)} from Yahoo and Finnhub. An estimated earnings "
-            "date is a projection until the company confirms it. Where the sources are a day "
-            "apart Yahoo's date is used, since Finnhub often runs a day early; where they "
-            "differ by more, the earlier date is used so the warning is not late."
-        )
-
-
 # Streamlit generates a .st-key-<key> class for keyed containers; that is the
 # supported way to address an element, unlike ids injected through raw HTML.
 EDITOR_SELECTOR = ".st-key-ticker-editor"
 TOP_SELECTOR = ".st-key-app-top"
+PANEL_SELECTOR = ".st-key-ticker-panel"
 
 
 def toggle_editor():
@@ -296,7 +218,9 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
     # Streamlit's guidance: column_config handles formatting, Styler only colours.
     price_help = "Price level derived from the last 20 regular-session closes."
     column_config = {
-        "Ticker": st.column_config.TextColumn(help="Yahoo Finance symbol."),
+        "Ticker": st.column_config.TextColumn(
+            help="Yahoo Finance symbol. Select the row for the ticker's chart, events, "
+                 "fundamentals and news."),
         "Price": st.column_config.NumberColumn(
             format="%.2f",
             help="Last regular-session close. Extended hours are excluded so the indicators stay comparable.",
@@ -401,12 +325,22 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
 
     selected = table.selection.rows
     if selected and selected[0] < len(df):
-        ticker = df.iloc[selected[0]]["Ticker"]
-        with st.container(border=True):
-            render_event_panel(ticker, meta.get("events", {}).get(ticker), market_today(),
-                               meta.get("record_generated"))
+        row = df.iloc[selected[0]]
+        ticker = row["Ticker"]
+        names = {u["ticker"]: u["name"] for u in load_universe()}
+        # The panel opens below a tall table, so bring it into view once per new pick.
+        if st.session_state.get("panel_ticker") != ticker:
+            st.session_state.panel_ticker = ticker
+            st.session_state.scroll_target = PANEL_SELECTOR
+        with st.container(border=True, key="ticker-panel"):
+            ticker_panel.render(
+                ticker, row.to_dict(), meta.get("history", {}).get(ticker),
+                meta.get("events", {}).get(ticker), market_today(),
+                meta.get("record_generated"), name=names.get(ticker),
+            )
     else:
-        st.caption("Select a row to see that ticker's upcoming events.")
+        st.session_state.panel_ticker = None
+        st.caption("Select a row for that ticker's chart, upcoming events, fundamentals and news.")
 else:
     st.warning("No data found for the selected tickers.")
 
@@ -473,8 +407,10 @@ signal logic, and they are worth reading mainly as a spread — a wide `Target L
 `Target High` range means analysts disagree, so the median tells you little.
 
 **Upcoming events.** `Next Event` counts down to the nearest earnings report or
-ex-dividend date, turning from green at 30 days to red at 3 or fewer. Select a row to see
-all of that ticker's known dates. A dip in the days before earnings is often the market
+ex-dividend date, turning from green at 30 days to red at 3 or fewer. Select a row to open
+that ticker's panel: a year of prices with its bands and dip levels, returns over
+standard windows, every known date, fundamentals and analyst ratings, and recent
+headlines. A dip in the days before earnings is often the market
 positioning for the report, which is a different situation from the sell-offs the
 backtest measured.
 
@@ -493,6 +429,8 @@ st.caption(
 scroll_target = st.session_state.pop("scroll_target", None)
 if scroll_target:
     focus_editor = "true" if scroll_target == EDITOR_SELECTOR else "false"
+    # A tall panel should open at its top; short targets read best centred.
+    block = "start" if scroll_target == PANEL_SELECTOR else "center"
     # scroll_target is always one of our own constants, never user input
     st.iframe(
         f"""
@@ -502,7 +440,7 @@ if scroll_target:
                     const doc = window.parent.document;
                     const target = doc.querySelector("{scroll_target}");
                     if (target) {{
-                        target.scrollIntoView({{behavior: "smooth", block: "center"}});
+                        target.scrollIntoView({{behavior: "smooth", block: "{block}"}});
                     }}
                     if ({focus_editor}) {{
                         const input = doc.querySelector("{EDITOR_SELECTOR} input");
