@@ -46,8 +46,9 @@ jobs:
             echo "record unchanged"
           else
             git commit -m "Update analyst record [skip ci]"
-            # The branch may have moved while the job ran (a push, or a universe edit
-            # from the app); replay the record on top instead of failing.
-            git pull --rebase --quiet origin "$GITHUB_REF_NAME"
+            # The branch may have moved while the job ran (a push, a universe edit from
+            # the app, or another run's record). Replay this record on top; the file is
+            # regenerated whole each run, so on a conflict this run's newer copy wins.
+            git pull --rebase -X theirs --quiet origin "$GITHUB_REF_NAME"
             git push
           fi
