@@ -1,0 +1,1210 @@
+ticker,yahoo,status,member_days,covered_days
+A,A,ok,,6529
+AABA,AABA,no Yahoo history,,0
+AAL,AAL,excluded: history starts after membership (possible reused symbol),,0
+AAMRQ,AAMRQ,no Yahoo history,,0
+AAP,AAP,ok,,2047
+AAPL,AAPL,ok,,7760
+ABBV,ABBV,ok,,3230
+ABC,ABC,no Yahoo history,,0
+ABI,ABI,excluded: history starts after membership (possible reused symbol),,0
+ABKFQ,ABKFQ,no Yahoo history,,0
+ABMD,ABMD,no Yahoo history,,0
+ABNB,ABNB,ok,,785
+ABS,ABS,no Yahoo history,,0
+ABT,ABT,ok,,7760
+ABX,ABX,excluded: history starts after membership (possible reused symbol),,0
+ACAS,ACAS,no Yahoo history,,0
+ACGL,ACGL,ok,,1004
+ACKH,ACKH,no Yahoo history,,0
+ACN,ACN,ok,,3855
+ACS,ACS,no Yahoo history,,0
+ACV,ACV,excluded: history starts after membership (possible reused symbol),,0
+ADBE,ADBE,ok,,7420
+ADCT,ADCT,excluded: history starts after membership (possible reused symbol),,0
+ADI,ADI,ok,,6806
+ADM,ADM,ok,,7760
+ADP,ADP,ok,,7760
+ADS,ADS,no Yahoo history,,0
+ADSK,ADSK,ok,,7760
+ADT,ADT,excluded: history starts after membership (possible reused symbol),,0
+AEE,AEE,ok,,7003
+AEP,AEP,ok,,7760
+AES,AES,ok,,7064
+AET,AET,no Yahoo history,,0
+AFL,AFL,ok,,6900
+AFS.A,AFS-A,no Yahoo history,,0
+AGC,AGC,no Yahoo history,,0
+AGN,AGN,no Yahoo history,,0
+AHM,AHM,no Yahoo history,,0
+AIG,AIG,ok,,7760
+AIT,AIT,ok,,953
+AIV,AIV,ok,,4475
+AIZ,AIZ,ok,,4924
+AJG,AJG,ok,,2622
+AKAM,AKAM,ok,,4859
+AKS,AKS,no Yahoo history,,0
+AL,AL,no Yahoo history,,0
+ALB,ALB,ok,,2599
+ALGN,ALGN,ok,,2357
+ALK,ALK,ok,,1912
+ALL,ALL,ok,,7760
+ALLE,ALLE,ok,,3008
+ALTR,ALTR,no Yahoo history,,0
+ALXN,ALXN,no Yahoo history,,0
+AM,AM,excluded: history starts after membership (possible reused symbol),,0
+AMAT,AMAT,ok,,7760
+AMCC,AMCC,no Yahoo history,,0
+AMCR,AMCR,ok,,1862
+AMD,AMD,ok,,6882
+AME,AME,ok,,3298
+AMG,AMG,ok,,1380
+AMGN,AMGN,ok,,7760
+AMH,AMH,excluded: history starts after membership (possible reused symbol),,0
+AMP,AMP,ok,,5066
+AMT,AMT,ok,,4768
+AMTM,AMTM,ok,,0
+AMZN,AMZN,ok,,5269
+AN,AN,ok,,4399
+ANDV,ANDV,no Yahoo history,,0
+ANDW,ANDW,no Yahoo history,,0
+ANET,ANET,ok,,2056
+ANF,ANF,ok,,1697
+ANRZQ,ANRZQ,no Yahoo history,,0
+ANSS,ANSS,no Yahoo history,,0
+ANTM,ANTM,no Yahoo history,,0
+ANV,ANV,excluded: history starts after membership (possible reused symbol),,0
+AON,AON,ok,,7682
+AOS,AOS,ok,,2331
+APA,APA,ok,,7363
+APC,APC,excluded: history starts after membership (possible reused symbol),,0
+APCC,APCC,no Yahoo history,,0
+APD,APD,ok,,7760
+APH,APH,ok,,4551
+APO,APO,ok,,466
+APOL,APOL,no Yahoo history,,0
+APP,APP,ok,,281
+APTV,APTV,ok,,3485
+AR,AR,excluded: history starts after membership (possible reused symbol),,0
+ARC,ARC,no Yahoo history,,0
+ARE,ARE,ok,,2420
+ARES,ARES,ok,,224
+ARG,ARG,no Yahoo history,,0
+ARNC,ARNC,no Yahoo history,,0
+AS,AS,excluded: history starts after membership (possible reused symbol),,0
+ASC,ASC,excluded: history starts after membership (possible reused symbol),,0
+ASH,ASH,ok,,3242
+ASN,ASN,no Yahoo history,,0
+ASND,ASND,excluded: history starts after membership (possible reused symbol),,0
+ASO,ASO,excluded: history starts after membership (possible reused symbol),,0
+AT,AT,excluded: history starts after membership (possible reused symbol),,0
+ATGE,ATGE,no Yahoo history,,0
+ATI,ATI,excluded: history starts after membership (possible reused symbol),,0
+ATO,ATO,ok,,1939
+ATVI,ATVI,no Yahoo history,,0
+AV,AV,excluded: history starts after membership (possible reused symbol),,0
+AVB,AVB,excluded: history starts after membership (possible reused symbol),,0
+AVGO,AVGO,ok,,3141
+AVP,AVP,no Yahoo history,,0
+AVY,AVY,ok,,7760
+AW,AW,no Yahoo history,,0
+AWE,AWE,no Yahoo history,,0
+AWK,AWK,ok,,2682
+AXON,AXON,ok,,878
+AXP,AXP,ok,,7760
+AYE,AYE,no Yahoo history,,0
+AYI,AYI,ok,,535
+AZA.A,AZA-A,no Yahoo history,,0
+AZO,AZO,ok,,7506
+BA,BA,ok,,7760
+BAC,BAC,ok,,7760
+BALL,BALL,ok,,1125
+BAX,BAX,ok,,7760
+BAY,BAY,excluded: history starts after membership (possible reused symbol),,0
+BBBY,BBBY,excluded: history starts after membership (possible reused symbol),,0
+BBI,BBI,no Yahoo history,,0
+BBT,BBT,excluded: history starts after membership (possible reused symbol),,0
+BBWI,BBWI,ok,,795
+BBY,BBY,ok,,6878
+BC,BC,ok,,3140
+BCO,BCO,ok,,0
+BCR,BCR,no Yahoo history,,0
+BDK,BDK,no Yahoo history,,0
+BDX,BDX,ok,,7760
+BEAM,BEAM,excluded: history starts after membership (possible reused symbol),,0
+BEN,BEN,ok,,7173
+BEV,BEV,no Yahoo history,,0
+BF.B,BF-B,ok,,7760
+BFI,BFI,no Yahoo history,,0
+BFO,BFO,no Yahoo history,,0
+BG,BG,ok,,913
+BGEN,BGEN,no Yahoo history,,0
+BGG,BGG,no Yahoo history,,0
+BHF,BHF,ok,,180
+BHGE,BHGE,no Yahoo history,,0
+BHMSQ,BHMSQ,no Yahoo history,,0
+BIG,BIG,no Yahoo history,,0
+BIIB,BIIB,ok,,5778
+BIO,BIO,ok,,1070
+BJS,BJS,no Yahoo history,,0
+BK,BK,no Yahoo history,,0
+BKB,BKB,no Yahoo history,,0
+BKNG,BKNG,ok,,4272
+BKR,BKR,ok,,1769
+BLDR,BLDR,ok,,721
+BLK,BLK,ok,,3919
+BLL,BLL,no Yahoo history,,0
+BLS,BLS,no Yahoo history,,0
+BLY,BLY,no Yahoo history,,0
+BMC,BMC,no Yahoo history,,0
+BMET,BMET,no Yahoo history,,0
+BMGCA,BMGCA,no Yahoo history,,0
+BMS,BMS,no Yahoo history,,0
+BMY,BMY,ok,,7760
+BNI,BNI,no Yahoo history,,0
+BNL,BNL,excluded: history starts after membership (possible reused symbol),,0
+BNY,BNY,ok,,114
+BOAT,BOAT,excluded: history starts after membership (possible reused symbol),,0
+BOL,BOL,no Yahoo history,,0
+BR,BR,ok,,2106
+BRCM,BRCM,no Yahoo history,,0
+BRK.B,BRK-B,ok,,4205
+BRL,BRL,no Yahoo history,,0
+BRO,BRO,ok,,1286
+BSC,BSC,no Yahoo history,,0
+BSX,BSX,ok,,7760
+BT,BT,no Yahoo history,,0
+BTUUQ,BTUUQ,no Yahoo history,,0
+BUD,BUD,excluded: history starts after membership (possible reused symbol),,0
+BVSN,BVSN,no Yahoo history,,0
+BWA,BWA,ok,,3333
+BX,BX,ok,,785
+BXLT,BXLT,no Yahoo history,,0
+BXP,BXP,ok,,5179
+C,C,ok,,7760
+CA,CA,no Yahoo history,,0
+CAG,CAG,ok,,7672
+CAH,CAH,ok,,7406
+CAL,CAL,ok,,140
+CAM,CAM,excluded: history starts after membership (possible reused symbol),,0
+CAR,CAR,ok,,2664
+CARR,CARR,ok,,1415
+CASY,CASY,ok,,144
+CAT,CAT,ok,,7760
+CB,CB,ok,,7760
+CBB,CBB,no Yahoo history,,0
+CBE,CBE,no Yahoo history,,0
+CBH,CBH,no Yahoo history,,0
+CBOE,CBOE,ok,,2433
+CBRE,CBRE,ok,,5024
+CBS,CBS,no Yahoo history,,0
+CBSS,CBSS,no Yahoo history,,0
+CCB,CCB,excluded: history starts after membership (possible reused symbol),,0
+CCE,CCE,no Yahoo history,,0
+CCEP,CCEP,ok,,102
+CCI,CCI,ok,,3682
+CCK,CCK,ok,,1249
+CCL,CCL,ok,,7008
+CCTYQ,CCTYQ,no Yahoo history,,0
+CCU,CCU,ok,,2745
+CDAY,CDAY,no Yahoo history,,0
+CDNS,CDNS,ok,,2294
+CDW,CDW,ok,,1788
+CE,CE,excluded: history starts after membership (possible reused symbol),,0
+CEG,CEG,ok,,952
+CELG,CELG,no Yahoo history,,0
+CEN,CEN,no Yahoo history,,0
+CEPH,CEPH,no Yahoo history,,0
+CERN,CERN,no Yahoo history,,0
+CF,CF,ok,,4574
+CFC,CFC,no Yahoo history,,0
+CFG,CFG,ok,,2705
+CFL,CFL,no Yahoo history,,0
+CFN,CFN,no Yahoo history,,0
+CG,CG,excluded: history starts after membership (possible reused symbol),,0
+CGP,CGP,no Yahoo history,,0
+CHA,CHA,excluded: history starts after membership (possible reused symbol),,0
+CHD,CHD,ok,,2727
+CHIR,CHIR,no Yahoo history,,0
+CHK,CHK,no Yahoo history,,0
+CHRS,CHRS,excluded: history starts after membership (possible reused symbol),,0
+CHRW,CHRW,ok,,4950
+CHTR,CHTR,ok,,2552
+CI,CI,ok,,7760
+CIEN,CIEN,ok,,2273
+CIN,CIN,no Yahoo history,,0
+CINF,CINF,ok,,7262
+CIT.A,CIT-A,no Yahoo history,,0
+CITGQ,CITGQ,no Yahoo history,,0
+CL,CL,ok,,7760
+CLF,CLF,ok,,1076
+CLX,CLX,ok,,7760
+CMA,CMA,no Yahoo history,,0
+CMB,CMB,no Yahoo history,,0
+CMCSA,CMCSA,ok,,7760
+CMCSK,CMCSK,no Yahoo history,,0
+CME,CME,ok,,5088
+CMG,CMG,ok,,3902
+CMI,CMI,ok,,7760
+CMS,CMS,ok,,6919
+CMVT,CMVT,no Yahoo history,,0
+CMX,CMX,no Yahoo history,,0
+CNC,CNC,ok,,2665
+CNG,CNG,no Yahoo history,,0
+CNP,CNP,ok,,7760
+CNW,CNW,no Yahoo history,,0
+CNX,CNX,ok,,2437
+CNXT,CNXT,excluded: history starts after membership (possible reused symbol),,0
+COC.B,COC-B,no Yahoo history,,0
+COF,COF,ok,,7129
+COG,COG,no Yahoo history,,0
+COHR,COHR,ok,,156
+COIN,COIN,ok,,367
+COL,COL,no Yahoo history,,0
+COMS,COMS,excluded: history starts after membership (possible reused symbol),,0
+COO,COO,ok,,2541
+COP,COP,ok,,7760
+COR,COR,ok,,797
+COST,COST,ok,,7760
+COTY,COTY,ok,,998
+COV,COV,no Yahoo history,,0
+CPAY,CPAY,ok,,655
+CPB,CPB,ok,,7666
+CPGX,CPGX,no Yahoo history,,0
+CPNLQ,CPNLQ,no Yahoo history,,0
+CPQ,CPQ,no Yahoo history,,0
+CPRI,CPRI,ok,,1096
+CPRT,CPRT,ok,,2096
+CPT,CPT,ok,,1150
+CPWR,CPWR,excluded: history starts after membership (possible reused symbol),,0
+CR,CR,excluded: history starts after membership (possible reused symbol),,0
+CRH,CRH,ok,,217
+CRL,CRL,ok,,1374
+CRM,CRM,ok,,4562
+CRR,CRR,no Yahoo history,,0
+CRWD,CRWD,ok,,593
+CSCO,CSCO,ok,,7760
+CSE,CSE,no Yahoo history,,0
+CSGP,CSGP,ok,,1035
+CSR,CSR,excluded: history starts after membership (possible reused symbol),,0
+CSRA,CSRA,excluded: history starts after membership (possible reused symbol),,0
+CSX,CSX,ok,,7760
+CTAS,CTAS,ok,,6457
+CTB,CTB,no Yahoo history,,0
+CTL,CTL,no Yahoo history,,0
+CTLT,CTLT,no Yahoo history,,0
+CTRA,CTRA,no Yahoo history,,0
+CTSH,CTSH,ok,,5019
+CTVA,CTVA,ok,,1621
+CTX,CTX,no Yahoo history,,0
+CTXS,CTXS,no Yahoo history,,0
+CVC,CVC,no Yahoo history,,0
+CVG,CVG,no Yahoo history,,0
+CVH,CVH,no Yahoo history,,0
+CVNA,CVNA,ok,,217
+CVS,CVS,ok,,7760
+CVX,CVX,ok,,7760
+CXO,CXO,no Yahoo history,,0
+CYM,CYM,no Yahoo history,,0
+CYR,CYR,no Yahoo history,,0
+CZR,CZR,ok,,1131
+D,D,ok,,7760
+DAL,DAL,ok,,3306
+DALRQ,DALRQ,no Yahoo history,,0
+DASH,DASH,ok,,406
+DAY,DAY,no Yahoo history,,0
+DCNAQ,DCNAQ,no Yahoo history,,0
+DD,DD,ok,,7322
+DDOG,DDOG,ok,,333
+DDR,DDR,no Yahoo history,,0
+DDS,DDS,ok,,3225
+DE,DE,ok,,7760
+DEC,DEC,excluded: history starts after membership (possible reused symbol),,0
+DECK,DECK,ok,,660
+DELL,DELL,ok,,530
+DF,DF,no Yahoo history,,0
+DFS,DFS,no Yahoo history,,0
+DG,DG,ok,,3500
+DGN,DGN,no Yahoo history,,0
+DGX,DGX,ok,,6010
+DHI,DHI,ok,,5367
+DHR,DHR,ok,,7031
+DI,DI,no Yahoo history,,0
+DIGI,DIGI,excluded: history starts after membership (possible reused symbol),,0
+DIS,DIS,ok,,7760
+DISCA,DISCA,no Yahoo history,,0
+DISCK,DISCK,no Yahoo history,,0
+DISH,DISH,no Yahoo history,,0
+DJ,DJ,no Yahoo history,,0
+DLR,DLR,ok,,2630
+DLTR,DLTR,ok,,3739
+DLX,DLX,ok,,2258
+DNB,DNB,no Yahoo history,,0
+DNR,DNR,no Yahoo history,,0
+DO,DO,no Yahoo history,,0
+DOC,DOC,ok,,670
+DOV,DOV,ok,,7760
+DOW,DOW,ok,,1667
+DPHIQ,DPHIQ,no Yahoo history,,0
+DPZ,DPZ,ok,,1628
+DRE,DRE,no Yahoo history,,0
+DRI,DRI,ok,,7674
+DTE,DTE,ok,,7760
+DTV,DTV,no Yahoo history,,0
+DUK,DUK,ok,,7760
+DVA,DVA,ok,,4593
+DVN,DVN,ok,,6582
+DWD,DWD,no Yahoo history,,0
+DWDP,DWDP,no Yahoo history,,0
+DXC,DXC,ok,,6648
+DXCM,DXCM,ok,,1628
+DYN,DYN,excluded: history starts after membership (possible reused symbol),,0
+EA,EA,excluded: history starts after membership (possible reused symbol),,0
+EBAY,EBAY,ok,,6111
+EC,EC,excluded: history starts after membership (possible reused symbol),,0
+ECH,ECH,excluded: history starts after membership (possible reused symbol),,0
+ECHO,ECHO,ok,,92
+ECL,ECL,ok,,7760
+ECO,ECO,excluded: history starts after membership (possible reused symbol),,0
+ED,ED,ok,,7760
+EDS,EDS,no Yahoo history,,0
+EFU,EFU,excluded: history starts after membership (possible reused symbol),,0
+EFX,EFX,ok,,7389
+EG,EG,ok,,834
+EHC,EHC,ok,,1559
+EIX,EIX,ok,,7760
+EKDKQ,EKDKQ,no Yahoo history,,0
+EL,EL,ok,,5239
+ELV,ELV,ok,,1092
+EMC,EMC,excluded: history starts after membership (possible reused symbol),,0
+EME,EME,ok,,281
+EMN,EMN,ok,,7510
+EMR,EMR,ok,,7760
+ENDP,ENDP,no Yahoo history,,0
+ENPH,ENPH,ok,,1181
+ENRNQ,ENRNQ,no Yahoo history,,0
+ENS,ENS,excluded: history starts after membership (possible reused symbol),,0
+EOG,EOG,ok,,6537
+EOP,EOP,no Yahoo history,,0
+EP,EP,ok,,2915
+EPAM,EPAM,ok,,1119
+EQ,EQ,excluded: history starts after membership (possible reused symbol),,0
+EQIX,EQIX,ok,,2922
+EQR,EQR,excluded: history starts after membership (possible reused symbol),,0
+EQT,EQT,ok,,3517
+ERIE,ERIE,ok,,530
+ES,ES,ok,,4436
+ESRX,ESRX,no Yahoo history,,0
+ESS,ESS,ok,,3166
+ESV,ESV,no Yahoo history,,0
+ETFC,ETFC,no Yahoo history,,0
+ETN,ETN,ok,,7760
+ETR,ETR,ok,,7760
+ETS,ETS,excluded: history starts after membership (possible reused symbol),,0
+ETSY,ETSY,ok,,1007
+EVHC,EVHC,no Yahoo history,,0
+EVRG,EVRG,ok,,2115
+EW,EW,ok,,3920
+EXC,EXC,ok,,7760
+EXE,EXE,ok,,406
+EXPD,EXPD,ok,,4796
+EXPE,EXPE,ok,,4802
+EXR,EXR,ok,,2714
+F,F,ok,,7760
+FANG,FANG,ok,,1989
+FAST,FAST,ok,,4562
+FB,FB,excluded: history starts after membership (possible reused symbol),,0
+FBF,FBF,no Yahoo history,,0
+FBHS,FBHS,no Yahoo history,,0
+FBO,FBO,no Yahoo history,,0
+FCN,FCN,excluded: history starts after membership (possible reused symbol),,0
+FCPT,FCPT,ok,,0
+FCX,FCX,ok,,7632
+FDC,FDC,no Yahoo history,,0
+FDO,FDO,no Yahoo history,,0
+FDS,FDS,ok,,1222
+FDX,FDX,ok,,7760
+FDXF,FDXF,ok,,0
+FE,FE,ok,,7039
+FERG,FERG,ok,,63
+FFIV,FFIV,ok,,3991
+FG,FG,excluded: history starts after membership (possible reused symbol),,0
+FHN,FHN,ok,,2803
+FI,FI,no Yahoo history,,0
+FICO,FICO,ok,,910
+FII,FII,no Yahoo history,,0
+FIS,FIS,ok,,5024
+FISV,FISV,ok,,5825
+FITB,FITB,ok,,7713
+FIX,FIX,ok,,217
+FJ,FJ,no Yahoo history,,0
+FL,FL,no Yahoo history,,0
+FLEX,FLEX,ok,,94
+FLIR,FLIR,no Yahoo history,,0
+FLMIQ,FLMIQ,no Yahoo history,,0
+FLR,FLR,ok,,4401
+FLS,FLS,ok,,3137
+FLT,FLT,no Yahoo history,,0
+FLTWQ,FLTWQ,no Yahoo history,,0
+FMC,FMC,ok,,5433
+FMCC,FMCC,ok,,3196
+FMY,FMY,excluded: history starts after membership (possible reused symbol),,0
+FNMA,FNMA,ok,,3196
+FOSL,FOSL,ok,,943
+FOX,FOX,ok,,1672
+FOXA,FOXA,ok,,1673
+FPC,FPC,no Yahoo history,,0
+FRC,FRC,no Yahoo history,,0
+FRO,FRO,excluded: history starts after membership (possible reused symbol),,0
+FRT,FRT,ok,,2705
+FRX,FRX,no Yahoo history,,0
+FSH,FSH,no Yahoo history,,0
+FSL,FSL,no Yahoo history,,0
+FSLR,FSLR,ok,,2838
+FTI,FTI,ok,,2943
+FTL.A,FTL-A,no Yahoo history,,0
+FTNT,FTNT,ok,,2025
+FTR,FTR,no Yahoo history,,0
+FTV,FTV,ok,,2348
+FWLT,FWLT,no Yahoo history,,0
+G,G,excluded: history starts after membership (possible reused symbol),,0
+GAPTQ,GAPTQ,no Yahoo history,,0
+GAS,GAS,no Yahoo history,,0
+GD,GD,ok,,7760
+GDDY,GDDY,ok,,593
+GDT,GDT,excluded: history starts after membership (possible reused symbol),,0
+GDW,GDW,no Yahoo history,,0
+GE,GE,ok,,7760
+GEHC,GEHC,ok,,723
+GEN,GEN,ok,,999
+GENZ,GENZ,excluded: history starts after membership (possible reused symbol),,0
+GEV,GEV,ok,,403
+GFS.A,GFS-A,no Yahoo history,,0
+GGP,GGP,no Yahoo history,,0
+GHC,GHC,ok,,1693
+GIDL,GIDL,no Yahoo history,,0
+GILD,GILD,ok,,5621
+GIS,GIS,ok,,7760
+GL,GL,ok,,1819
+GLD,GLD,excluded: history starts after membership (possible reused symbol),,0
+GLK,GLK,no Yahoo history,,0
+GLW,GLW,ok,,7760
+GM,GM,ok,,3372
+GMCR,GMCR,no Yahoo history,,0
+GME,GME,ok,,2103
+GNRC,GNRC,ok,,1412
+GNT,GNT,excluded: history starts after membership (possible reused symbol),,0
+GNW,GNW,ok,,2507
+GOOG,GOOG,ok,,3165
+GOOGL,GOOGL,ok,,5179
+GP,GP,excluded: history starts after membership (possible reused symbol),,0
+GPC,GPC,ok,,7760
+GPN,GPN,ok,,2647
+GPS,GPS,no Yahoo history,,0
+GPU,GPU,no Yahoo history,,0
+GR,GR,no Yahoo history,,0
+GRA,GRA,no Yahoo history,,0
+GRMN,GRMN,ok,,3493
+GRN,GRN,excluded: history starts after membership (possible reused symbol),,0
+GS,GS,ok,,6111
+GSX,GSX,no Yahoo history,,0
+GT,GT,ok,,5828
+GTE,GTE,excluded: history starts after membership (possible reused symbol),,0
+GTW,GTW,no Yahoo history,,0
+GWF,GWF,no Yahoo history,,0
+GWW,GWW,ok,,7760
+GX,GX,no Yahoo history,,0
+H,H,excluded: history starts after membership (possible reused symbol),,0
+HAL,HAL,ok,,7760
+HAR,HAR,no Yahoo history,,0
+HAS,HAS,ok,,7760
+HBAN,HBAN,ok,,7356
+HBI,HBI,no Yahoo history,,0
+HBOC,HBOC,no Yahoo history,,0
+HCA,HCA,ok,,2960
+HCBK,HCBK,no Yahoo history,,0
+HCP,HCP,no Yahoo history,,0
+HCR,HCR,no Yahoo history,,0
+HD,HD,ok,,7760
+HDLM,HDLM,no Yahoo history,,0
+HES,HES,no Yahoo history,,0
+HET,HET,no Yahoo history,,0
+HFC,HFC,no Yahoo history,,0
+HFS,HFS,no Yahoo history,,0
+HI,HI,no Yahoo history,,0
+HIG,HIG,ok,,7520
+HII,HII,ok,,2220
+HLT,HLT,ok,,2357
+HM,HM,no Yahoo history,,0
+HMA,HMA,no Yahoo history,,0
+HNZ,HNZ,no Yahoo history,,0
+HOG,HOG,ok,,5130
+HOLX,HOLX,no Yahoo history,,0
+HON,HON,ok,,7760
+HONA,HONA,ok,,0
+HOOD,HOOD,ok,,281
+HOT,HOT,no Yahoo history,,0
+HP,HP,ok,,3586
+HPC,HPC,no Yahoo history,,0
+HPE,HPE,ok,,2526
+HPH,HPH,no Yahoo history,,0
+HPQ,HPQ,ok,,7760
+HRB,HRB,ok,,6223
+HRL,HRL,ok,,4445
+HRS,HRS,no Yahoo history,,0
+HSH,HSH,no Yahoo history,,0
+HSIC,HSIC,ok,,2925
+HSP,HSP,no Yahoo history,,0
+HST,HST,ok,,4938
+HSY,HSY,ok,,7760
+HUBB,HUBB,ok,,763
+HUM,HUM,ok,,7760
+HWM,HWM,ok,,1653
+I,I,no Yahoo history,,0
+IAC,IAC,no Yahoo history,,0
+IBKR,IBKR,ok,,297
+IBM,IBM,ok,,7760
+ICE,ICE,ok,,4806
+IDXX,IDXX,ok,,2470
+IEX,IEX,ok,,1818
+IFF,IFF,ok,,7760
+IGT,IGT,no Yahoo history,,0
+IKN,IKN,no Yahoo history,,0
+ILMN,ILMN,ok,,2160
+IMNX,IMNX,no Yahoo history,,0
+INCLF,INCLF,no Yahoo history,,0
+INCY,INCY,ok,,2434
+INFO,INFO,excluded: history starts after membership (possible reused symbol),,0
+INGR,INGR,excluded: history starts after membership (possible reused symbol),,0
+INTC,INTC,ok,,7760
+INTU,INTU,ok,,6511
+INVH,INVH,ok,,1035
+IP,IP,ok,,7760
+IPG,IPG,no Yahoo history,,0
+IPGP,IPGP,ok,,1080
+IQV,IQV,ok,,2307
+IR,IR,ok,,2132
+IRM,IRM,ok,,4484
+ISRG,ISRG,ok,,4635
+IT,IT,ok,,2408
+ITT,ITT,ok,,3748
+ITW,ITW,ok,,7760
+IVZ,IVZ,ok,,4578
+J,J,ok,,1733
+JAVA,JAVA,excluded: history starts after membership (possible reused symbol),,0
+JBHT,JBHT,ok,,2852
+JBL,JBL,ok,,4184
+JCI,JCI,ok,,7760
+JCP,JCP,no Yahoo history,,0
+JEC,JEC,no Yahoo history,,0
+JEF,JEF,ok,,3042
+JH,JH,no Yahoo history,,0
+JHF,JHF,no Yahoo history,,0
+JKHY,JKHY,ok,,2002
+JNJ,JNJ,ok,,7760
+JNPR,JNPR,no Yahoo history,,0
+JNS,JNS,no Yahoo history,,0
+JNY,JNY,no Yahoo history,,0
+JOS,JOS,no Yahoo history,,0
+JOY,JOY,no Yahoo history,,0
+JP,JP,no Yahoo history,,0
+JPM,JPM,ok,,7760
+JWN,JWN,no Yahoo history,,0
+K,K,no Yahoo history,,0
+KATE,KATE,no Yahoo history,,0
+KBH,KBH,ok,,3518
+KDP,KDP,ok,,3403
+KEY,KEY,ok,,7760
+KEYS,KEYS,ok,,2007
+KG,KG,excluded: history starts after membership (possible reused symbol),,0
+KHC,KHC,ok,,2600
+KIM,KIM,ok,,5179
+KKR,KKR,ok,,593
+KLAC,KLAC,ok,,7329
+KM,KM,no Yahoo history,,0
+KMB,KMB,ok,,7760
+KMG,KMG,no Yahoo history,,0
+KMI,KMI,ok,,3630
+KMX,KMX,ok,,3861
+KO,KO,ok,,7760
+KORS,KORS,no Yahoo history,,0
+KR,KR,ok,,7760
+KRB,KRB,no Yahoo history,,0
+KRFT,KRFT,no Yahoo history,,0
+KRI,KRI,no Yahoo history,,0
+KSE,KSE,no Yahoo history,,0
+KSS,KSS,ok,,5561
+KSU,KSU,no Yahoo history,,0
+KVUE,KVUE,ok,,627
+KWP,KWP,no Yahoo history,,0
+L,L,ok,,7760
+LB,LB,excluded: history starts after membership (possible reused symbol),,0
+LDG,LDG,no Yahoo history,,0
+LDOS,LDOS,ok,,2762
+LDW.B,LDW-B,no Yahoo history,,0
+LEG,LEG,excluded: history starts after membership (possible reused symbol),,0
+LEHMQ,LEHMQ,no Yahoo history,,0
+LEN,LEN,ok,,5303
+LH,LH,ok,,5536
+LHX,LHX,ok,,1866
+LIFE,LIFE,excluded: history starts after membership (possible reused symbol),,0
+LII,LII,ok,,466
+LIN,LIN,ok,,2007
+LITE,LITE,ok,,156
+LKQ,LKQ,ok,,2410
+LLL,LLL,no Yahoo history,,0
+LLTC,LLTC,no Yahoo history,,0
+LLX,LLX,no Yahoo history,,0
+LLY,LLY,ok,,7760
+LM,LM,no Yahoo history,,0
+LMT,LMT,ok,,7760
+LNC,LNC,ok,,6975
+LNT,LNT,ok,,2599
+LO,LO,no Yahoo history,,0
+LOR,LOR,no Yahoo history,,0
+LOW,LOW,ok,,7760
+LPX,LPX,ok,,2736
+LRCX,LRCX,ok,,3624
+LSI,LSI,no Yahoo history,,0
+LU,LU,excluded: history starts after membership (possible reused symbol),,0
+LUB,LUB,no Yahoo history,,0
+LULU,LULU,ok,,763
+LUMN,LUMN,ok,,628
+LUV,LUV,ok,,7760
+LVLT,LVLT,no Yahoo history,,0
+LVS,LVS,ok,,1780
+LW,LW,ok,,1833
+LXK,LXK,no Yahoo history,,0
+LYB,LYB,ok,,3560
+LYV,LYV,ok,,1724
+M,M,ok,,6107
+MA,MA,ok,,4602
+MAA,MAA,ok,,2492
+MAC,MAC,ok,,1668
+MAR,MAR,ok,,6949
+MAS,MAS,ok,,7760
+MAT,MAT,ok,,5898
+MAY,MAY,no Yahoo history,,0
+MBI,MBI,ok,,3284
+MCD,MCD,ok,,7760
+MCHP,MCHP,ok,,4819
+MCIC,MCIC,excluded: history starts after membership (possible reused symbol),,0
+MCK,MCK,ok,,6994
+MCO,MCO,ok,,7760
+MD,MD,ok,,222
+MDLZ,MDLZ,ok,,4929
+MDP,MDP,no Yahoo history,,0
+MDR,MDR,no Yahoo history,,0
+MDT,MDT,ok,,7760
+MEA,MEA,no Yahoo history,,0
+MEDI,MEDI,excluded: history starts after membership (possible reused symbol),,0
+MEE,MEE,no Yahoo history,,0
+MEL,MEL,no Yahoo history,,0
+MER,MER,no Yahoo history,,0
+MERQ,MERQ,no Yahoo history,,0
+MET,MET,ok,,6434
+META,META,ok,,1104
+MFE,MFE,no Yahoo history,,0
+MGM,MGM,ok,,2331
+MHK,MHK,ok,,3017
+MHS,MHS,no Yahoo history,,0
+MI,MI,excluded: history starts after membership (possible reused symbol),,0
+MII,MII,no Yahoo history,,0
+MIL,MIL,no Yahoo history,,0
+MIR,MIR,excluded: history starts after membership (possible reused symbol),,0
+MJN,MJN,no Yahoo history,,0
+MKC,MKC,ok,,5943
+MKG,MKG,no Yahoo history,,0
+MKTX,MKTX,ok,,1565
+MLM,MLM,ok,,3103
+MMC,MMC,no Yahoo history,,0
+MMI,MMI,excluded: history starts after membership (possible reused symbol),,0
+MMM,MMM,ok,,7760
+MNK,MNK,no Yahoo history,,0
+MNR,MNR,excluded: history starts after membership (possible reused symbol),,0
+MNST,MNST,ok,,3606
+MO,MO,ok,,7760
+MOB,MOB,excluded: history starts after membership (possible reused symbol),,0
+MOH,MOH,ok,,1017
+MOLX,MOLX,no Yahoo history,,0
+MON,MON,no Yahoo history,,0
+MOS,MOS,ok,,3798
+MPC,MPC,ok,,3612
+MPWR,MPWR,ok,,1437
+MRK,MRK,ok,,7760
+MRNA,MRNA,ok,,1328
+MRO,MRO,no Yahoo history,,0
+MRSH,MRSH,ok,,202
+MRVL,MRVL,ok,,94
+MS,MS,ok,,7760
+MSCI,MSCI,ok,,2158
+MSFT,MSFT,ok,,7760
+MSI,MSI,ok,,7760
+MST,MST,excluded: history starts after membership (possible reused symbol),,0
+MTB,MTB,ok,,5707
+MTCH,MTCH,ok,,1130
+MTD,MTD,ok,,2554
+MTG,MTG,ok,,3093
+MTL,MTL,no Yahoo history,,0
+MTLQQ,MTLQQ,no Yahoo history,,0
+MTW,MTW,ok,,450
+MU,MU,ok,,7760
+MUR,MUR,ok,,3007
+MWI,MWI,no Yahoo history,,0
+MWV,MWV,no Yahoo history,,0
+MWW,MWW,no Yahoo history,,0
+MXIM,MXIM,no Yahoo history,,0
+MYG,MYG,no Yahoo history,,0
+MYL,MYL,no Yahoo history,,0
+MZIAQ,MZIAQ,no Yahoo history,,0
+NAE,NAE,no Yahoo history,,0
+NAV,NAV,no Yahoo history,,0
+NAVI,NAVI,ok,,790
+NBL,NBL,no Yahoo history,,0
+NBR,NBR,ok,,3626
+NC,NC,ok,,1117
+NCC,NCC,no Yahoo history,,0
+NCE,NCE,no Yahoo history,,0
+NCLH,NCLH,ok,,2275
+NCR,NCR,no Yahoo history,,0
+NDAQ,NDAQ,ok,,4535
+NDSN,NDSN,ok,,1183
+NE,NE,excluded: history starts after membership (possible reused symbol),,0
+NEE,NEE,ok,,7760
+NEM,NEM,ok,,7760
+NFB,NFB,no Yahoo history,,0
+NFLX,NFLX,ok,,3991
+NFX,NFX,excluded: history starts after membership (possible reused symbol),,0
+NGH,NGH,no Yahoo history,,0
+NI,NI,ok,,6537
+NKE,NKE,ok,,7760
+NKTR,NKTR,ok,,389
+NLC,NLC,no Yahoo history,,0
+NLOK,NLOK,no Yahoo history,,0
+NLSN,NLSN,no Yahoo history,,0
+NLV,NLV,no Yahoo history,,0
+NMK,NMK,no Yahoo history,,0
+NOC,NOC,ok,,7760
+NOV,NOV,ok,,4159
+NOVL,NOVL,no Yahoo history,,0
+NOW,NOW,ok,,1745
+NRG,NRG,ok,,4216
+NRTLQ,NRTLQ,no Yahoo history,,0
+NSC,NSC,ok,,7760
+NSI,NSI,excluded: history starts after membership (possible reused symbol),,0
+NSM,NSM,no Yahoo history,,0
+NTAP,NTAP,ok,,6881
+NTRS,NTRS,ok,,7234
+NUE,NUE,ok,,7760
+NVDA,NVDA,ok,,6270
+NVLS,NVLS,no Yahoo history,,0
+NVR,NVR,ok,,1785
+NWL,NWL,ok,,6975
+NWS,NWS,ok,,2796
+NWSA,NWSA,ok,,3114
+NXPI,NXPI,ok,,1412
+NXTL,NXTL,no Yahoo history,,0
+NYN,NYN,no Yahoo history,,0
+NYT,NYT,ok,,3769
+NYX,NYX,no Yahoo history,,0
+O,O,ok,,2912
+OAT,OAT,no Yahoo history,,0
+ODFL,ODFL,ok,,1734
+ODP,ODP,no Yahoo history,,0
+OGN,OGN,ok,,361
+OI,OI,ok,,2841
+OK,OK,no Yahoo history,,0
+OKE,OKE,ok,,5616
+OM,OM,excluded: history starts after membership (possible reused symbol),,0
+OMC,OMC,ok,,7258
+OMX,OMX,no Yahoo history,,0
+ON,ON,ok,,1097
+ONE,ONE,no Yahoo history,,0
+ORCL,ORCL,ok,,7760
+ORLY,ORLY,ok,,4428
+ORX,ORX,no Yahoo history,,0
+OTIS,OTIS,ok,,1415
+OWENQ,OWENQ,no Yahoo history,,0
+OXY,OXY,ok,,7760
+PAC,PAC,excluded: history starts after membership (possible reused symbol),,0
+PALM,PALM,no Yahoo history,,0
+PANW,PANW,ok,,847
+PARA,PARA,ok,,870
+PAS,PAS,no Yahoo history,,0
+PAYC,PAYC,ok,,1545
+PAYX,PAYX,ok,,7065
+PBCT,PBCT,no Yahoo history,,0
+PBG,PBG,no Yahoo history,,0
+PBI,PBI,ok,,5327
+PBY,PBY,no Yahoo history,,0
+PCAR,PCAR,ok,,7760
+PCG,PCG,ok,,6827
+PCH,PCH,no Yahoo history,,0
+PCL,PCL,excluded: history starts after membership (possible reused symbol),,0
+PCP,PCP,no Yahoo history,,0
+PCS,PCS,excluded: history starts after membership (possible reused symbol),,0
+PD,PD,excluded: history starts after membership (possible reused symbol),,0
+PDCO,PDCO,no Yahoo history,,0
+PDG,PDG,no Yahoo history,,0
+PEAK,PEAK,no Yahoo history,,0
+PEG,PEG,ok,,7760
+PEL,PEL,no Yahoo history,,0
+PENN,PENN,ok,,377
+PEP,PEP,ok,,7760
+PET,PET,no Yahoo history,,0
+PETM,PETM,no Yahoo history,,0
+PFE,PFE,ok,,7760
+PFG,PFG,ok,,6047
+PG,PG,ok,,7760
+PGL,PGL,no Yahoo history,,0
+PGN,PGN,no Yahoo history,,0
+PGR,PGR,ok,,7358
+PH,PH,ok,,7760
+PHA,PHA,no Yahoo history,,0
+PHB,PHB,no Yahoo history,,0
+PHM,PHM,ok,,7760
+PKG,PKG,ok,,2331
+PKI,PKI,no Yahoo history,,0
+PLD,PLD,ok,,5862
+PLL,PLL,no Yahoo history,,0
+PLTR,PLTR,ok,,530
+PM,PM,ok,,4438
+PMCS,PMCS,no Yahoo history,,0
+PMI,PMI,excluded: history starts after membership (possible reused symbol),,0
+PNC,PNC,ok,,7760
+PNR,PNR,ok,,3542
+PNU,PNU,no Yahoo history,,0
+PNW,PNW,ok,,6812
+PODD,PODD,ok,,913
+POM,POM,excluded: history starts after membership (possible reused symbol),,0
+POOL,POOL,ok,,1431
+PPG,PPG,ok,,7760
+PPL,PPL,ok,,7760
+PPW,PPW,no Yahoo history,,0
+PRD,PRD,no Yahoo history,,0
+PRGO,PRGO,ok,,2453
+PRU,PRU,ok,,6011
+PSA,PSA,ok,,5334
+PSFT,PSFT,no Yahoo history,,0
+PSKY,PSKY,ok,,0
+PSX,PSX,ok,,3411
+PTC,PTC,ok,,3845
+PTV,PTV,no Yahoo history,,0
+PVH,PVH,ok,,2415
+PVN,PVN,no Yahoo history,,0
+PVT,PVT,no Yahoo history,,0
+PWER,PWER,excluded: history starts after membership (possible reused symbol),,0
+PWJ,PWJ,no Yahoo history,,0
+PWR,PWR,ok,,4362
+PX,PX,no Yahoo history,,0
+PXD,PXD,no Yahoo history,,0
+PYPL,PYPL,ok,,2600
+PZE,PZE,no Yahoo history,,0
+Q,Q,ok,,6
+QCOM,QCOM,ok,,6863
+QEP,QEP,no Yahoo history,,0
+QLGC,QLGC,no Yahoo history,,0
+QRVO,QRVO,excluded: history starts after membership (possible reused symbol),,0
+QTRN,QTRN,no Yahoo history,,0
+R,R,ok,,5403
+RAD,RAD,no Yahoo history,,0
+RAI,RAI,no Yahoo history,,0
+RAL,RAL,excluded: history starts after membership (possible reused symbol),,0
+RATL,RATL,no Yahoo history,,0
+RBD,RBD,no Yahoo history,,0
+RBK,RBK,no Yahoo history,,0
+RCL,RCL,ok,,2994
+RDC,RDC,no Yahoo history,,0
+RDDT,RDDT,ok,,54
+RDS.A,RDS-A,no Yahoo history,,0
+RE,RE,no Yahoo history,,0
+REG,REG,ok,,2432
+REGN,REGN,ok,,3398
+RF,RF,ok,,7088
+RHI,RHI,ok,,5922
+RHT,RHT,no Yahoo history,,0
+RIG,RIG,ok,,3197
+RJF,RJF,ok,,2420
+RL,RL,ok,,4969
+RLM,RLM,no Yahoo history,,0
+RMD,RMD,ok,,2331
+RML,RML,excluded: history starts after membership (possible reused symbol),,0
+RNB,RNB,no Yahoo history,,0
+ROH,ROH,no Yahoo history,,0
+ROK,ROK,ok,,7760
+ROL,ROL,ok,,2033
+ROP,ROP,ok,,4240
+ROST,ROST,ok,,4242
+RRC,RRC,ok,,2639
+RRD,RRD,no Yahoo history,,0
+RSG,RSG,ok,,4504
+RSHCQ,RSHCQ,no Yahoo history,,0
+RTN,RTN,no Yahoo history,,0
+RTX,RTX,ok,,1654
+RVTY,RVTY,ok,,870
+RX,RX,no Yahoo history,,0
+RYAN,RYAN,excluded: history starts after membership (possible reused symbol),,0
+RYC,RYC,no Yahoo history,,0
+RYI,RYI,no Yahoo history,,0
+S,S,excluded: history starts after membership (possible reused symbol),,0
+SAF,SAF,no Yahoo history,,0
+SAI,SAI,no Yahoo history,,0
+SANM,SANM,ok,,1765
+SAPE,SAPE,no Yahoo history,,0
+SATS,SATS,excluded: history starts after membership (possible reused symbol),,0
+SB,SB,excluded: history starts after membership (possible reused symbol),,0
+SBAC,SBAC,ok,,2304
+SBL,SBL,no Yahoo history,,0
+SBNY,SBNY,excluded: history starts after membership (possible reused symbol),,0
+SBUX,SBUX,ok,,6640
+SCG,SCG,no Yahoo history,,0
+SCHW,SCHW,ok,,7402
+SCI,SCI,ok,,1062
+SDS,SDS,excluded: history starts after membership (possible reused symbol),,0
+SE,SE,excluded: history starts after membership (possible reused symbol),,0
+SEBL,SEBL,no Yahoo history,,0
+SEDG,SEDG,ok,,501
+SEE,SEE,no Yahoo history,,0
+SEG,SEG,excluded: history starts after membership (possible reused symbol),,0
+SFA,SFA,no Yahoo history,,0
+SFS,SFS,no Yahoo history,,0
+SGID,SGID,no Yahoo history,,0
+SGP,SGP,excluded: history starts after membership (possible reused symbol),,0
+SHLD,SHLD,excluded: history starts after membership (possible reused symbol),,0
+SHN,SHN,no Yahoo history,,0
+SHW,SHW,ok,,7760
+SIAL,SIAL,no Yahoo history,,0
+SIG,SIG,ok,,664
+SII,SII,excluded: history starts after membership (possible reused symbol),,0
+SIVB,SIVB,no Yahoo history,,0
+SJM,SJM,ok,,4524
+SK,SK,excluded: history starts after membership (possible reused symbol),,0
+SLB,SLB,ok,,7760
+SLG,SLG,ok,,1510
+SLM,SLM,ok,,3983
+SLR,SLR,no Yahoo history,,0
+SMCI,SMCI,ok,,660
+SMI,SMI,no Yahoo history,,0
+SMS,SMS,no Yahoo history,,0
+SNA,SNA,ok,,7760
+SNDK,SNDK,ok,,182
+SNI,SNI,no Yahoo history,,0
+SNPS,SNPS,ok,,2422
+SNT,SNT,ok,,964
+SNV,SNV,no Yahoo history,,0
+SO,SO,ok,,7760
+SOLS,SOLS,ok,,0
+SOLV,SOLV,ok,,404
+SOTR,SOTR,no Yahoo history,,0
+SOV,SOV,no Yahoo history,,0
+SPG,SPG,ok,,6128
+SPGI,SPGI,ok,,7760
+SPLS,SPLS,excluded: history starts after membership (possible reused symbol),,0
+SRCL,SRCL,no Yahoo history,,0
+SRE,SRE,ok,,6881
+SRR,SRR,no Yahoo history,,0
+SSP,SSP,ok,,635
+STE,STE,ok,,1724
+STI,STI,excluded: history starts after membership (possible reused symbol),,0
+STJ,STJ,no Yahoo history,,0
+STLD,STLD,ok,,968
+STO,STO,no Yahoo history,,0
+STR,STR,no Yahoo history,,0
+STT,STT,ok,,7348
+STX,STX,ok,,3605
+STZ,STZ,ok,,5367
+SUB,SUB,excluded: history starts after membership (possible reused symbol),,0
+SUN,SUN,excluded: history starts after membership (possible reused symbol),,0
+SUNEQ,SUNEQ,no Yahoo history,,0
+SVU,SVU,no Yahoo history,,0
+SW,SW,ok,,584
+SWK,SWK,ok,,7760
+SWKS,SWKS,ok,,2929
+SWN,SWN,no Yahoo history,,0
+SWY,SWY,no Yahoo history,,0
+SXCL,SXCL,no Yahoo history,,0
+SYF,SYF,ok,,2754
+SYK,SYK,ok,,6510
+SYMC,SYMC,no Yahoo history,,0
+SYY,SYY,ok,,7760
+T,T,ok,,7760
+TA,TA,no Yahoo history,,0
+TAP,TAP,ok,,7760
+TCOMA,TCOMA,no Yahoo history,,0
+TDC,TDC,ok,,2196
+TDG,TDG,ok,,2619
+TDM,TDM,no Yahoo history,,0
+TDY,TDY,ok,,1600
+TE,TE,excluded: history starts after membership (possible reused symbol),,0
+TECH,TECH,ok,,1300
+TEG,TEG,no Yahoo history,,0
+TEK,TEK,excluded: history starts after membership (possible reused symbol),,0
+TEL,TEL,ok,,4046
+TEN,TEN,excluded: history starts after membership (possible reused symbol),,0
+TER,TER,ok,,5085
+TEX,TEX,ok,,473
+TFC,TFC,ok,,1734
+TFX,TFX,ok,,1552
+TGNA,TGNA,no Yahoo history,,0
+TGT,TGT,ok,,7760
+THC,THC,ok,,5108
+THY,THY,excluded: history starts after membership (possible reused symbol),,0
+TIE,TIE,no Yahoo history,,0
+TIF,TIF,no Yahoo history,,0
+TIN,TIN,no Yahoo history,,0
+TJX,TJX,ok,,7760
+TKO,TKO,ok,,406
+TKR,TKR,ok,,1413
+TLAB,TLAB,no Yahoo history,,0
+TMC,TMC,excluded: history starts after membership (possible reused symbol),,0
+TMC.A,TMC-A,no Yahoo history,,0
+TMK,TMK,no Yahoo history,,0
+TMO,TMO,ok,,7506
+TMUS,TMUS,ok,,2802
+TNB,TNB,no Yahoo history,,0
+TOS,TOS,excluded: history starts after membership (possible reused symbol),,0
+TOY,TOY,no Yahoo history,,0
+TPL,TPL,ok,,484
+TPR,TPR,ok,,5578
+TRB,TRB,no Yahoo history,,0
+TRGP,TRGP,ok,,1018
+TRIP,TRIP,ok,,1773
+TRMB,TRMB,ok,,1453
+TROW,TROW,ok,,6805
+TRV,TRV,ok,,7760
+TRW,TRW,no Yahoo history,,0
+TSCO,TSCO,ok,,3213
+TSG,TSG,no Yahoo history,,0
+TSLA,TSLA,ok,,1473
+TSN,TSN,ok,,5340
+TSS,TSS,no Yahoo history,,0
+TT,TT,ok,,3205
+TTD,TTD,ok,,326
+TTWO,TTWO,ok,,2169
+TUP,TUP,no Yahoo history,,0
+TWC,TWC,no Yahoo history,,0
+TWTR,TWTR,no Yahoo history,,0
+TWX,TWX,no Yahoo history,,0
+TX,TX,excluded: history starts after membership (possible reused symbol),,0
+TXN,TXN,ok,,7760
+TXT,TXT,ok,,7760
+TXU,TXU,no Yahoo history,,0
+TYL,TYL,ok,,1600
+UA,UA,ok,,1322
+UAA,UAA,ok,,2049
+UAL,UAL,ok,,2807
+UAWGQ,UAWGQ,no Yahoo history,,0
+UBER,UBER,ok,,721
+UCC,UCC,excluded: history starts after membership (possible reused symbol),,0
+UCL,UCL,excluded: history starts after membership (possible reused symbol),,0
+UCM,UCM,no Yahoo history,,0
+UDR,UDR,ok,,2681
+UHS,UHS,ok,,3047
+UIS,UIS,ok,,3239
+UK,UK,excluded: history starts after membership (possible reused symbol),,0
+ULTA,ULTA,ok,,2652
+UMG,UMG,no Yahoo history,,0
+UN,UN,excluded: history starts after membership (possible reused symbol),,0
+UNH,UNH,ok,,7760
+UNM,UNM,ok,,6474
+UNP,UNP,ok,,7760
+UPC,UPC,excluded: history starts after membership (possible reused symbol),,0
+UPR,UPR,no Yahoo history,,0
+UPS,UPS,ok,,6111
+URBN,URBN,ok,,1790
+URI,URI,ok,,3047
+USB,USB,ok,,7760
+USBC,USBC,excluded: history starts after membership (possible reused symbol),,0
+USH,USH,no Yahoo history,,0
+USHC,USHC,no Yahoo history,,0
+USS,USS,no Yahoo history,,0
+UST,UST,excluded: history starts after membership (possible reused symbol),,0
+USW,USW,no Yahoo history,,0
+UTX,UTX,no Yahoo history,,0
+UVN,UVN,no Yahoo history,,0
+V,V,ok,,4242
+VAR,VAR,no Yahoo history,,0
+VAT,VAT,no Yahoo history,,0
+VEEV,VEEV,ok,,124
+VFC,VFC,ok,,7109
+VIAB,VIAB,no Yahoo history,,0
+VIAC,VIAC,no Yahoo history,,0
+VIAV,VIAV,ok,,3372
+VICI,VICI,ok,,1105
+VLO,VLO,ok,,5664
+VLTO,VLTO,ok,,523
+VMC,VMC,ok,,6877
+VMRK,VMRK,ok,,54
+VNO,VNO,ok,,4378
+VNT,VNT,ok,,0
+VO,VO,excluded: history starts after membership (possible reused symbol),,0
+VRSK,VRSK,ok,,2783
+VRSN,VRSN,ok,,5221
+VRT,VRT,ok,,156
+VRTS,VRTS,excluded: history starts after membership (possible reused symbol),,0
+VRTX,VRTX,ok,,3298
+VST,VST,ok,,624
+VSTNQ,VSTNQ,no Yahoo history,,0
+VTR,VTR,ok,,4445
+VTRS,VTRS,ok,,1496
+VTSS,VTSS,no Yahoo history,,0
+VZ,VZ,ok,,7760
+WAB,WAB,ok,,1932
+WAI,WAI,no Yahoo history,,0
+WAMUQ,WAMUQ,no Yahoo history,,0
+WAT,WAT,ok,,6249
+WB,WB,excluded: history starts after membership (possible reused symbol),,0
+WBA,WBA,no Yahoo history,,0
+WBD,WBD,ok,,0
+WCG,WCG,no Yahoo history,,0
+WCOEQ,WCOEQ,no Yahoo history,,0
+WDAY,WDAY,ok,,466
+WDC,WDC,ok,,4362
+WEC,WEC,ok,,4528
+WELL,WELL,ok,,4467
+WEN,WEN,ok,,3209
+WFC,WFC,ok,,7760
+WFM,WFM,no Yahoo history,,0
+WFT,WFT,no Yahoo history,,0
+WHR,WHR,ok,,7100
+WIN,WIN,no Yahoo history,,0
+WLA,WLA,no Yahoo history,,0
+WLL,WLL,no Yahoo history,,0
+WLP,WLP,no Yahoo history,,0
+WLTW,WLTW,no Yahoo history,,0
+WM,WM,ok,,7118
+WMB,WMB,ok,,7760
+WMT,WMT,ok,,7760
+WMX,WMX,no Yahoo history,,0
+WNDXQ,WNDXQ,no Yahoo history,,0
+WOR,WOR,ok,,2258
+WPX,WPX,no Yahoo history,,0
+WRB,WRB,ok,,1736
+WRK,WRK,no Yahoo history,,0
+WSM,WSM,ok,,406
+WST,WST,ok,,1620
+WTW,WTW,ok,,1208
+WU,WU,ok,,3581
+WWY,WWY,no Yahoo history,,0
+WY,WY,ok,,7760
+WYE,WYE,no Yahoo history,,0
+WYND,WYND,no Yahoo history,,0
+WYNN,WYNN,ok,,4518
+X,X,no Yahoo history,,0
+XEC,XEC,no Yahoo history,,0
+XEL,XEL,ok,,7760
+XL,XL,no Yahoo history,,0
+XLNX,XLNX,no Yahoo history,,0
+XOM,XOM,ok,,7760
+XRAY,XRAY,ok,,3868
+XRX,XRX,ok,,6348
+XTO,XTO,no Yahoo history,,0
+XYL,XYL,ok,,3535
+XYZ,XYZ,ok,,323
+YNR,YNR,no Yahoo history,,0
+YRCW,YRCW,no Yahoo history,,0
+YUM,YUM,ok,,7077
+ZBH,ZBH,ok,,6106
+ZBRA,ZBRA,ok,,1724
+ZION,ZION,ok,,5717
+ZTS,ZTS,ok,,3209
