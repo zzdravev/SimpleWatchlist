@@ -23,9 +23,11 @@ Prices are cached under .cache/backtest/ (not committed). Outputs go to docs/.
 
 import argparse
 import json
+import logging
 import sys
 import time
 import urllib.request
+import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -171,6 +173,10 @@ def download(symbols, start, cache_name, offline, end=None, batch=50, passes=3):
     CACHE.mkdir(parents=True, exist_ok=True)
     import yfinance as yf
     yf.set_tz_cache_location(str(CACHE / "yf-tz"))
+    # yfinance prints a line per delisted symbol and pandas a deprecation warning per
+    # call; the coverage CSV records the misses, so both are silenced here.
+    warnings.filterwarnings("ignore")
+    logging.getLogger("yfinance").setLevel(logging.CRITICAL)
     started = time.monotonic()
     frames, missing = {}, list(symbols)
     for attempt in range(passes):
@@ -214,29 +220,29 @@ def build_panel(frames, pit_dates, pit_rows, current):
         symbol = yahoo_symbol(ticker)
         df = frames.get(symbol)
         start = first_membership_start(ticker, pit_dates, pit_rows)
-        status = "ok"
+        record = {"ticker": ticker, "yahoo": symbol, "current": ticker in current,
+                  "first_member": str(start.date()), "first_bar": None, "last_bar": None,
+                  "late_start": False, "status": "ok", "covered_days": 0}
         if df is None or df.empty:
-            status = "no Yahoo history"
-        else:
-            first_bar = df.index[0]
-            # A delisted company's symbol is often reused later, and Yahoo then returns
-            # the new company's history under the old name. A removed member whose Yahoo
-            # history starts well after it joined the index is treated as such a case.
-            if ticker not in current and first_bar > max(start, first_pit) + pd.Timedelta(days=31):
-                status = "excluded: history starts after membership (possible reused symbol)"
-        if status != "ok":
-            coverage.append({"ticker": ticker, "yahoo": symbol, "status": status,
-                             "member_days": None, "covered_days": 0})
+            record["status"] = "no Yahoo history"
+            coverage.append(record)
             continue
+        record["first_bar"], record["last_bar"] = str(df.index[0].date()), str(df.index[-1].date())
+        # Only days on which the ticker was a member and Yahoo has a bar are used. When a
+        # former member's Yahoo history starts well after it joined the index, the symbol
+        # may since have passed to another company; those tickers are flagged and the
+        # headline table is repeated without them.
+        late = ticker not in current and df.index[0] > max(start, first_pit) + pd.Timedelta(days=31)
+        record["late_start"] = bool(late)
         ind = indicators(df)
         ind["in_index"] = membership_mask(ind.index, ticker, pit_dates, pit_sets)
         ind["current"] = ticker in current
+        ind["late_start"] = bool(late)
         gaps = ind.index.to_series().diff().dt.days
         big_gap = gaps[ind["in_index"].to_numpy() & (gaps > 31).to_numpy()]
         if ticker not in current and len(big_gap):
-            coverage.append({"ticker": ticker, "yahoo": symbol,
-                             "status": "excluded: gap of more than a month while a member",
-                             "member_days": None, "covered_days": 0})
+            record["status"] = "excluded: gap of more than a month in Yahoo data while a member"
+            coverage.append(record)
             continue
         ind = ind[(ind["bar"] >= WARMUP_BARS) & (ind.index >= SIGNAL_START)]
         ind = ind[ind["in_index"] | ind["current"]]
@@ -244,8 +250,8 @@ def build_panel(frames, pit_dates, pit_rows, current):
         ind = ind[valid]
         ind.insert(0, "ticker", ticker)
         panels.append(ind)
-        coverage.append({"ticker": ticker, "yahoo": symbol, "status": status,
-                         "member_days": None, "covered_days": int(ind["in_index"].sum())})
+        record["covered_days"] = int(ind["in_index"].sum())
+        coverage.append(record)
     panel = pd.concat(panels)
     panel.index.name = "date"
     panel = panel.reset_index()
@@ -260,13 +266,19 @@ def member_ticker_days(pit_dates, pit_rows, calendar):
 
 
 def add_excess(panel, universe_mask):
-    """Forward return minus the same-day mean of all days in the same universe."""
-    out = {}
+    """Two benchmarks for each forward return, both within the same universe:
+    xs = minus the same-day mean of all stocks (removes the market's move);
+    vx = minus the same-day mean of stocks in the same volatility quintile (ATR/close),
+         which also removes the pay-off from simply holding more volatile stocks."""
+    u = panel.loc[universe_mask, ["date", "close", "atr"] + [f"fwd{h}" for h in HORIZONS]].copy()
+    vol_rank = (u["atr"] / u["close"]).groupby(u["date"]).rank(pct=True)
+    u["volq"] = np.ceil(vol_rank * 5).clip(1, 5)
+    out = pd.DataFrame(index=panel.index)
     for h in HORIZONS:
         col = f"fwd{h}"
-        day_mean = panel.loc[universe_mask].groupby("date")[col].mean()
-        out[f"xs{h}"] = panel[col] - panel["date"].map(day_mean)
-    return pd.DataFrame(out, index=panel.index), day_mean
+        out[f"xs{h}"] = u[col] - u.groupby("date")[col].transform("mean")
+        out[f"vx{h}"] = u[col] - u.groupby(["date", "volq"])[col].transform("mean")
+    return out, None
 
 
 # --------------------------------------------------------------------------------------
@@ -289,28 +301,40 @@ def describe(df, h):
         "n": int(len(sub)), "tickers": int(sub["ticker"].nunique()),
         "mean": float(r.mean()), "median": float(r.median()), "win": float((r > 0).mean()),
         "p10": float(r.quantile(0.10)), "xs": float(sub[xs].mean()) if xs in sub else np.nan,
+        "vx": float(sub[f"vx{h}"].mean()) if f"vx{h}" in sub else np.nan,
     }
 
 
-def boot_diff(a, b, h, rounds=BOOT_ROUNDS, seed=7):
-    """95% interval for mean(a) - mean(b), resampling calendar quarters.
+def _quarter_sums(frame, col):
+    frame = frame[frame[col].notna()]
+    return frame.groupby(frame["date"].dt.to_period("Q"))[col].agg(["sum", "count"])
+
+
+def boot_diff(a, b, h, col=None, rounds=BOOT_ROUNDS, seed=7):
+    """95% interval for mean(a) - mean(b), or for mean(a) alone when b is None,
+    resampling calendar quarters.
 
     Signals cluster in time (a crash puts hundreds of stocks on the lower band in the
     same week) and 60-day windows overlap, so day-level standard errors would be far
     too small. Quarters are the resampling unit.
     """
-    col = f"fwd{h}"
-    a, b = a[a[col].notna()], b[b[col].notna()]
-    if not len(a) or not len(b):
+    col = col or f"fwd{h}"
+    qa = _quarter_sums(a, col)
+    if not len(qa):
         return (np.nan, np.nan)
-    qa = a.groupby(a["date"].dt.to_period("Q"))[col].agg(["sum", "count"])
-    qb = b.groupby(b["date"].dt.to_period("Q"))[col].agg(["sum", "count"])
-    q = qa.join(qb, how="outer", lsuffix="_a", rsuffix="_b").fillna(0.0)
+    if b is None:
+        q = qa.rename(columns={"sum": "sum_a", "count": "count_a"})
+    else:
+        qb = _quarter_sums(b, col)
+        if not len(qb):
+            return (np.nan, np.nan)
+        q = qa.join(qb, how="outer", lsuffix="_a", rsuffix="_b").fillna(0.0)
     rng = np.random.default_rng(seed)
     w = rng.multinomial(len(q), np.full(len(q), 1 / len(q)), size=rounds)
     with np.errstate(invalid="ignore", divide="ignore"):
-        diff = (w @ q["sum_a"].to_numpy()) / (w @ q["count_a"].to_numpy()) - \
-               (w @ q["sum_b"].to_numpy()) / (w @ q["count_b"].to_numpy())
+        diff = (w @ q["sum_a"].to_numpy()) / (w @ q["count_a"].to_numpy())
+        if b is not None:
+            diff = diff - (w @ q["sum_b"].to_numpy()) / (w @ q["count_b"].to_numpy())
     diff = diff[np.isfinite(diff)]
     return (float(np.percentile(diff, 2.5)), float(np.percentile(diff, 97.5)))
 
@@ -321,23 +345,28 @@ def pct(x, signed=True):
     return f"{x * 100:+.1f}%" if signed else f"{x * 100:.1f}%"
 
 
-def row_cells(label, stats_by_h, ci_by_h=None):
-    cells = [label, f"{stats_by_h[60].get('n', 0):,}"]
-    for h in HORIZONS:
-        s = stats_by_h[h]
-        if not s.get("n"):
-            cells += ["n/a"] * 4
-            continue
-        cells += [pct(s["mean"]), pct(s["win"], signed=False), pct(s["median"]), pct(s["xs"])]
-    cells.append(pct(stats_by_h[60].get("p10")) if stats_by_h[60].get("n") else "n/a")
-    if ci_by_h is not None:
-        lo, hi = ci_by_h
-        cells.append(f"{pct(lo)} to {pct(hi)}")
-    return cells
+def with_ci(value, ci):
+    if value is None or (isinstance(value, float) and np.isnan(value)):
+        return "n/a"
+    if ci is None:
+        return pct(value)
+    return f"{pct(value)} ({pct(ci[0])} to {pct(ci[1])})"
 
 
-HEADER = ["Group", "Days (60d)", "Mean 20d", "Win 20d", "Median 20d", "Excess 20d",
-          "Mean 60d", "Win 60d", "Median 60d", "Excess 60d", "10th pct 60d"]
+def row_cells(label, stats, cis):
+    s20, s60 = stats[20], stats[60]
+    if not s60.get("n"):
+        return [label, "0"] + ["n/a"] * (len(HEADER) - 2)
+    return [label, f"{s60['n']:,}",
+            pct(s20.get("mean")), pct(s20.get("win"), signed=False), pct(s20.get("xs")),
+            pct(s60["mean"]), pct(s60["win"], signed=False), pct(s60["median"]), pct(s60["p10"]),
+            with_ci(cis["vs_base"][0], cis["vs_base"][1]) if cis["vs_base"] else "—",
+            with_ci(s60["xs"], cis["xs"]), with_ci(s60["vx"], cis["vx"])]
+
+
+HEADER = ["Group", "Days (60d)", "Mean 20d", "Win 20d", "Excess 20d",
+          "Mean 60d", "Win 60d", "Median 60d", "10th pct 60d",
+          "60d minus baseline (95% CI)", "Excess 60d (95% CI)", "Vol-matched excess 60d (95% CI)"]
 
 
 def md_table(header, rows):
@@ -346,21 +375,24 @@ def md_table(header, rows):
     return "\n".join(lines)
 
 
-def group_table(groups, baseline, with_ci=True):
-    """groups: list of (label, frame). CI is for the 60-day mean minus the baseline."""
+def group_table(groups, baseline):
+    """groups: list of (label, frame). Intervals are 95%, bootstrapped over quarters."""
     rows, data = [], []
+    base60 = describe(baseline, 60).get("mean", np.nan)
     for label, frame in groups:
         stats = {h: describe(frame, h) for h in HORIZONS}
-        ci = boot_diff(frame, baseline, 60) if with_ci and frame is not baseline else None
-        rows.append(row_cells(label, stats, ci if with_ci else None))
+        is_base = frame is baseline
+        cis = {
+            "vs_base": None if is_base or not stats[60].get("n") else
+                       (stats[60]["mean"] - base60, boot_diff(frame, baseline, 60)),
+            "xs": None if is_base else boot_diff(frame, None, 60, col="xs60"),
+            "vx": None if is_base else boot_diff(frame, None, 60, col="vx60"),
+        }
+        rows.append(row_cells(label, stats, cis))
         data.append({"group": label, **{f"h{h}": stats[h] for h in HORIZONS},
-                     "ci60_vs_baseline": ci})
-    header = HEADER + (["60d minus baseline, 95% CI"] if with_ci else [])
-    if with_ci:
-        for r in rows:
-            if len(r) < len(header):
-                r.append("—")
-    return md_table(header, rows), data
+                     "ci60_vs_baseline": cis["vs_base"][1] if cis["vs_base"] else None,
+                     "ci60_xs": cis["xs"], "ci60_vx": cis["vx"]})
+    return md_table(HEADER, rows), data
 
 
 # --------------------------------------------------------------------------------------
@@ -407,17 +439,32 @@ def analyse(u, name):
                       "Dip excess vs same day", "STRONG BUY mean", "STRONG BUY minus baseline"], rows), ""]
     data["by_year"] = rows
 
+    # Q1 per ticker: is the edge broad, or carried by a few names?
+    d60 = dip[dip["fwd60"].notna()]
+    per = d60.groupby("ticker").agg(n=("fwd60", "size"), dip=("fwd60", "mean"), vx=("vx60", "mean"))
+    per = per.join(u[u["fwd60"].notna()].groupby("ticker")["fwd60"].mean().rename("own"))
+    per = per[per["n"] >= 20]
+    if len(per):
+        line = (f"Per ticker (tickers with at least 20 dip days, n = {len(per)}): the dip mean beat the "
+                f"ticker's own all-days mean for {pct((per['dip'] > per['own']).mean(), False)} of tickers; "
+                f"the dip's vol-matched excess was positive for {pct((per['vx'] > 0).mean(), False)}.")
+        out += [line, ""]
+        data["per_ticker"] = {"n": int(len(per)), "beat_own": float((per["dip"] > per["own"]).mean()),
+                              "vx_positive": float((per["vx"] > 0).mean())}
+
     # Q2: RSI at the moment of a dip.
     groups = [("Baseline: all days", u), ("Dip, conviction HIGH (RSI<30)", dip[dip["conviction"] == "HIGH"]),
               ("Dip, conviction MEDIUM (30-40)", dip[dip["conviction"] == "MEDIUM"]),
               ("Dip, conviction LOW (RSI>=40)", dip[dip["conviction"] == "LOW"])]
     t, data["conviction"] = group_table(groups, u)
     hi, lo = dip[dip["conviction"] == "HIGH"], dip[dip["conviction"] == "LOW"]
-    ci = boot_diff(hi, lo, 60)
+    ci, ci_vx = boot_diff(hi, lo, 60), boot_diff(hi, lo, 60, col="vx60")
+    dh, dl = describe(hi, 60), describe(lo, 60)
     data["high_minus_low_ci60"] = ci
+    data["high_minus_low_vx_ci60"] = ci_vx
     out += [f"### {name}: dips by conviction (RSI at the signal)", "", t, "",
-            f"HIGH minus LOW, 60-day mean: {pct(describe(hi, 60).get('mean', np.nan) - describe(lo, 60).get('mean', np.nan))}, "
-            f"95% CI {pct(ci[0])} to {pct(ci[1])}.", ""]
+            f"HIGH minus LOW, 60-day mean: {with_ci(dh.get('mean', np.nan) - dl.get('mean', np.nan), ci)}; "
+            f"in vol-matched excess: {with_ci(dh.get('vx', np.nan) - dl.get('vx', np.nan), ci_vx)}.", ""]
 
     deciles = pd.qcut(dip["rsi"], 10, duplicates="drop")
     groups = [(f"RSI {iv.left:.1f}-{iv.right:.1f}", frame) for iv, frame in dip.groupby(deciles, observed=True)]
@@ -439,11 +486,13 @@ def analyse(u, name):
               ("HIGH conviction above SMA200", above[above["conviction"] == "HIGH"]),
               ("HIGH conviction below SMA200", below[below["conviction"] == "HIGH"])]
     t, data["trend"] = group_table(groups, u)
-    ci = boot_diff(above, below, 60)
+    ci, ci_vx = boot_diff(above, below, 60), boot_diff(above, below, 60, col="vx60")
+    da, db = describe(above, 60), describe(below, 60)
     data["above_minus_below_ci60"] = ci
+    data["above_minus_below_vx_ci60"] = ci_vx
     out += [f"### {name}: dips split by the SMA200 trend", "", t, "",
-            f"Above minus below, 60-day mean: {pct(describe(above, 60).get('mean', np.nan) - describe(below, 60).get('mean', np.nan))}, "
-            f"95% CI {pct(ci[0])} to {pct(ci[1])}.", ""]
+            f"Above minus below, 60-day mean: {with_ci(da.get('mean', np.nan) - db.get('mean', np.nan), ci)}; "
+            f"in vol-matched excess: {with_ci(da.get('vx', np.nan) - db.get('vx', np.nan), ci_vx)}.", ""]
 
     rows = []
     for label, frame in [("above SMA200", above), ("below SMA200", below)]:
@@ -488,13 +537,15 @@ def analyse(u, name):
         shallow = dip[dip["dist_lower_atr"] < k]
         sd, ss = describe(deep, 60), describe(shallow, 60)
         ci = boot_diff(deep, shallow, 60)
+        ci_vx = boot_diff(deep, shallow, 60, col="vx60")
         rows.append([f"{k:g} ATR", f"{sd.get('n', 0):,}", pct(sd.get("mean")), pct(sd.get("win"), False),
                      f"{ss.get('n', 0):,}", pct(ss.get("mean")), pct(ss.get("win"), False),
-                     pct(sd.get("mean", np.nan) - ss.get("mean", np.nan)), f"{pct(ci[0])} to {pct(ci[1])}"])
+                     with_ci(sd.get("mean", np.nan) - ss.get("mean", np.nan), ci),
+                     with_ci(sd.get("vx", np.nan) - ss.get("vx", np.nan), ci_vx)])
     out += [f"### {name}: where to put the STRONG cut on the dip side", "",
             "Each row splits all dips at k ATR below the band and compares the two sides over 60 days.", "",
             md_table(["Cut k", "Days at or beyond k", "Mean 60d", "Win 60d", "Days short of k", "Mean 60d",
-                      "Win 60d", "Beyond minus short", "95% CI"], rows), ""]
+                      "Win 60d", "Beyond minus short (95% CI)", "Same, vol-matched excess (95% CI)"], rows), ""]
     data["atr_cuts_dip"] = rows
 
     rows = []
@@ -548,6 +599,17 @@ def main():
         out, data = analyse(u, title)
         sections += [f"## {title}", ""] + out
         results[key] = data
+        if key == "A":
+            strict = u[~u["late_start"]]
+            is_dip = strict["signal"].isin(["STRONG BUY (Dip)", "BUY (Mod Dip)"])
+            groups = [("Baseline: all days", strict)] + [(sname, strict[strict["signal"] == sname]) for sname in SIGNALS]
+            groups.insert(3, ("Any dip (STRONG BUY or BUY)", strict[is_dip]))
+            t, results["A_strict"] = group_table(groups, strict)
+            n_flag = int(u.loc[u["late_start"], "ticker"].nunique())
+            sections += [f"### {title}: sensitivity, without the {n_flag} flagged tickers", "",
+                         "Former members whose Yahoo history starts more than a month after they joined "
+                         "the index, so the symbol may belong to a different company in Yahoo's data.", "",
+                         t, ""]
 
     # C: the original fourteen, five years to September 2026, for replication.
     narrow = []
@@ -572,13 +634,14 @@ def main():
     # from close, atr and the two distances; gzip keeps the file under GitHub's limits.
     signal_cols = ["date", "ticker", "signal", "conviction", "close", "rsi", "atr", "sma200",
                    "dist_lower_atr", "dist_upper_atr", "fwd20", "fwd60", "recovered",
-                   "in_index", "current"]
+                   "in_index", "current", "late_start"]
     sig = panel[panel["signal"] != "HOLD"][signal_cols].copy()
     for key in ("A", "B"):
         for h in HORIZONS:
-            sig[f"xs{h}_{key}"] = excess[key].loc[sig.index, f"xs{h}"]
+            for kind in ("xs", "vx"):
+                sig[f"{kind}{h}_{key}"] = excess[key].loc[sig.index, f"{kind}{h}"]
     sig["date"] = sig["date"].dt.strftime("%Y-%m-%d")
-    sig[["in_index", "current"]] = sig[["in_index", "current"]].astype(int)
+    sig[["in_index", "current", "late_start"]] = sig[["in_index", "current", "late_start"]].astype(int)
     sig.to_csv(DOCS / "backtest-broad-universe-signals.csv.gz", index=False, float_format="%.4g",
                compression={"method": "gzip", "mtime": 0})
 
@@ -592,15 +655,17 @@ def main():
     base["date"] = base["date"].dt.strftime("%Y-%m-%d")
     base.to_csv(DOCS / "backtest-broad-universe-baseline-by-day.csv", index=False, float_format="%.5g")
 
-    narrow_out = narrow[narrow["signal"] != "HOLD"][[c for c in signal_cols if c in narrow] + ["xs20", "xs60"]].copy()
+    narrow_out = narrow[narrow["signal"] != "HOLD"][[c for c in signal_cols if c in narrow] +
+                                                    ["xs20", "xs60", "vx20", "vx60"]].copy()
     narrow_out["date"] = narrow_out["date"].dt.strftime("%Y-%m-%d")
-    narrow_out.drop(columns=[c for c in ("in_index", "current") if c in narrow_out]).to_csv(
+    narrow_out.drop(columns=[c for c in ("in_index", "current", "late_start") if c in narrow_out]).to_csv(
         DOCS / "backtest-narrow-replication-signals.csv", index=False, float_format="%.5g")
 
     coverage.to_csv(DOCS / "backtest-broad-universe-coverage.csv", index=False)
 
     import yfinance
     status_counts = coverage["status"].value_counts().to_dict()
+    status_counts["ok, flagged late start"] = int((coverage["status"].eq("ok") & coverage["late_start"]).sum())
     meta = {
         "run_utc": run_started.isoformat(timespec="seconds"),
         "membership_source": MEMBERSHIP_URL,
@@ -621,7 +686,9 @@ def main():
         "with verdicts is `docs/backtest-broad-universe.md`.", "",
         "Returns are close to close over 20 and 60 trading days after the signal day. "
         "Win = share of days with a positive forward return. Excess = forward return minus the "
-        "same-day mean of the whole universe, which removes the market's move. "
+        "same-day mean of the whole universe, which removes the market's move. Vol-matched excess = "
+        "forward return minus the same-day mean of stocks in the same volatility quintile (ATR/close), "
+        "which also removes the reward for simply holding more volatile stocks. "
         "95% intervals come from a bootstrap over calendar quarters.", "",
         "```json", json.dumps(meta, indent=2), "```", "",
     ]
