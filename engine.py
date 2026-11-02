@@ -102,11 +102,15 @@ def _fetch_ticker_info(ticker):
         return ticker, {}, str(e)
 
 
-def get_financial_data(tickers):
+def get_financial_data(tickers, extra_events=None):
     """
     Download and process data for a list of tickers, with built-in caching.
     Returns (DataFrame, list of errors, meta) where meta reports whether the
     daily analyst record was needed and how old it is.
+
+    extra_events supplies event entries, in the record's shape, for tickers the
+    daily record does not cover (a visitor's own additions); the record wins
+    wherever it has an entry.
     """
     now = datetime.now()
     cache_key = tuple(sorted(tickers))
@@ -124,7 +128,7 @@ def get_financial_data(tickers):
     record_checked = set(record.get("checked", record_tickers))
     # Upcoming events exist only in the record: Yahoo's live quote is refused on the
     # hosted app, and the events change on the order of days anyway.
-    record_events = record.get("events", {})
+    record_events = {**(extra_events or {}), **record.get("events", {})}
     today = market_today()
     meta = {"record_generated": record.get("generated"), "record_used": False,
             "quotes_refused": False, "last_close": None,
@@ -327,13 +331,9 @@ def get_financial_data(tickers):
     # that otherwise worked: one that failed outright already said so above. Where the
     # record fills in, the caption reports it, so a warning still means something broke.
     priced = {row["Ticker"] for row in results}
-    uncovered = [t for t in missing_quotes if t not in record_checked and t in priced]
-    if uncovered:
-        errors.append(
-            "Yahoo returned no analyst data for " + ", ".join(uncovered) +
-            ". Its authenticated endpoint is usually blocked for hosted apps and rate-limited "
-            "elsewhere. Prices, signals and indicators are unaffected."
-        )
+    # Tickers outside the daily record are a visitor's own additions, not a failure:
+    # report them in meta so the app can label them rather than warn.
+    meta["uncovered"] = [t for t in missing_quotes if t not in record_checked and t in priced]
 
     final_df = pd.DataFrame(results)
     _data_cache[cache_key] = (now, final_df, errors, meta)

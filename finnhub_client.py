@@ -144,3 +144,27 @@ metrics = _safe(_metrics)
 earnings_history = _safe(_earnings_history)
 recommendations = _safe(_recommendations)
 news = _safe(_news)
+
+
+@st.cache_data(ttl=timedelta(hours=6), show_spinner=False)
+def _next_earnings(ticker, horizon_days=120):
+    """The next earnings date as an event entry in the daily record's shape."""
+    symbol = symbol_for(ticker)
+    if not symbol:
+        return None
+    today = market_today()
+    data = _get("calendar/earnings", symbol=symbol, **{
+        "from": today.isoformat(), "to": (today + timedelta(days=horizon_days)).isoformat()})
+    rows = sorted((r for r in (data or {}).get("earningsCalendar") or []
+                   if r.get("date", "") >= today.isoformat()), key=lambda r: r["date"])
+    if not rows:
+        return None
+    row = rows[0]
+    earnings = {"date": row["date"], "confirmed": False, "yahoo": None, "finnhub": row["date"]}
+    for source, field in (("epsEstimate", "eps_estimate"), ("revenueEstimate", "revenue_estimate")):
+        if row.get(source) is not None:
+            earnings[field] = row[source]
+    return {"earnings": earnings}
+
+
+next_earnings = _safe(_next_earnings)

@@ -1,14 +1,17 @@
 import re
 
+import pandas as pd
 import streamlit as st
 import browser_store
+import finnhub_client
 import ticker_panel
-from engine import DEFAULT_TICKERS, get_financial_data, load_universe, market_today
+import universe_admin
+import watchlist
+from engine import get_financial_data, market_today
 from ticker_panel import short_date
 
 st.set_page_config(page_title="Simple Watchlist", layout="wide")
 
-DEFAULT_TICKER_TEXT = ", ".join(DEFAULT_TICKERS)
 
 # Analyst targets go stale without being withdrawn: PARA once showed a $24 target
 # against a $0.93 price (+2480%). Past this point the target says nothing useful.
@@ -22,8 +25,10 @@ REQUIRED_COLUMNS = {
     "Target Median", "Target Low", "Target High", "Analyst Rec", "Market",
 }
 
-if "ticker_input" not in st.session_state:
-    st.session_state.ticker_input = DEFAULT_TICKER_TEXT
+SHARED = watchlist.universe()
+
+if "watchlist" not in st.session_state:
+    st.session_state.watchlist = watchlist.saved_or_default()
 if "show_editor" not in st.session_state:
     st.session_state.show_editor = False
 
@@ -81,6 +86,14 @@ def save_columns():
     browser_store.write("hidden_columns", [c for c in OPTIONAL_COLUMNS if c not in visible])
 
 
+def save_watchlist():
+    valid, rejected = watchlist.normalise(st.session_state.watchlist)
+    # Allowed inside a callback: it runs before the widget is drawn again.
+    st.session_state.watchlist = valid
+    st.session_state.rejected_tickers = rejected
+    watchlist.save(valid)
+
+
 def request_refresh(scroll_to_top=False):
     st.session_state.force_refresh = True
     if scroll_to_top:
@@ -101,7 +114,7 @@ with st.container(key="app-top"):
     with edit_col:
         st.button("Edit tickers", key="edit_toggle", width="stretch", on_click=toggle_editor)
 
-tickers = [t.strip().upper() for t in st.session_state.ticker_input.split(",") if t.strip()]
+tickers = list(st.session_state.watchlist)
 
 cached = st.session_state.get("df_data")
 stale_schema = cached is not None and not cached.empty and not REQUIRED_COLUMNS.issubset(cached.columns)
@@ -113,10 +126,20 @@ should_refresh = (
     or st.session_state.get("last_tickers") != tickers
 )
 
-if should_refresh:
+if should_refresh and not tickers:
+    st.session_state.df_data, st.session_state.errors, st.session_state.meta = pd.DataFrame(), [], {}
+    st.session_state.last_tickers = tickers
+elif should_refresh:
     with st.spinner("Fetching data from Yahoo Finance..."):
+        # The daily record covers the shared list only; a visitor's own US tickers
+        # get their next earnings date live instead.
+        extra_events = {}
+        for ticker in watchlist.extras(tickers, SHARED):
+            entry = finnhub_client.next_earnings(ticker)
+            if entry:
+                extra_events[ticker] = entry
         (st.session_state.df_data, st.session_state.errors,
-         st.session_state.meta) = get_financial_data(tickers)
+         st.session_state.meta) = get_financial_data(tickers, extra_events=extra_events)
         st.session_state.last_tickers = tickers
 
 if st.session_state.get("errors"):
@@ -318,6 +341,12 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
     if meta.get("quotes_refused"):
         parts.append("Ext unavailable on this deployment")
     st.caption(" · ".join(parts))
+    uncovered = meta.get("uncovered") or []
+    if uncovered:
+        st.caption(
+            f"Outside the shared list: {', '.join(uncovered)}. Prices and signals as usual; no "
+            "analyst targets or dividend dates, and earnings dates only for US listings."
+        )
     table = st.dataframe(styled_df, width="stretch", height=560, hide_index=True, row_height=28,
                          column_config=column_config,
                          column_order=["Ticker", *st.session_state.visible_columns],
@@ -327,7 +356,6 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
     if selected and selected[0] < len(df):
         row = df.iloc[selected[0]]
         ticker = row["Ticker"]
-        names = {u["ticker"]: u["name"] for u in load_universe()}
         # The panel opens below a tall table, so bring it into view once per new pick.
         if st.session_state.get("panel_ticker") != ticker:
             st.session_state.panel_ticker = ticker
@@ -336,20 +364,36 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
             ticker_panel.render(
                 ticker, row.to_dict(), meta.get("history", {}).get(ticker),
                 meta.get("events", {}).get(ticker), market_today(),
-                meta.get("record_generated"), name=names.get(ticker),
+                meta.get("record_generated"), name=SHARED.get(ticker, {}).get("name"),
             )
     else:
         st.session_state.panel_ticker = None
         st.caption("Select a row for that ticker's chart, upcoming events, fundamentals and news.")
+elif not tickers:
+    st.info("Your watchlist is empty. Open **Edit tickers** to pick some.")
 else:
     st.warning("No data found for the selected tickers.")
 
 if st.session_state.show_editor:
     st.divider()
     with st.container(key="ticker-editor"):
+        # Extras stay in the options so a saved one is still a valid value.
+        options = list(SHARED) + watchlist.extras(st.session_state.watchlist, SHARED)
         # persist_state keeps the value when the editor is collapsed; without it
         # Streamlit drops the widget state and the watchlist resets to defaults.
-        st.text_input("Tickers (comma separated)", key="ticker_input", persist_state="session")
+        st.multiselect(
+            "Your watchlist", options, key="watchlist", persist_state="session",
+            format_func=lambda t: watchlist.label(t, SHARED), on_change=save_watchlist,
+            accept_new_options=True, max_selections=watchlist.MAX_TICKERS,
+            placeholder="Search the S&P 100 or type any Yahoo symbol",
+            help="Pick from the shared list (the S&P 100 plus a few others), or type any "
+                 "Yahoo Finance symbol and press Enter. Tickers outside the shared list get "
+                 "prices and signals but no analyst targets or dividend dates. Your list is "
+                 "remembered in this browser.",
+        )
+        rejected = st.session_state.pop("rejected_tickers", None)
+        if rejected:
+            st.warning("Not a valid symbol, so not added: " + ", ".join(rejected))
     st.button("Refresh", key="refresh_bottom", on_click=request_refresh, kwargs={"scroll_to_top": True})
     st.caption(
         "Analyst targets are 12-month forward estimates and are not part of the signal logic. "
@@ -414,11 +458,21 @@ headlines. A dip in the days before earnings is often the market
 positioning for the report, which is a different situation from the sell-offs the
 backtest measured.
 
+**Your watchlist.** `Edit tickers` picks from a shared list, the S&P 100 plus a few
+others, which is refreshed every morning with analyst figures and event dates. Any
+other Yahoo symbol can be typed in too; it gets prices, signals and, for US listings,
+an earnings date, but no analyst targets or dividend dates. The list and the columns
+you show are remembered in this browser only: another browser or device starts from
+the default.
+
 **What this does not do.** Apart from those dates it knows nothing about earnings,
 valuation, debt, news or anything fundamental. It measures how a price sits relative to
 its own recent range, and those relationships hold on average, not in any individual case.
 """
     )
+
+with st.expander("Manage the shared list"):
+    universe_admin.render(SHARED)
 
 st.caption(
     "Technical indicators for research only, not financial advice. Signals are derived from "
