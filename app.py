@@ -99,7 +99,8 @@ def render_event_panel(ticker, events, today, generated):
         if kind == "earnings":
             if event.get("confirmed"):
                 status = "Confirmed"
-                hour = {"bmo": "before the open", "amc": "after the close"}.get(event.get("hour"))
+                hour = {"bmo": "before the open", "amc": "after the close",
+                        "during": "during market hours"}.get(event.get("hour"))
                 if hour:
                     details.append(hour)
             else:

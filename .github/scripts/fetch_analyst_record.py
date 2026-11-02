@@ -52,6 +52,23 @@ def tickers_to_cover():
     return sorted(set(universe) | set(DEFAULT_TICKERS))
 
 
+def _session_part(timestamp, tz_name):
+    """"bmo", "amc" or "during" for a report time, or None when Yahoo gives no time.
+
+    Unconfirmed dates are stored at midnight, which says nothing about the hour.
+    """
+    if not isinstance(timestamp, (int, float)):
+        return None
+    moment = datetime.fromtimestamp(timestamp, ZoneInfo(tz_name)).time()
+    if (moment.hour, moment.minute) == (0, 0):
+        return None
+    if (moment.hour, moment.minute) < (9, 30):
+        return "bmo"
+    if moment.hour >= 16:
+        return "amc"
+    return "during"
+
+
 def _date_at(timestamp, tz_name):
     """Calendar date of a Yahoo epoch timestamp, or None if it is not a number."""
     if not isinstance(timestamp, (int, float)):
@@ -78,6 +95,11 @@ def yahoo_events(info, today):
         estimate = info.get("isEarningsDateEstimate")
         if isinstance(estimate, bool):
             earnings["estimated"] = estimate
+        if estimate is False:
+            hour = _session_part(info.get("earningsTimestampStart") or info.get("earningsTimestamp"),
+                                 tz_name)
+            if hour:
+                earnings["hour"] = hour
         events["earnings"] = earnings
 
     for field, name in (("exDividendDate", "ex_dividend"), ("dividendDate", "dividend_payment")):
@@ -176,9 +198,9 @@ def combine_earnings(yahoo, finnhub):
     a real disagreement, and the earlier date is kept so the warning comes early.
 
     Finnhub's estimates are kept when its date is the same report (within a day).
-    Its time of day is kept only when the date is confirmed and Finnhub agrees
-    exactly: on estimated dates it defaulted to after-close for companies that
-    report before the open.
+    The time of day comes from Yahoo's timestamp on a confirmed date only. Finnhub's
+    was wrong even on confirmed dates: it gave after-close for Johnson & Johnson,
+    which reports before the open.
     """
     if not yahoo and not finnhub:
         return None
@@ -195,10 +217,10 @@ def combine_earnings(yahoo, finnhub):
     entry = {"date": chosen, "confirmed": confirmed, "yahoo": yahoo_date, "finnhub": finnhub_date}
     if yahoo and yahoo.get("latest"):
         entry["latest"] = yahoo["latest"]
+    if confirmed and yahoo.get("hour"):
+        entry["hour"] = yahoo["hour"]
     same_report = _days_apart(finnhub_date, chosen)
     if finnhub and same_report is not None and same_report <= 1:
-        if confirmed and finnhub_date == chosen and finnhub.get("hour") in ("bmo", "amc"):
-            entry["hour"] = finnhub["hour"]
         for field in ("eps_estimate", "revenue_estimate"):
             if finnhub.get(field) is not None:
                 entry[field] = finnhub[field]
