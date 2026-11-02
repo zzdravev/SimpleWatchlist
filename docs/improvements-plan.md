@@ -4,6 +4,20 @@ Agreed while the broad-universe re-test was running. Nothing here is built yet;
 implementation starts after the re-test, so any threshold changes it produces land
 first and these features build on the result.
 
+## 0. Changes from the re-test (done)
+
+Decided after `docs/backtest-broad-universe.md`:
+
+- Every figure in the tooltips, the explainer and the engine comments now comes from the
+  broad test instead of the fourteen-ticker one.
+- The STRONG tier stays as it is.
+- Conviction keeps HIGH and MEDIUM; a dip with RSI of 40 or more is now WEAK, shown pale,
+  since it did no better than an average day.
+- A `↓` after a signal marks a price below its 200-day average. Information, not a
+  filter: the test could not settle whether a filter helps.
+- A `Columns` menu hides and shows columns; the choice is kept in a cookie
+  (`browser_store.py`), which is also how the watchlist will be remembered.
+
 ## 1. Next-event column
 
 One column showing the nearest upcoming event per ticker, e.g. `Earnings · 9d` or

@@ -135,6 +135,11 @@ def get_financial_data(tickers):
             tr = np.maximum((high - low), np.maximum(abs(high - close.shift(1)), abs(low - close.shift(1))))
             atr = _wilder_rma(tr, 14).iloc[-1]
 
+            # Long-term trend. A year of daily bars leaves about 50 values past the
+            # warm-up; a younger listing simply has none and gets no trend marker.
+            sma200 = close.rolling(window=200).mean().iloc[-1]
+            below_trend = pd.notna(sma200) and current_price < sma200
+
             # Dynamic dip / take-profit levels for the DCA strategy
             mod_dip = lower_band.iloc[-1]
             strong_dip = mod_dip - (0.5 * atr)
@@ -142,8 +147,11 @@ def get_financial_data(tickers):
             strong_tp = mod_tp + (0.5 * atr)
 
             # Price signal. Upper-band touches are labelled "overextended" rather
-            # than "sell": backtesting showed forward returns after those signals
-            # match or beat the baseline, so they mean "don't add here", not "exit".
+            # than "sell": on the 1996-2026 S&P 500 backtest (docs/backtest-broad-
+            # universe.md) they returned +2.2% over 60 days against a +3.2% baseline,
+            # below average but still positive, so "don't add here", not "exit".
+            # The STRONG tier is kept as a price level, although that backtest found
+            # no ATR offset that separates outcomes once volatility is matched.
             price_signal = "HOLD"
             if current_price <= strong_dip:
                 price_signal = "STRONG BUY (Dip)"
@@ -154,6 +162,14 @@ def get_financial_data(tickers):
             elif current_price >= mod_tp:
                 price_signal = "OVEREXTENDED"
 
+            # Below SMA200 the trend is down. Not a filter: the backtest could not
+            # settle whether one helps. But such dips are a different bet: 41% of them
+            # regained their prior 52-week high within a year, against 78% above the
+            # trend, with a fatter left tail. An upper-band touch below SMA200 was the
+            # weakest upper-band case. The marker makes that visible without hiding it.
+            if below_trend and price_signal != "HOLD":
+                price_signal += " \u2193"
+
             if current_rsi < 30:
                 rsi_signal = "OVERSOLD"
             elif current_rsi > 70:
@@ -161,18 +177,21 @@ def get_financial_data(tickers):
             else:
                 rsi_signal = "NEUTRAL"
 
-            # Conviction grades a dip by RSI. Over a 5y backtest of this watchlist, a
-            # dip with RSI<30 returned +12.8% over 60 days (82% win rate) versus +4.0%
-            # for a dip with RSI>40. A dip fires on only about a third of days across
-            # the whole list, so the rest of the time the column reports the distance
-            # left to one, measured in ATR so that it compares across tickers.
+            # Conviction grades a dip by RSI. On the broad backtest a dip with RSI<30
+            # returned +5.6% over 60 days and one with RSI 40 or more +3.3%, the same
+            # as the +3.2% baseline. So a WEAK dip is no better than no signal. The
+            # extra return at low RSI comes with worse tails and vanishes against
+            # stocks of equal volatility: it pays for risk, it is not a free edge.
+            # A dip fires on only a minority of days, so the rest of the time the
+            # column reports the distance left to one, measured in ATR so that it
+            # compares across tickers.
             if "BUY" in price_signal:
                 if current_rsi < 30:
                     conviction = "HIGH"
                 elif current_rsi < 40:
                     conviction = "MEDIUM"
                 else:
-                    conviction = "LOW"
+                    conviction = "WEAK"
             elif pd.notna(mod_dip) and pd.notna(atr) and atr > 0:
                 conviction = f"{(current_price - mod_dip) / atr:.1f} ATR"
             else:
