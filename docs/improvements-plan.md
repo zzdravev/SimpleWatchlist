@@ -36,13 +36,43 @@ can only open an external page).
 
 ## 3. Personal watchlists
 
-- Tickers are picked from a curated list (`data/universe.csv`: ticker, name, sector)
-  with `st.multiselect`, instead of free text. The CI job covers the whole universe,
-  so every selectable ticker has analyst and event data.
-- The last selection is remembered per browser in a cookie: read with
-  `st.context.cookies`, written with a small script like the existing scroll helper.
-  If Streamlit Cloud's iframe blocks the cookie, fall back to a localStorage
-  component. No database and no login.
+Two layers: a shared universe that the owner maintains, and per-user extras.
+
+**Universe (shared).** The S&P 100 plus a few hand-picked tickers (the list is still
+to come) in `data/universe.csv`: ticker, name, sector. Users pick from it with
+`st.multiselect` instead of typing free text. The CI job covers the whole universe,
+so every ticker in it has analyst and event data.
+
+**Editing the universe from the app.** Streamlit Cloud's filesystem resets on every
+restart, so the app cannot save the list locally. Instead:
+
+- A small admin panel, locked by a password from `st.secrets`, adds or removes
+  tickers.
+- A change is committed to `data/universe.csv` through the GitHub API, using a
+  fine-grained token limited to this repository with Contents write access.
+- The analyst-record workflow gains `data/universe.csv` in its `push.paths`, so the
+  commit itself starts collection and a new ticker has data within a couple of
+  minutes. The app's commit must not carry `[skip ci]`. The push also redeploys the
+  app.
+- Input is validated as a ticker symbol before anything is written.
+
+**Extras (per user).** Anyone can add tickers outside the universe. They are stored
+in that user's cookie and are not shared.
+
+- Prices and signals work for any symbol, since the price history endpoint answers
+  Streamlit Cloud.
+- Earnings dates come live from Finnhub, for US symbols only.
+- Analyst targets and ex-dividend dates are unavailable, because Yahoo refuses the
+  quote endpoint from Streamlit Cloud. Such rows are marked as limited data rather
+  than showing blanks that look like errors.
+
+**Remembering the choice.** The selection and the extras are saved per browser in a
+cookie: read with `st.context.cookies`, written with a small script like the
+existing scroll helper. If Streamlit Cloud's iframe blocks the cookie, fall back to a
+localStorage component. No database and no user login.
+
+**Secrets this needs on Streamlit Cloud:** `FINNHUB_API_KEY`, `ADMIN_PASSWORD`, and
+`GITHUB_TOKEN` (the fine-grained token above).
 
 ## Data sources, as probed on 2 November 2026
 
@@ -72,7 +102,6 @@ Two pitfalls found:
 The key is stored as the `FINNHUB_API_KEY` repository secret for CI. It will also go
 into Streamlit secrets if any of this is fetched live.
 
-## Open question
+## Waiting on
 
-- Size and source of the universe: a hand-maintained list, or a base such as the
-  S&P 100 plus a few European names.
+- The extra tickers to add to the S&P 100 for the initial universe.
