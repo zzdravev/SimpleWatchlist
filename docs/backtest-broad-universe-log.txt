@@ -1,9 +1,9 @@
 membership: 2720 change dates, 1209 tickers ever, 503 current
-sp500: pass 1: 759/1209 (175s)
-sp500: pass 2: 759/1209 (241s)
-narrow: pass 1: 14/14 (2s)
+sp500: pass 1: 759/1209 (172s)
+sp500: pass 2: 759/1209 (235s)
+narrow: pass 1: 14/14 (1s)
 {
-  "run_utc": "2026-11-02T20:44:22+00:00",
+  "run_utc": "2026-11-02T21:19:22+00:00",
   "membership_source": "https://raw.githubusercontent.com/fja05680/sp500/a2430f2af0c79ddf0748e91de11bdeb1616ab5a7/S%26P%20500%20Historical%20Components%20%26%20Changes%20(Updated).csv",
   "membership_last_change": "2026-08-18",
   "tickers_ever": 1209,
