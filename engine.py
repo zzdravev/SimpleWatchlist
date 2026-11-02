@@ -1,3 +1,4 @@
+import csv
 import json
 import pandas as pd
 import yfinance as yf
@@ -17,6 +18,18 @@ DEFAULT_TICKERS = ["NVDA", "VUAA.L", "KO", "JNJ", "O", "META", "GOOGL", "MSFT",
 # authenticated quote endpoint from Streamlit Cloud but answers it from CI, so the
 # slow-moving analyst figures are collected there and read back from disk here.
 RECORD_PATH = Path(__file__).with_name("data") / "analyst_record.json"
+
+# The tickers users pick from, and the ones the daily record job covers.
+UNIVERSE_PATH = Path(__file__).with_name("data") / "universe.csv"
+
+
+def load_universe():
+    """Rows of data/universe.csv as dicts (ticker, name, sector, group), or [] if absent."""
+    try:
+        with open(UNIVERSE_PATH, encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle))
+    except OSError:
+        return []
 
 
 def load_analyst_record():

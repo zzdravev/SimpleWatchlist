@@ -10,6 +10,8 @@ on:
     paths:
       - .github/workflows/analyst-record.yml
       - .github/scripts/fetch_analyst_record.py
+      # A ticker added to the universe gets its data on the same push, not the next morning.
+      - data/universe.csv
 
 permissions:
   contents: write
@@ -28,9 +30,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - run: pip install --quiet yfinance
+      - run: pip install --quiet yfinance pandas numpy
 
-      - name: Collect analyst data
+      - name: Collect analyst data and upcoming events
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
         run: python .github/scripts/fetch_analyst_record.py
 
       - name: Commit the record
