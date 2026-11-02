@@ -134,8 +134,9 @@ def render_event_panel(ticker, events, today, generated):
     if generated:
         st.caption(
             f"Collected {short_date(generated)} from Yahoo and Finnhub. An estimated earnings "
-            "date is a projection until the company confirms it; where the two sources "
-            "disagree, the earlier date is used."
+            "date is a projection until the company confirms it. Where the sources are a day "
+            "apart Yahoo's date is used, since Finnhub often runs a day early; where they "
+            "differ by more, the earlier date is used so the warning is not late."
         )
 
 

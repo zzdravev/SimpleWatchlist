@@ -25,7 +25,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -159,13 +159,26 @@ def fetch_finnhub(ticker, key, today):
     }
 
 
+def _days_apart(first, second):
+    """Absolute distance in days between two ISO dates, or None if either is missing."""
+    if not first or not second:
+        return None
+    return abs((date.fromisoformat(first) - date.fromisoformat(second)).days)
+
+
 def combine_earnings(yahoo, finnhub):
     """One earnings entry from the two sources, keeping both dates for display.
 
-    A date Yahoo marks as confirmed wins, since that comes from the company. An
-    unconfirmed date takes the earlier of the two sources. Finnhub's time of day
-    is kept only when the date is confirmed and Finnhub agrees: on estimated dates
-    it was seen to default to after-close for companies that report before the open.
+    A date Yahoo marks as confirmed wins, since that comes from the company.
+    Otherwise Yahoo's date wins when the two are a day apart: on the first full
+    run Finnhub was one day early for 40 tickers, including three dates the
+    companies had confirmed and two that fell on a market holiday. A wider gap is
+    a real disagreement, and the earlier date is kept so the warning comes early.
+
+    Finnhub's estimates are kept when its date is the same report (within a day).
+    Its time of day is kept only when the date is confirmed and Finnhub agrees
+    exactly: on estimated dates it defaulted to after-close for companies that
+    report before the open.
     """
     if not yahoo and not finnhub:
         return None
@@ -173,7 +186,8 @@ def combine_earnings(yahoo, finnhub):
     finnhub_date = finnhub.get("date") if finnhub else None
     confirmed = bool(yahoo) and yahoo.get("estimated") is False
 
-    if confirmed:
+    gap = _days_apart(yahoo_date, finnhub_date)
+    if confirmed or (gap is not None and gap <= 1):
         chosen = yahoo_date
     else:
         chosen = min(d for d in (yahoo_date, finnhub_date) if d)
@@ -181,8 +195,9 @@ def combine_earnings(yahoo, finnhub):
     entry = {"date": chosen, "confirmed": confirmed, "yahoo": yahoo_date, "finnhub": finnhub_date}
     if yahoo and yahoo.get("latest"):
         entry["latest"] = yahoo["latest"]
-    if finnhub and finnhub_date == chosen:
-        if confirmed and finnhub.get("hour") in ("bmo", "amc"):
+    same_report = _days_apart(finnhub_date, chosen)
+    if finnhub and same_report is not None and same_report <= 1:
+        if confirmed and finnhub_date == chosen and finnhub.get("hour") in ("bmo", "amc"):
             entry["hour"] = finnhub["hour"]
         for field in ("eps_estimate", "revenue_estimate"):
             if finnhub.get(field) is not None:
@@ -225,13 +240,17 @@ def main():
 
     events = {}
     disagreements = []
+    off_by_one = 0
     for ticker in tickers:
         from_yahoo = yahoo_by_ticker.get(ticker, {})
         entry = {name: value for name, value in from_yahoo.items() if name != "earnings"}
         earnings = combine_earnings(from_yahoo.get("earnings"), finnhub_by_ticker.get(ticker))
         if earnings:
             entry["earnings"] = earnings
-            if earnings["yahoo"] and earnings["finnhub"] and earnings["yahoo"] != earnings["finnhub"]:
+            gap = _days_apart(earnings["yahoo"], earnings["finnhub"])
+            if gap == 1:
+                off_by_one += 1
+            elif gap:
                 disagreements.append(f"{ticker} yahoo {earnings['yahoo']} finnhub {earnings['finnhub']}"
                                      f"{' (confirmed)' if earnings['confirmed'] else ''}")
         if entry:
@@ -262,8 +281,9 @@ def main():
         print("no analyst data for:", ", ".join(missing))
     confirmed = sum(1 for e in events.values() if e.get("earnings", {}).get("confirmed"))
     print(f"earnings dates confirmed by Yahoo: {confirmed}")
+    print(f"Finnhub one day off Yahoo (Yahoo used): {off_by_one}")
     if disagreements:
-        print("sources disagree on:\n  " + "\n  ".join(disagreements))
+        print("sources disagree by more than a day:\n  " + "\n  ".join(disagreements))
     return 0
 
 
