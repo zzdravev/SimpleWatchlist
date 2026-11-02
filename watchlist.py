@@ -3,7 +3,7 @@
 The universe (data/universe.csv) is what the daily record job covers, so every
 ticker in it has analyst figures and event dates. A visitor may add any other
 symbol too; those extras get prices, signals and, for US listings, a live earnings
-date, but no analyst targets or dividend dates. The choice is saved in a cookie.
+date, but no analyst targets or dividend dates. The choice is saved in the browser.
 """
 import re
 
