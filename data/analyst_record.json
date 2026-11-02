@@ -1,21 +1,1406 @@
 {
   "checked": [
     "AAPL",
+    "ABBV",
+    "ABT",
+    "ACN",
+    "ADBE",
+    "AMAT",
+    "AMD",
+    "AMGN",
+    "AMT",
     "AMZN",
+    "ANET",
     "AVGO",
+    "AXP",
+    "BA",
+    "BAC",
+    "BKNG",
+    "BLK",
+    "BMY",
+    "BNY",
+    "BRK-B",
+    "C",
+    "CAT",
+    "CMCSA",
+    "COF",
+    "COP",
+    "COST",
+    "CRM",
+    "CSCO",
+    "CVS",
     "CVX",
+    "DE",
+    "DELL",
+    "DHR",
+    "DIS",
+    "DUK",
+    "EMR",
+    "FDX",
+    "GD",
+    "GE",
+    "GEV",
+    "GILD",
+    "GM",
+    "GOOG",
     "GOOGL",
+    "GS",
+    "HD",
+    "IBM",
+    "INTC",
+    "INTU",
+    "ISRG",
     "JNJ",
     "JPM",
     "KO",
+    "LIN",
+    "LLY",
+    "LMT",
+    "LOW",
+    "LRCX",
+    "MA",
+    "MCD",
+    "MDLZ",
+    "MDT",
     "META",
+    "MMM",
+    "MO",
+    "MRK",
+    "MS",
     "MSFT",
+    "MU",
+    "NEE",
+    "NFLX",
+    "NOW",
     "NVDA",
     "O",
+    "ORCL",
+    "PANW",
+    "PEP",
+    "PFE",
+    "PG",
+    "PLTR",
+    "PM",
+    "QCOM",
+    "RTX",
+    "SBUX",
+    "SCHW",
+    "SNDK",
+    "SO",
+    "T",
+    "TMO",
+    "TMUS",
     "TSLA",
-    "VUAA.L"
+    "TXN",
+    "UBER",
+    "UNH",
+    "UNP",
+    "UPS",
+    "USB",
+    "V",
+    "VUAA.L",
+    "VZ",
+    "WFC",
+    "WMT",
+    "XOM"
   ],
-  "generated": "2026-11-02T13:59:38+00:00",
+  "events": {
+    "AAPL": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-02",
+        "eps_estimate": 2.0267,
+        "finnhub": "2026-11-02",
+        "hour": "amc",
+        "revenue_estimate": 115660327009,
+        "yahoo": "2026-11-02"
+      }
+    },
+    "ABBV": {
+      "dividend_payment": {
+        "date": "2027-02-16"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-02",
+        "eps_estimate": 3.9581,
+        "finnhub": "2027-02-02",
+        "revenue_estimate": 18667042950,
+        "yahoo": null
+      },
+      "ex_dividend": {
+        "date": "2027-01-15"
+      }
+    },
+    "ABT": {
+      "dividend_payment": {
+        "date": "2026-11-16"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-20",
+        "eps_estimate": 1.6548,
+        "finnhub": "2027-01-20",
+        "revenue_estimate": 13378784422,
+        "yahoo": "2027-01-28"
+      }
+    },
+    "ACN": {
+      "dividend_payment": {
+        "date": "2026-11-13"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-12-17",
+        "eps_estimate": 3.9902,
+        "finnhub": "2026-12-16",
+        "hour": "bmo",
+        "revenue_estimate": 19588513841,
+        "yahoo": "2026-12-17"
+      }
+    },
+    "ADBE": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-12-09",
+        "eps_estimate": 6.456,
+        "finnhub": "2026-12-09",
+        "hour": "amc",
+        "revenue_estimate": 6965492239,
+        "yahoo": "2026-12-09"
+      }
+    },
+    "AMAT": {
+      "dividend_payment": {
+        "date": "2026-12-10"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-12",
+        "eps_estimate": 4.1345,
+        "finnhub": "2026-11-12",
+        "hour": "amc",
+        "revenue_estimate": 10504570449,
+        "yahoo": "2026-11-12"
+      },
+      "ex_dividend": {
+        "date": "2026-11-19"
+      }
+    },
+    "AMD": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-03",
+        "eps_estimate": 1.969,
+        "finnhub": "2026-11-03",
+        "hour": "amc",
+        "revenue_estimate": 13222748108,
+        "yahoo": "2026-11-03"
+      }
+    },
+    "AMGN": {
+      "dividend_payment": {
+        "date": "2026-12-11"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-03",
+        "eps_estimate": 5.9089,
+        "finnhub": "2026-11-03",
+        "hour": "amc",
+        "revenue_estimate": 10272321886,
+        "yahoo": "2026-11-03"
+      },
+      "ex_dividend": {
+        "date": "2026-11-20"
+      }
+    },
+    "AMT": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-22",
+        "eps_estimate": 1.6514,
+        "finnhub": "2027-02-22",
+        "revenue_estimate": 2798053308,
+        "yahoo": null
+      }
+    },
+    "AMZN": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-03",
+        "eps_estimate": 2.4698,
+        "finnhub": "2027-02-03",
+        "revenue_estimate": 249920223774,
+        "yahoo": null
+      }
+    },
+    "ANET": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-03",
+        "eps_estimate": 1.0979,
+        "finnhub": "2026-11-03",
+        "hour": "amc",
+        "revenue_estimate": 3397052074,
+        "yahoo": "2026-11-03"
+      }
+    },
+    "AVGO": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-12-09",
+        "eps_estimate": 3.8912,
+        "finnhub": "2026-12-09",
+        "hour": "amc",
+        "revenue_estimate": 35584527044,
+        "yahoo": "2026-12-09"
+      }
+    },
+    "AXP": {
+      "dividend_payment": {
+        "date": "2026-11-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-29",
+        "eps_estimate": 4.3241,
+        "finnhub": "2027-01-28",
+        "revenue_estimate": 20993063786,
+        "yahoo": "2027-01-29"
+      }
+    },
+    "BA": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-26",
+        "eps_estimate": -0.8401,
+        "finnhub": "2027-01-25",
+        "revenue_estimate": 26385311313,
+        "yahoo": "2027-01-26"
+      }
+    },
+    "BAC": {
+      "dividend_payment": {
+        "date": "2026-12-24"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-15",
+        "eps_estimate": 1.1288,
+        "finnhub": "2027-01-15",
+        "hour": "bmo",
+        "revenue_estimate": 30747947928,
+        "yahoo": "2027-01-15"
+      },
+      "ex_dividend": {
+        "date": "2026-12-04"
+      }
+    },
+    "BKNG": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-03",
+        "eps_estimate": 4.5926,
+        "finnhub": "2026-11-03",
+        "hour": "amc",
+        "revenue_estimate": 9738989712,
+        "yahoo": "2026-11-03"
+      }
+    },
+    "BLK": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-14",
+        "eps_estimate": 15.6432,
+        "finnhub": "2027-01-13",
+        "revenue_estimate": 8058219350,
+        "yahoo": "2027-01-14"
+      }
+    },
+    "BMY": {
+      "dividend_payment": {
+        "date": "2026-11-02"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-03",
+        "eps_estimate": 1.5298,
+        "finnhub": "2027-02-03",
+        "revenue_estimate": 12772254869,
+        "yahoo": null
+      }
+    },
+    "BNY": {
+      "dividend_payment": {
+        "date": "2026-11-09"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-15",
+        "finnhub": "2027-01-11",
+        "hour": "bmo",
+        "yahoo": "2027-01-15"
+      }
+    },
+    "BRK-B": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-07",
+        "finnhub": "2026-11-02",
+        "hour": "amc",
+        "yahoo": "2026-11-07"
+      }
+    },
+    "C": {
+      "dividend_payment": {
+        "date": "2026-11-25"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-14",
+        "eps_estimate": 2.3856,
+        "finnhub": "2027-01-14",
+        "hour": "bmo",
+        "revenue_estimate": 22834785308,
+        "yahoo": "2027-01-14"
+      },
+      "ex_dividend": {
+        "date": "2026-11-02"
+      }
+    },
+    "CAT": {
+      "dividend_payment": {
+        "date": "2026-11-19"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-28",
+        "eps_estimate": 6.7339,
+        "finnhub": "2027-01-27",
+        "hour": "bmo",
+        "revenue_estimate": 21147003411,
+        "yahoo": "2027-01-28"
+      }
+    },
+    "CMCSA": {
+      "dividend_payment": {
+        "date": "2027-01-27"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-28",
+        "eps_estimate": 0.623,
+        "finnhub": "2027-01-27",
+        "revenue_estimate": 30712364714,
+        "yahoo": "2027-01-28"
+      },
+      "ex_dividend": {
+        "date": "2027-01-06"
+      }
+    },
+    "COF": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-19",
+        "eps_estimate": 4.9629,
+        "finnhub": "2027-01-20",
+        "revenue_estimate": 16774054285,
+        "yahoo": "2027-01-19"
+      }
+    },
+    "COP": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-05",
+        "eps_estimate": 2.9914,
+        "finnhub": "2026-11-05",
+        "hour": "bmo",
+        "revenue_estimate": 18357035365,
+        "yahoo": "2026-11-05"
+      }
+    },
+    "COST": {
+      "dividend_payment": {
+        "date": "2026-11-13"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-12-10",
+        "eps_estimate": 5.0319,
+        "finnhub": "2026-12-10",
+        "hour": "amc",
+        "revenue_estimate": 75703801831,
+        "yahoo": "2026-12-10"
+      }
+    },
+    "CRM": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2026-12-02",
+        "eps_estimate": 3.4717,
+        "finnhub": "2026-12-01",
+        "revenue_estimate": 11570800208,
+        "yahoo": "2026-12-02"
+      }
+    },
+    "CSCO": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-12",
+        "finnhub": "2026-11-18",
+        "hour": "amc",
+        "yahoo": "2026-11-12"
+      }
+    },
+    "CVS": {
+      "dividend_payment": {
+        "date": "2026-11-02"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-04",
+        "eps_estimate": 1.667,
+        "finnhub": "2026-11-04",
+        "hour": "bmo",
+        "revenue_estimate": 105741861120,
+        "yahoo": "2026-11-04"
+      }
+    },
+    "CVX": {
+      "dividend_payment": {
+        "date": "2026-12-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-29",
+        "eps_estimate": 5.4522,
+        "finnhub": "2027-01-28",
+        "revenue_estimate": 62443833699,
+        "yahoo": "2027-01-29"
+      },
+      "ex_dividend": {
+        "date": "2026-11-18"
+      }
+    },
+    "DE": {
+      "dividend_payment": {
+        "date": "2026-11-09"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-25",
+        "eps_estimate": 4.1688,
+        "finnhub": "2026-11-25",
+        "hour": "bmo",
+        "revenue_estimate": 10677445374,
+        "yahoo": "2026-11-25"
+      }
+    },
+    "DELL": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-24",
+        "eps_estimate": 6.682,
+        "finnhub": "2026-11-24",
+        "hour": "amc",
+        "revenue_estimate": 50148620473,
+        "yahoo": "2026-11-24"
+      }
+    },
+    "DHR": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 2.5005,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 7573441782,
+        "yahoo": "2027-01-27"
+      }
+    },
+    "DIS": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-17",
+        "eps_estimate": 1.6946,
+        "finnhub": "2026-11-17",
+        "hour": "bmo",
+        "revenue_estimate": 25439119035,
+        "yahoo": "2026-11-17"
+      }
+    },
+    "DUK": {
+      "dividend_payment": {
+        "date": "2026-12-16"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-05",
+        "eps_estimate": 1.8836,
+        "finnhub": "2026-11-05",
+        "hour": "bmo",
+        "revenue_estimate": 8997733025,
+        "yahoo": "2026-11-05"
+      },
+      "ex_dividend": {
+        "date": "2026-11-13"
+      }
+    },
+    "EMR": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-04",
+        "eps_estimate": 1.8733,
+        "finnhub": "2026-11-04",
+        "hour": "bmo",
+        "revenue_estimate": 5169216117,
+        "yahoo": "2026-11-04"
+      }
+    },
+    "FDX": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2026-12-16",
+        "eps_estimate": 5.2957,
+        "finnhub": "2026-12-16",
+        "revenue_estimate": 24149157570,
+        "yahoo": null
+      }
+    },
+    "GD": {
+      "dividend_payment": {
+        "date": "2026-11-13"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 4.6858,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 15210041600,
+        "yahoo": "2027-01-27"
+      }
+    },
+    "GE": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-21",
+        "eps_estimate": 2.1052,
+        "finnhub": "2027-01-20",
+        "revenue_estimate": 13713888186,
+        "yahoo": "2027-01-21"
+      }
+    },
+    "GEV": {
+      "dividend_payment": {
+        "date": "2026-11-24"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-27",
+        "eps_estimate": 6.6061,
+        "finnhub": "2027-01-26",
+        "hour": "bmo",
+        "revenue_estimate": 13884902785,
+        "yahoo": "2027-01-27"
+      }
+    },
+    "GILD": {
+      "dividend_payment": {
+        "date": "2026-12-30"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-08",
+        "eps_estimate": 1.4897,
+        "finnhub": "2027-02-08",
+        "revenue_estimate": 8479350902,
+        "yahoo": null
+      },
+      "ex_dividend": {
+        "date": "2026-12-15"
+      }
+    },
+    "GM": {
+      "dividend_payment": {
+        "date": "2026-12-17"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-27",
+        "eps_estimate": 2.6205,
+        "finnhub": "2027-01-27",
+        "hour": "bmo",
+        "revenue_estimate": 46093525128,
+        "yahoo": "2027-01-27"
+      },
+      "ex_dividend": {
+        "date": "2026-12-04"
+      }
+    },
+    "GOOG": {
+      "dividend_payment": {
+        "date": "2026-12-14"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-02",
+        "eps_estimate": 3.3182,
+        "finnhub": "2027-02-02",
+        "revenue_estimate": 146849547486,
+        "yahoo": null
+      }
+    },
+    "GOOGL": {
+      "dividend_payment": {
+        "date": "2026-12-14"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-02",
+        "eps_estimate": 3.3182,
+        "finnhub": "2027-02-02",
+        "revenue_estimate": 146849547486,
+        "yahoo": null
+      }
+    },
+    "GS": {
+      "dividend_payment": {
+        "date": "2026-12-30"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-19",
+        "finnhub": null,
+        "hour": "bmo",
+        "yahoo": "2027-01-19"
+      },
+      "ex_dividend": {
+        "date": "2026-12-02"
+      }
+    },
+    "HD": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-17",
+        "eps_estimate": 3.952,
+        "finnhub": "2026-11-17",
+        "hour": "bmo",
+        "revenue_estimate": 44033075934,
+        "yahoo": "2026-11-17"
+      }
+    },
+    "IBM": {
+      "dividend_payment": {
+        "date": "2026-12-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 4.6731,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 20584185587,
+        "yahoo": "2027-01-27"
+      },
+      "ex_dividend": {
+        "date": "2026-11-10"
+      }
+    },
+    "INTC": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-20",
+        "eps_estimate": 0.2755,
+        "finnhub": "2027-01-20",
+        "revenue_estimate": 15983976218,
+        "yahoo": "2027-01-28"
+      }
+    },
+    "INTU": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-19",
+        "eps_estimate": 2.7085,
+        "finnhub": "2026-11-19",
+        "hour": "amc",
+        "revenue_estimate": 4391457102,
+        "yahoo": "2026-11-19"
+      }
+    },
+    "ISRG": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-21",
+        "eps_estimate": 3.01,
+        "finnhub": "2027-01-20",
+        "revenue_estimate": 3301083324,
+        "yahoo": "2027-01-21"
+      }
+    },
+    "JNJ": {
+      "dividend_payment": {
+        "date": "2026-12-08"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-26",
+        "eps_estimate": 2.9384,
+        "finnhub": "2027-01-26",
+        "hour": "bmo",
+        "revenue_estimate": 26696618182,
+        "yahoo": "2027-01-26"
+      },
+      "ex_dividend": {
+        "date": "2026-11-24"
+      }
+    },
+    "JPM": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-14",
+        "eps_estimate": 5.9106,
+        "finnhub": "2027-01-14",
+        "hour": "bmo",
+        "revenue_estimate": 51785108516,
+        "yahoo": "2027-01-14"
+      }
+    },
+    "KO": {
+      "dividend_payment": {
+        "date": "2026-12-15"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-08",
+        "eps_estimate": 0.6187,
+        "finnhub": "2027-02-08",
+        "revenue_estimate": 11586860153,
+        "yahoo": null
+      },
+      "ex_dividend": {
+        "date": "2026-12-01"
+      }
+    },
+    "LIN": {
+      "dividend_payment": {
+        "date": "2026-12-17"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-03",
+        "eps_estimate": 4.5571,
+        "finnhub": "2027-02-03",
+        "revenue_estimate": 9289905532,
+        "yahoo": null
+      },
+      "ex_dividend": {
+        "date": "2026-12-03"
+      }
+    },
+    "LLY": {
+      "dividend_payment": {
+        "date": "2026-12-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-02",
+        "eps_estimate": 11.1627,
+        "finnhub": "2027-02-02",
+        "revenue_estimate": 24662944378,
+        "yahoo": null
+      },
+      "ex_dividend": {
+        "date": "2026-11-13"
+      }
+    },
+    "LMT": {
+      "dividend_payment": {
+        "date": "2026-12-31"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-26",
+        "eps_estimate": 8.2852,
+        "finnhub": "2027-01-27",
+        "revenue_estimate": 22876318492,
+        "yahoo": "2027-01-26"
+      },
+      "ex_dividend": {
+        "date": "2026-12-01"
+      }
+    },
+    "LOW": {
+      "dividend_payment": {
+        "date": "2026-11-04"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-18",
+        "eps_estimate": 2.8946,
+        "finnhub": "2026-11-18",
+        "hour": "bmo",
+        "revenue_estimate": 22628838829,
+        "yahoo": "2026-11-18"
+      }
+    },
+    "LRCX": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 2.3877,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 8800290352,
+        "yahoo": "2027-01-27"
+      }
+    },
+    "MA": {
+      "dividend_payment": {
+        "date": "2026-11-09"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-28",
+        "eps_estimate": 5.2972,
+        "finnhub": "2027-01-27",
+        "revenue_estimate": 10220945831,
+        "yahoo": "2027-01-28"
+      }
+    },
+    "MCD": {
+      "dividend_payment": {
+        "date": "2026-12-15"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-04",
+        "eps_estimate": 3.4184,
+        "finnhub": "2026-11-04",
+        "hour": "bmo",
+        "revenue_estimate": 7357417406,
+        "yahoo": "2026-11-04"
+      },
+      "ex_dividend": {
+        "date": "2026-12-01"
+      }
+    },
+    "MDLZ": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-01",
+        "eps_estimate": 0.9032,
+        "finnhub": "2027-02-01",
+        "revenue_estimate": 10798304143,
+        "yahoo": null
+      }
+    },
+    "MDT": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2026-11-17",
+        "finnhub": "2026-11-24",
+        "yahoo": "2026-11-17"
+      }
+    },
+    "META": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 8.5691,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 76707087764,
+        "yahoo": "2027-01-27"
+      }
+    },
+    "MMM": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-19",
+        "eps_estimate": 2.0538,
+        "finnhub": "2027-01-18",
+        "revenue_estimate": 6412958842,
+        "yahoo": "2027-01-19"
+      }
+    },
+    "MO": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-28",
+        "eps_estimate": 1.4185,
+        "finnhub": "2027-01-28",
+        "revenue_estimate": 5327040520,
+        "yahoo": "2027-01-28"
+      }
+    },
+    "MRK": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-02",
+        "eps_estimate": 1.8006,
+        "finnhub": "2027-02-02",
+        "revenue_estimate": 16587065501,
+        "yahoo": null
+      }
+    },
+    "MS": {
+      "dividend_payment": {
+        "date": "2026-11-13"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-14",
+        "eps_estimate": 3.0388,
+        "finnhub": "2027-01-14",
+        "revenue_estimate": 20818081271,
+        "yahoo": "2027-01-14"
+      }
+    },
+    "MSFT": {
+      "dividend_payment": {
+        "date": "2026-12-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 4.9704,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 98542884012,
+        "yahoo": "2027-01-27"
+      },
+      "ex_dividend": {
+        "date": "2026-11-19"
+      }
+    },
+    "MU": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2026-12-15",
+        "eps_estimate": 39.3702,
+        "finnhub": "2026-12-15",
+        "revenue_estimate": 63792594667,
+        "yahoo": "2026-12-23"
+      }
+    },
+    "NEE": {
+      "dividend_payment": {
+        "date": "2026-12-15"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-25",
+        "eps_estimate": 0.5601,
+        "finnhub": "2027-01-25",
+        "revenue_estimate": 7946973304,
+        "yahoo": "2027-01-27"
+      },
+      "ex_dividend": {
+        "date": "2026-11-27"
+      }
+    },
+    "NFLX": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-19",
+        "eps_estimate": 0.6966,
+        "finnhub": "2027-01-18",
+        "revenue_estimate": 13712561403,
+        "yahoo": "2027-01-19"
+      }
+    },
+    "NOW": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 1.1,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 4410055041,
+        "yahoo": "2027-01-27"
+      }
+    },
+    "NVDA": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-17",
+        "eps_estimate": 2.5263,
+        "finnhub": "2026-11-17",
+        "hour": "amc",
+        "revenue_estimate": 111356225808,
+        "yahoo": "2026-11-17"
+      }
+    },
+    "O": {
+      "dividend_payment": {
+        "date": "2026-11-13"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-02",
+        "eps_estimate": 0.4271,
+        "finnhub": "2026-11-02",
+        "hour": "amc",
+        "revenue_estimate": 1549572606,
+        "yahoo": "2026-11-02"
+      }
+    },
+    "ORCL": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-12-14",
+        "finnhub": "2026-12-08",
+        "hour": "amc",
+        "yahoo": "2026-12-14"
+      }
+    },
+    "PANW": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2026-11-12",
+        "eps_estimate": 0.9908,
+        "finnhub": "2026-11-12",
+        "revenue_estimate": 3372983960,
+        "yahoo": "2026-11-19"
+      }
+    },
+    "PEP": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-01",
+        "eps_estimate": 2.2622,
+        "finnhub": "2027-02-01",
+        "revenue_estimate": 30722730248,
+        "yahoo": null
+      }
+    },
+    "PFE": {
+      "dividend_payment": {
+        "date": "2026-12-07"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-03",
+        "eps_estimate": 0.7326,
+        "finnhub": "2026-11-03",
+        "hour": "bmo",
+        "revenue_estimate": 16030810526,
+        "yahoo": "2026-11-03"
+      },
+      "ex_dividend": {
+        "date": "2026-11-06"
+      }
+    },
+    "PG": {
+      "dividend_payment": {
+        "date": "2026-11-16"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-21",
+        "eps_estimate": 1.8691,
+        "finnhub": "2027-01-20",
+        "revenue_estimate": 23537261495,
+        "yahoo": "2027-01-21"
+      }
+    },
+    "PLTR": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-02",
+        "eps_estimate": 0.4182,
+        "finnhub": "2026-11-02",
+        "hour": "amc",
+        "revenue_estimate": 2226152254,
+        "yahoo": "2026-11-02"
+      }
+    },
+    "PM": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-04",
+        "eps_estimate": 1.8743,
+        "finnhub": "2027-02-04",
+        "revenue_estimate": 11141322910,
+        "yahoo": null
+      }
+    },
+    "QCOM": {
+      "dividend_payment": {
+        "date": "2026-12-17"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-04",
+        "eps_estimate": 2.202,
+        "finnhub": "2026-11-04",
+        "hour": "amc",
+        "revenue_estimate": 10318265215,
+        "yahoo": "2026-11-04"
+      },
+      "ex_dividend": {
+        "date": "2026-12-03"
+      }
+    },
+    "RTX": {
+      "dividend_payment": {
+        "date": "2026-12-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-26",
+        "finnhub": null,
+        "yahoo": "2027-01-26"
+      },
+      "ex_dividend": {
+        "date": "2026-11-20"
+      }
+    },
+    "SBUX": {
+      "dividend_payment": {
+        "date": "2026-11-27"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 0.7662,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 9585435138,
+        "yahoo": "2027-01-27"
+      },
+      "ex_dividend": {
+        "date": "2026-11-13"
+      }
+    },
+    "SCHW": {
+      "dividend_payment": {
+        "date": "2026-11-27"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-19",
+        "eps_estimate": 1.7505,
+        "finnhub": "2027-01-19",
+        "revenue_estimate": 7536650643,
+        "yahoo": "2027-01-21"
+      },
+      "ex_dividend": {
+        "date": "2026-11-13"
+      }
+    },
+    "SNDK": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 57.7568,
+        "finnhub": "2027-01-27",
+        "revenue_estimate": 12621705481,
+        "yahoo": null
+      }
+    },
+    "SO": {
+      "dividend_payment": {
+        "date": "2026-12-07"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-05",
+        "eps_estimate": 1.7621,
+        "finnhub": "2026-11-05",
+        "hour": "bmo",
+        "revenue_estimate": 8609285096,
+        "yahoo": "2026-11-05"
+      },
+      "ex_dividend": {
+        "date": "2026-11-16"
+      }
+    },
+    "T": {
+      "dividend_payment": {
+        "date": "2026-11-02"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 0.5519,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 35330808776,
+        "yahoo": "2027-01-27"
+      }
+    },
+    "TMO": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-28",
+        "eps_estimate": 7.1936,
+        "finnhub": "2027-01-27",
+        "revenue_estimate": 12977552418,
+        "yahoo": "2027-01-28"
+      }
+    },
+    "TMUS": {
+      "dividend_payment": {
+        "date": "2026-12-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-02-09",
+        "eps_estimate": 2.81,
+        "finnhub": "2027-02-09",
+        "revenue_estimate": 25933664485,
+        "yahoo": null
+      },
+      "ex_dividend": {
+        "date": "2026-11-25"
+      }
+    },
+    "TSLA": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-27",
+        "eps_estimate": 0.4629,
+        "finnhub": "2027-01-26",
+        "revenue_estimate": 29641523258,
+        "yahoo": "2027-01-27"
+      }
+    },
+    "TXN": {
+      "dividend_payment": {
+        "date": "2026-11-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-26",
+        "eps_estimate": 2.6504,
+        "finnhub": "2027-01-25",
+        "revenue_estimate": 6106717085,
+        "yahoo": "2027-01-26"
+      }
+    },
+    "UBER": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-04",
+        "eps_estimate": 0.9838,
+        "finnhub": "2026-11-04",
+        "hour": "bmo",
+        "revenue_estimate": 14997971451,
+        "yahoo": "2026-11-04"
+      }
+    },
+    "UNH": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-12",
+        "finnhub": "2027-01-25",
+        "yahoo": "2027-01-12"
+      }
+    },
+    "UNP": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-26",
+        "eps_estimate": 3.3403,
+        "finnhub": "2027-01-25",
+        "revenue_estimate": 7178790665,
+        "yahoo": "2027-01-26"
+      }
+    },
+    "UPS": {
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-26",
+        "eps_estimate": 2.7922,
+        "finnhub": "2027-01-25",
+        "revenue_estimate": 25928977135,
+        "yahoo": "2027-01-26"
+      }
+    },
+    "USB": {
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-19",
+        "eps_estimate": 1.4233,
+        "finnhub": "2027-01-19",
+        "hour": "bmo",
+        "revenue_estimate": 8159816765,
+        "yahoo": "2027-01-19"
+      }
+    },
+    "V": {
+      "dividend_payment": {
+        "date": "2026-12-01"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-26",
+        "eps_estimate": 3.7005,
+        "finnhub": "2027-01-27",
+        "revenue_estimate": 12448968297,
+        "yahoo": "2027-01-26"
+      }
+    },
+    "VZ": {
+      "dividend_payment": {
+        "date": "2026-11-02"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-28",
+        "eps_estimate": 1.1884,
+        "finnhub": "2027-01-28",
+        "revenue_estimate": 38192704818,
+        "yahoo": "2027-01-28"
+      }
+    },
+    "WFC": {
+      "dividend_payment": {
+        "date": "2026-12-01"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2027-01-14",
+        "eps_estimate": 1.8849,
+        "finnhub": "2027-01-14",
+        "hour": "bmo",
+        "revenue_estimate": 22571090008,
+        "yahoo": "2027-01-14"
+      },
+      "ex_dividend": {
+        "date": "2026-11-06"
+      }
+    },
+    "WMT": {
+      "dividend_payment": {
+        "date": "2027-01-04"
+      },
+      "earnings": {
+        "confirmed": true,
+        "date": "2026-11-19",
+        "eps_estimate": 0.6427,
+        "finnhub": "2026-11-19",
+        "hour": "bmo",
+        "revenue_estimate": 189206226646,
+        "yahoo": "2026-11-19"
+      },
+      "ex_dividend": {
+        "date": "2026-12-11"
+      }
+    },
+    "XOM": {
+      "dividend_payment": {
+        "date": "2026-12-10"
+      },
+      "earnings": {
+        "confirmed": false,
+        "date": "2027-01-29",
+        "eps_estimate": 3.9981,
+        "finnhub": "2027-01-28",
+        "revenue_estimate": 110366421092,
+        "yahoo": "2027-01-29"
+      },
+      "ex_dividend": {
+        "date": "2026-11-16"
+      }
+    }
+  },
+  "events_from": "2026-11-02",
+  "generated": "2026-11-02T22:32:34+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 38,
@@ -25,6 +1410,70 @@
       "targetMeanPrice": 332.3858,
       "targetMedianPrice": 337.5
     },
+    "ABBV": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 350.0,
+      "targetLowPrice": 237.0,
+      "targetMeanPrice": 305.57693,
+      "targetMedianPrice": 314.0
+    },
+    "ABT": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 130.0,
+      "targetLowPrice": 100.0,
+      "targetMeanPrice": 118.52269,
+      "targetMedianPrice": 120.0
+    },
+    "ACN": {
+      "numberOfAnalystOpinions": 24,
+      "recommendationKey": "buy",
+      "targetHighPrice": 300.0,
+      "targetLowPrice": 163.0,
+      "targetMeanPrice": 229.73792,
+      "targetMedianPrice": 232.5
+    },
+    "ADBE": {
+      "numberOfAnalystOpinions": 32,
+      "recommendationKey": "hold",
+      "targetHighPrice": 373.0,
+      "targetLowPrice": 195.0,
+      "targetMeanPrice": 272.31375,
+      "targetMedianPrice": 260.5
+    },
+    "AMAT": {
+      "numberOfAnalystOpinions": 37,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 900.0,
+      "targetLowPrice": 358.0,
+      "targetMeanPrice": 627.5405,
+      "targetMedianPrice": 610.0
+    },
+    "AMD": {
+      "numberOfAnalystOpinions": 49,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 1250.0,
+      "targetLowPrice": 430.0,
+      "targetMeanPrice": 645.82446,
+      "targetMedianPrice": 641.0
+    },
+    "AMGN": {
+      "numberOfAnalystOpinions": 29,
+      "recommendationKey": "hold",
+      "targetHighPrice": 500.0,
+      "targetLowPrice": 225.0,
+      "targetMeanPrice": 397.3231,
+      "targetMedianPrice": 405.0
+    },
+    "AMT": {
+      "numberOfAnalystOpinions": 23,
+      "recommendationKey": "buy",
+      "targetHighPrice": 260.0,
+      "targetLowPrice": 188.0,
+      "targetMeanPrice": 215.8261,
+      "targetMedianPrice": 210.0
+    },
     "AMZN": {
       "numberOfAnalystOpinions": 58,
       "recommendationKey": "strong_buy",
@@ -32,6 +1481,14 @@
       "targetLowPrice": 230.0,
       "targetMeanPrice": 327.09344,
       "targetMedianPrice": 330.0
+    },
+    "ANET": {
+      "numberOfAnalystOpinions": 29,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 290.0,
+      "targetLowPrice": 190.0,
+      "targetMeanPrice": 243.58655,
+      "targetMedianPrice": 248.0
     },
     "AVGO": {
       "numberOfAnalystOpinions": 48,
@@ -41,6 +1498,142 @@
       "targetMeanPrice": 530.14166,
       "targetMedianPrice": 537.5
     },
+    "AXP": {
+      "numberOfAnalystOpinions": 24,
+      "recommendationKey": "buy",
+      "targetHighPrice": 425.0,
+      "targetLowPrice": 329.0,
+      "targetMeanPrice": 365.78708,
+      "targetMedianPrice": 362.5
+    },
+    "BA": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 305.0,
+      "targetLowPrice": 157.0,
+      "targetMeanPrice": 235.65385,
+      "targetMedianPrice": 236.5
+    },
+    "BAC": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 71.0,
+      "targetLowPrice": 56.0,
+      "targetMeanPrice": 62.61364,
+      "targetMedianPrice": 62.0
+    },
+    "BKNG": {
+      "numberOfAnalystOpinions": 35,
+      "recommendationKey": "buy",
+      "targetHighPrice": 301.0,
+      "targetLowPrice": 170.0,
+      "targetMeanPrice": 232.7143,
+      "targetMedianPrice": 236.0
+    },
+    "BLK": {
+      "numberOfAnalystOpinions": 17,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 1531.0,
+      "targetLowPrice": 1250.0,
+      "targetMeanPrice": 1358.7059,
+      "targetMedianPrice": 1350.0
+    },
+    "BMY": {
+      "numberOfAnalystOpinions": 24,
+      "recommendationKey": "buy",
+      "targetHighPrice": 80.0,
+      "targetLowPrice": 40.0,
+      "targetMeanPrice": 65.25,
+      "targetMedianPrice": 65.5
+    },
+    "BNY": {
+      "numberOfAnalystOpinions": 15,
+      "recommendationKey": "buy",
+      "targetHighPrice": 182.0,
+      "targetLowPrice": 135.0,
+      "targetMeanPrice": 163.7,
+      "targetMedianPrice": 165.0
+    },
+    "BRK-B": {
+      "numberOfAnalystOpinions": 3,
+      "recommendationKey": "buy",
+      "targetHighPrice": 628.0,
+      "targetLowPrice": 510.0,
+      "targetMeanPrice": 555.6667,
+      "targetMedianPrice": 529.0
+    },
+    "C": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "buy",
+      "targetHighPrice": 170.0,
+      "targetLowPrice": 127.0,
+      "targetMeanPrice": 150.83333,
+      "targetMedianPrice": 154.0
+    },
+    "CAT": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 1044.68,
+      "targetLowPrice": 575.0,
+      "targetMeanPrice": 838.37537,
+      "targetMedianPrice": 827.5
+    },
+    "CMCSA": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "hold",
+      "targetHighPrice": 42.0,
+      "targetLowPrice": 17.0,
+      "targetMeanPrice": 27.97727,
+      "targetMedianPrice": 27.25
+    },
+    "COF": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "buy",
+      "targetHighPrice": 290.0,
+      "targetLowPrice": 225.0,
+      "targetMeanPrice": 255.4762,
+      "targetMedianPrice": 252.0
+    },
+    "COP": {
+      "numberOfAnalystOpinions": 27,
+      "recommendationKey": "buy",
+      "targetHighPrice": 189.0,
+      "targetLowPrice": 126.0,
+      "targetMeanPrice": 151.48148,
+      "targetMedianPrice": 150.0
+    },
+    "COST": {
+      "numberOfAnalystOpinions": 37,
+      "recommendationKey": "buy",
+      "targetHighPrice": 1315.0,
+      "targetLowPrice": 770.0,
+      "targetMeanPrice": 1067.5946,
+      "targetMedianPrice": 1065.0
+    },
+    "CRM": {
+      "numberOfAnalystOpinions": 53,
+      "recommendationKey": "buy",
+      "targetHighPrice": 475.0,
+      "targetLowPrice": 165.0,
+      "targetMeanPrice": 287.0836,
+      "targetMedianPrice": 285.0
+    },
+    "CSCO": {
+      "numberOfAnalystOpinions": 25,
+      "recommendationKey": "buy",
+      "targetHighPrice": 170.0,
+      "targetLowPrice": 110.0,
+      "targetMeanPrice": 136.16,
+      "targetMedianPrice": 135.0
+    },
+    "CVS": {
+      "numberOfAnalystOpinions": 25,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 145.0,
+      "targetLowPrice": 103.0,
+      "targetMeanPrice": 115.48,
+      "targetMedianPrice": 113.0
+    },
     "CVX": {
       "numberOfAnalystOpinions": 24,
       "recommendationKey": "buy",
@@ -49,6 +1642,110 @@
       "targetMeanPrice": 234.08333,
       "targetMedianPrice": 236.5
     },
+    "DE": {
+      "numberOfAnalystOpinions": 23,
+      "recommendationKey": "buy",
+      "targetHighPrice": 813.18,
+      "targetLowPrice": 500.0,
+      "targetMeanPrice": 694.0078,
+      "targetMedianPrice": 728.0
+    },
+    "DELL": {
+      "numberOfAnalystOpinions": 25,
+      "recommendationKey": "buy",
+      "targetHighPrice": 735.0,
+      "targetLowPrice": 490.0,
+      "targetMeanPrice": 595.0,
+      "targetMedianPrice": 600.0
+    },
+    "DHR": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 310.0,
+      "targetLowPrice": 220.0,
+      "targetMeanPrice": 259.90475,
+      "targetMedianPrice": 260.0
+    },
+    "DIS": {
+      "numberOfAnalystOpinions": 32,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 144.0,
+      "targetLowPrice": 86.0,
+      "targetMeanPrice": 126.58281,
+      "targetMedianPrice": 127.5
+    },
+    "DUK": {
+      "numberOfAnalystOpinions": 19,
+      "recommendationKey": "buy",
+      "targetHighPrice": 143.0,
+      "targetLowPrice": 121.0,
+      "targetMeanPrice": 131.73685,
+      "targetMedianPrice": 130.0
+    },
+    "EMR": {
+      "numberOfAnalystOpinions": 28,
+      "recommendationKey": "buy",
+      "targetHighPrice": 208.0,
+      "targetLowPrice": 104.0,
+      "targetMeanPrice": 174.99963,
+      "targetMedianPrice": 180.0
+    },
+    "FDX": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 479.0,
+      "targetLowPrice": 160.0,
+      "targetMeanPrice": 357.0,
+      "targetMedianPrice": 359.5
+    },
+    "GD": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "buy",
+      "targetHighPrice": 465.0,
+      "targetLowPrice": 309.0,
+      "targetMeanPrice": 413.4457,
+      "targetMedianPrice": 420.0
+    },
+    "GE": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 431.0,
+      "targetLowPrice": 280.0,
+      "targetMeanPrice": 378.42856,
+      "targetMedianPrice": 380.0
+    },
+    "GEV": {
+      "numberOfAnalystOpinions": 33,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 1450.0,
+      "targetLowPrice": 940.0,
+      "targetMeanPrice": 1188.9227,
+      "targetMedianPrice": 1200.0
+    },
+    "GILD": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 200.0,
+      "targetLowPrice": 131.0,
+      "targetMeanPrice": 172.5,
+      "targetMedianPrice": 175.0
+    },
+    "GM": {
+      "numberOfAnalystOpinions": 23,
+      "recommendationKey": "buy",
+      "targetHighPrice": 132.0,
+      "targetLowPrice": 75.0,
+      "targetMeanPrice": 101.08696,
+      "targetMedianPrice": 100.0
+    },
+    "GOOG": {
+      "numberOfAnalystOpinions": 16,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 460.0,
+      "targetLowPrice": 340.0,
+      "targetMeanPrice": 405.3125,
+      "targetMedianPrice": 410.0
+    },
     "GOOGL": {
       "numberOfAnalystOpinions": 52,
       "recommendationKey": "strong_buy",
@@ -56,6 +1753,54 @@
       "targetLowPrice": 325.0,
       "targetMeanPrice": 406.54807,
       "targetMedianPrice": 400.0
+    },
+    "GS": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "buy",
+      "targetHighPrice": 1250.0,
+      "targetLowPrice": 730.0,
+      "targetMeanPrice": 1030.6666,
+      "targetMedianPrice": 1000.0
+    },
+    "HD": {
+      "numberOfAnalystOpinions": 32,
+      "recommendationKey": "buy",
+      "targetHighPrice": 425.0,
+      "targetLowPrice": 310.0,
+      "targetMeanPrice": 379.0,
+      "targetMedianPrice": 392.5
+    },
+    "IBM": {
+      "numberOfAnalystOpinions": 23,
+      "recommendationKey": "buy",
+      "targetHighPrice": 300.0,
+      "targetLowPrice": 174.0,
+      "targetMeanPrice": 259.30347,
+      "targetMedianPrice": 265.0
+    },
+    "INTC": {
+      "numberOfAnalystOpinions": 43,
+      "recommendationKey": "hold",
+      "targetHighPrice": 160.0,
+      "targetLowPrice": 70.0,
+      "targetMeanPrice": 93.88372,
+      "targetMedianPrice": 90.0
+    },
+    "INTU": {
+      "numberOfAnalystOpinions": 31,
+      "recommendationKey": "buy",
+      "targetHighPrice": 732.0,
+      "targetLowPrice": 290.0,
+      "targetMeanPrice": 407.75934,
+      "targetMedianPrice": 400.0
+    },
+    "ISRG": {
+      "numberOfAnalystOpinions": 30,
+      "recommendationKey": "buy",
+      "targetHighPrice": 685.0,
+      "targetLowPrice": 324.0,
+      "targetMeanPrice": 482.63333,
+      "targetMedianPrice": 488.0
     },
     "JNJ": {
       "numberOfAnalystOpinions": 22,
@@ -81,6 +1826,78 @@
       "targetMeanPrice": 97.75,
       "targetMedianPrice": 100.0
     },
+    "LIN": {
+      "numberOfAnalystOpinions": 27,
+      "recommendationKey": "buy",
+      "targetHighPrice": 595.0,
+      "targetLowPrice": 400.0,
+      "targetMeanPrice": 549.37036,
+      "targetMedianPrice": 556.0
+    },
+    "LLY": {
+      "numberOfAnalystOpinions": 29,
+      "recommendationKey": "buy",
+      "targetHighPrice": 1650.0,
+      "targetLowPrice": 930.0,
+      "targetMeanPrice": 1426.9186,
+      "targetMedianPrice": 1497.0
+    },
+    "LMT": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "buy",
+      "targetHighPrice": 835.0,
+      "targetLowPrice": 498.0,
+      "targetMeanPrice": 652.5714,
+      "targetMedianPrice": 650.0
+    },
+    "LOW": {
+      "numberOfAnalystOpinions": 33,
+      "recommendationKey": "buy",
+      "targetHighPrice": 300.0,
+      "targetLowPrice": 191.0,
+      "targetMeanPrice": 251.9697,
+      "targetMedianPrice": 255.0
+    },
+    "LRCX": {
+      "numberOfAnalystOpinions": 30,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 500.0,
+      "targetLowPrice": 255.0,
+      "targetMeanPrice": 364.03333,
+      "targetMedianPrice": 352.5
+    },
+    "MA": {
+      "numberOfAnalystOpinions": 37,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 800.0,
+      "targetLowPrice": 550.0,
+      "targetMeanPrice": 701.9841,
+      "targetMedianPrice": 712.0
+    },
+    "MCD": {
+      "numberOfAnalystOpinions": 28,
+      "recommendationKey": "buy",
+      "targetHighPrice": 390.0,
+      "targetLowPrice": 230.0,
+      "targetMeanPrice": 291.75,
+      "targetMedianPrice": 294.0
+    },
+    "MDLZ": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "buy",
+      "targetHighPrice": 77.0,
+      "targetLowPrice": 55.0,
+      "targetMeanPrice": 70.40909,
+      "targetMedianPrice": 72.0
+    },
+    "MDT": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 121.0,
+      "targetLowPrice": 85.0,
+      "targetMeanPrice": 104.61538,
+      "targetMedianPrice": 106.0
+    },
     "META": {
       "numberOfAnalystOpinions": 58,
       "recommendationKey": "strong_buy",
@@ -89,6 +1906,38 @@
       "targetMeanPrice": 848.3765,
       "targetMedianPrice": 850.0
     },
+    "MMM": {
+      "numberOfAnalystOpinions": 18,
+      "recommendationKey": "buy",
+      "targetHighPrice": 230.0,
+      "targetLowPrice": 125.0,
+      "targetMeanPrice": 189.62444,
+      "targetMedianPrice": 193.0
+    },
+    "MO": {
+      "numberOfAnalystOpinions": 11,
+      "recommendationKey": "hold",
+      "targetHighPrice": 85.0,
+      "targetLowPrice": 58.0,
+      "targetMeanPrice": 73.27273,
+      "targetMedianPrice": 73.0
+    },
+    "MRK": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 186.0,
+      "targetLowPrice": 105.0,
+      "targetMeanPrice": 159.90962,
+      "targetMedianPrice": 165.0
+    },
+    "MS": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "buy",
+      "targetHighPrice": 262.0,
+      "targetLowPrice": 185.0,
+      "targetMeanPrice": 211.5,
+      "targetMedianPrice": 206.5
+    },
     "MSFT": {
       "numberOfAnalystOpinions": 52,
       "recommendationKey": "strong_buy",
@@ -96,6 +1945,38 @@
       "targetLowPrice": 440.0,
       "targetMeanPrice": 633.2829,
       "targetMedianPrice": 631.0
+    },
+    "MU": {
+      "numberOfAnalystOpinions": 45,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 3000.0,
+      "targetLowPrice": 361.0,
+      "targetMeanPrice": 1561.9111,
+      "targetMedianPrice": 1550.0
+    },
+    "NEE": {
+      "numberOfAnalystOpinions": 19,
+      "recommendationKey": "buy",
+      "targetHighPrice": 110.0,
+      "targetLowPrice": 56.0,
+      "targetMeanPrice": 94.0,
+      "targetMedianPrice": 99.0
+    },
+    "NFLX": {
+      "numberOfAnalystOpinions": 43,
+      "recommendationKey": "buy",
+      "targetHighPrice": 126.0,
+      "targetLowPrice": 57.0,
+      "targetMeanPrice": 84.76326,
+      "targetMedianPrice": 82.0
+    },
+    "NOW": {
+      "numberOfAnalystOpinions": 46,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 266.0,
+      "targetLowPrice": 72.0,
+      "targetMeanPrice": 154.68826,
+      "targetMedianPrice": 155.0
     },
     "NVDA": {
       "numberOfAnalystOpinions": 58,
@@ -113,6 +1994,134 @@
       "targetMeanPrice": 64.34524,
       "targetMedianPrice": 63.75
     },
+    "ORCL": {
+      "numberOfAnalystOpinions": 41,
+      "recommendationKey": "buy",
+      "targetHighPrice": 400.0,
+      "targetLowPrice": 110.0,
+      "targetMeanPrice": 235.55951,
+      "targetMedianPrice": 225.0
+    },
+    "PANW": {
+      "numberOfAnalystOpinions": 50,
+      "recommendationKey": "buy",
+      "targetHighPrice": 525.0,
+      "targetLowPrice": 190.0,
+      "targetMeanPrice": 398.52,
+      "targetMedianPrice": 415.0
+    },
+    "PEP": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "hold",
+      "targetHighPrice": 169.0,
+      "targetLowPrice": 106.0,
+      "targetMeanPrice": 141.59091,
+      "targetMedianPrice": 140.5
+    },
+    "PFE": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 36.0,
+      "targetLowPrice": 25.0,
+      "targetMeanPrice": 29.25962,
+      "targetMedianPrice": 28.5
+    },
+    "PG": {
+      "numberOfAnalystOpinions": 23,
+      "recommendationKey": "buy",
+      "targetHighPrice": 190.0,
+      "targetLowPrice": 151.0,
+      "targetMeanPrice": 173.65218,
+      "targetMedianPrice": 176.0
+    },
+    "PLTR": {
+      "numberOfAnalystOpinions": 28,
+      "recommendationKey": "buy",
+      "targetHighPrice": 265.0,
+      "targetLowPrice": 80.0,
+      "targetMeanPrice": 212.50357,
+      "targetMedianPrice": 224.0
+    },
+    "PM": {
+      "numberOfAnalystOpinions": 15,
+      "recommendationKey": "buy",
+      "targetHighPrice": 230.0,
+      "targetLowPrice": 175.0,
+      "targetMeanPrice": 210.8,
+      "targetMedianPrice": 215.0
+    },
+    "QCOM": {
+      "numberOfAnalystOpinions": 30,
+      "recommendationKey": "hold",
+      "targetHighPrice": 400.0,
+      "targetLowPrice": 100.0,
+      "targetMeanPrice": 196.3,
+      "targetMedianPrice": 180.0
+    },
+    "RTX": {
+      "numberOfAnalystOpinions": 23,
+      "recommendationKey": "buy",
+      "targetHighPrice": 250.0,
+      "targetLowPrice": 200.0,
+      "targetMeanPrice": 229.1739,
+      "targetMedianPrice": 235.0
+    },
+    "SBUX": {
+      "numberOfAnalystOpinions": 29,
+      "recommendationKey": "buy",
+      "targetHighPrice": 141.0,
+      "targetLowPrice": 82.0,
+      "targetMeanPrice": 110.65517,
+      "targetMedianPrice": 110.0
+    },
+    "SCHW": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "buy",
+      "targetHighPrice": 147.0,
+      "targetLowPrice": 82.0,
+      "targetMeanPrice": 116.86364,
+      "targetMedianPrice": 118.5
+    },
+    "SNDK": {
+      "numberOfAnalystOpinions": 24,
+      "recommendationKey": "buy",
+      "targetHighPrice": 3000.0,
+      "targetLowPrice": 870.0,
+      "targetMeanPrice": 2029.0416,
+      "targetMedianPrice": 2000.0
+    },
+    "SO": {
+      "numberOfAnalystOpinions": 20,
+      "recommendationKey": "hold",
+      "targetHighPrice": 112.0,
+      "targetLowPrice": 74.0,
+      "targetMeanPrice": 95.9,
+      "targetMedianPrice": 96.5
+    },
+    "T": {
+      "numberOfAnalystOpinions": 23,
+      "recommendationKey": "buy",
+      "targetHighPrice": 34.0,
+      "targetLowPrice": 20.0,
+      "targetMeanPrice": 27.58696,
+      "targetMedianPrice": 27.0
+    },
+    "TMO": {
+      "numberOfAnalystOpinions": 25,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 830.0,
+      "targetLowPrice": 590.0,
+      "targetMeanPrice": 752.12,
+      "targetMedianPrice": 750.0
+    },
+    "TMUS": {
+      "numberOfAnalystOpinions": 25,
+      "recommendationKey": "buy",
+      "targetHighPrice": 296.0,
+      "targetLowPrice": 165.0,
+      "targetMeanPrice": 225.64,
+      "targetMedianPrice": 235.0
+    },
     "TSLA": {
       "numberOfAnalystOpinions": 40,
       "recommendationKey": "buy",
@@ -120,6 +2129,94 @@
       "targetLowPrice": 128.11,
       "targetMeanPrice": 413.10126,
       "targetMedianPrice": 436.0
+    },
+    "TXN": {
+      "numberOfAnalystOpinions": 29,
+      "recommendationKey": "buy",
+      "targetHighPrice": 400.0,
+      "targetLowPrice": 250.0,
+      "targetMeanPrice": 336.86206,
+      "targetMedianPrice": 340.0
+    },
+    "UBER": {
+      "numberOfAnalystOpinions": 46,
+      "recommendationKey": "buy",
+      "targetHighPrice": 150.0,
+      "targetLowPrice": 70.0,
+      "targetMeanPrice": 100.85522,
+      "targetMedianPrice": 100.5
+    },
+    "UNH": {
+      "numberOfAnalystOpinions": 25,
+      "recommendationKey": "buy",
+      "targetHighPrice": 531.0,
+      "targetLowPrice": 380.0,
+      "targetMeanPrice": 476.64,
+      "targetMedianPrice": 490.0
+    },
+    "UNP": {
+      "numberOfAnalystOpinions": 24,
+      "recommendationKey": "buy",
+      "targetHighPrice": 375.0,
+      "targetLowPrice": 245.0,
+      "targetMeanPrice": 331.375,
+      "targetMedianPrice": 336.5
+    },
+    "UPS": {
+      "numberOfAnalystOpinions": 26,
+      "recommendationKey": "buy",
+      "targetHighPrice": 135.0,
+      "targetLowPrice": 76.0,
+      "targetMeanPrice": 115.42308,
+      "targetMedianPrice": 117.5
+    },
+    "USB": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "buy",
+      "targetHighPrice": 75.0,
+      "targetLowPrice": 65.0,
+      "targetMeanPrice": 68.75,
+      "targetMedianPrice": 68.5
+    },
+    "V": {
+      "numberOfAnalystOpinions": 37,
+      "recommendationKey": "strong_buy",
+      "targetHighPrice": 500.0,
+      "targetLowPrice": 330.0,
+      "targetMeanPrice": 443.4427,
+      "targetMedianPrice": 450.0
+    },
+    "VZ": {
+      "numberOfAnalystOpinions": 22,
+      "recommendationKey": "buy",
+      "targetHighPrice": 62.0,
+      "targetLowPrice": 44.0,
+      "targetMeanPrice": 50.65,
+      "targetMedianPrice": 50.0
+    },
+    "WFC": {
+      "numberOfAnalystOpinions": 24,
+      "recommendationKey": "buy",
+      "targetHighPrice": 108.0,
+      "targetLowPrice": 88.0,
+      "targetMeanPrice": 97.375,
+      "targetMedianPrice": 97.5
+    },
+    "WMT": {
+      "numberOfAnalystOpinions": 40,
+      "recommendationKey": "buy",
+      "targetHighPrice": 155.0,
+      "targetLowPrice": 81.0,
+      "targetMeanPrice": 127.475,
+      "targetMedianPrice": 130.0
+    },
+    "XOM": {
+      "numberOfAnalystOpinions": 21,
+      "recommendationKey": "buy",
+      "targetHighPrice": 206.0,
+      "targetLowPrice": 142.0,
+      "targetMeanPrice": 179.7143,
+      "targetMedianPrice": 182.0
     }
   }
 }

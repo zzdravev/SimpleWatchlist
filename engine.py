@@ -1,8 +1,10 @@
+import csv
 import json
 import pandas as pd
 import yfinance as yf
 import numpy as np
-from datetime import datetime
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -18,6 +20,18 @@ DEFAULT_TICKERS = ["NVDA", "VUAA.L", "KO", "JNJ", "O", "META", "GOOGL", "MSFT",
 # slow-moving analyst figures are collected there and read back from disk here.
 RECORD_PATH = Path(__file__).with_name("data") / "analyst_record.json"
 
+# The tickers users pick from, and the ones the daily record job covers.
+UNIVERSE_PATH = Path(__file__).with_name("data") / "universe.csv"
+
+
+def load_universe():
+    """Rows of data/universe.csv as dicts (ticker, name, sector, group), or [] if absent."""
+    try:
+        with open(UNIVERSE_PATH, encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle))
+    except OSError:
+        return []
+
 
 def load_analyst_record():
     try:
@@ -25,6 +39,39 @@ def load_analyst_record():
             return json.load(handle)
     except (OSError, ValueError):
         return {}
+
+
+EVENT_LABELS = {"earnings": "Earnings", "ex_dividend": "Ex-div"}
+
+
+def market_today():
+    """Today's date where the US market is, which is what event countdowns refer to."""
+    return datetime.now(ZoneInfo("America/New_York")).date()
+
+
+def next_event(entry, today):
+    """Label for the nearest upcoming earnings or ex-dividend date, e.g. "Earnings · ~9d".
+
+    A tilde marks an earnings date the company has not confirmed. Days are calendar
+    days, counted at render time from the stored date, so a record that is a day old
+    still counts down correctly. "-" when nothing is known within the horizon.
+    """
+    candidates = []
+    for kind in EVENT_LABELS:
+        event = (entry or {}).get(kind)
+        try:
+            days = (date.fromisoformat(event["date"]) - today).days
+        except (TypeError, KeyError, ValueError):
+            continue
+        if days >= 0:
+            candidates.append((days, kind, event))
+    if not candidates:
+        return "-"
+    days, kind, event = min(candidates, key=lambda c: c[0])
+    when = "today" if days == 0 else f"{days}d"
+    if kind == "earnings" and not event.get("confirmed"):
+        when = "~" + when
+    return f"{EVENT_LABELS[kind]} · {when}"
 
 
 def _wilder_rma(series, period):
@@ -75,8 +122,13 @@ def get_financial_data(tickers):
     # Tickers the record job looked at, including those that legitimately have no
     # analyst coverage, so an ETF is not reported as a failure.
     record_checked = set(record.get("checked", record_tickers))
+    # Upcoming events exist only in the record: Yahoo's live quote is refused on the
+    # hosted app, and the events change on the order of days anyway.
+    record_events = record.get("events", {})
+    today = market_today()
     meta = {"record_generated": record.get("generated"), "record_used": False,
-            "quotes_refused": False, "last_close": None}
+            "quotes_refused": False, "last_close": None,
+            "events": {t: record_events[t] for t in tickers if t in record_events}}
 
     raw_data = yf.download(tickers, period="1y", interval="1d", group_by="ticker", auto_adjust=True)
 
@@ -135,6 +187,11 @@ def get_financial_data(tickers):
             tr = np.maximum((high - low), np.maximum(abs(high - close.shift(1)), abs(low - close.shift(1))))
             atr = _wilder_rma(tr, 14).iloc[-1]
 
+            # Long-term trend. A year of daily bars leaves about 50 values past the
+            # warm-up; a younger listing simply has none and gets no trend marker.
+            sma200 = close.rolling(window=200).mean().iloc[-1]
+            below_trend = pd.notna(sma200) and current_price < sma200
+
             # Dynamic dip / take-profit levels for the DCA strategy
             mod_dip = lower_band.iloc[-1]
             strong_dip = mod_dip - (0.5 * atr)
@@ -142,8 +199,11 @@ def get_financial_data(tickers):
             strong_tp = mod_tp + (0.5 * atr)
 
             # Price signal. Upper-band touches are labelled "overextended" rather
-            # than "sell": backtesting showed forward returns after those signals
-            # match or beat the baseline, so they mean "don't add here", not "exit".
+            # than "sell": on the 1996-2026 S&P 500 backtest (docs/backtest-broad-
+            # universe.md) they returned +2.2% over 60 days against a +3.2% baseline,
+            # below average but still positive, so "don't add here", not "exit".
+            # The STRONG tier is kept as a price level, although that backtest found
+            # no ATR offset that separates outcomes once volatility is matched.
             price_signal = "HOLD"
             if current_price <= strong_dip:
                 price_signal = "STRONG BUY (Dip)"
@@ -154,6 +214,14 @@ def get_financial_data(tickers):
             elif current_price >= mod_tp:
                 price_signal = "OVEREXTENDED"
 
+            # Below SMA200 the trend is down. Not a filter: the backtest could not
+            # settle whether one helps. But such dips are a different bet: 41% of them
+            # regained their prior 52-week high within a year, against 78% above the
+            # trend, with a fatter left tail. An upper-band touch below SMA200 was the
+            # weakest upper-band case. The marker makes that visible without hiding it.
+            if below_trend and price_signal != "HOLD":
+                price_signal += " \u2193"
+
             if current_rsi < 30:
                 rsi_signal = "OVERSOLD"
             elif current_rsi > 70:
@@ -161,18 +229,21 @@ def get_financial_data(tickers):
             else:
                 rsi_signal = "NEUTRAL"
 
-            # Conviction grades a dip by RSI. Over a 5y backtest of this watchlist, a
-            # dip with RSI<30 returned +12.8% over 60 days (82% win rate) versus +4.0%
-            # for a dip with RSI>40. A dip fires on only about a third of days across
-            # the whole list, so the rest of the time the column reports the distance
-            # left to one, measured in ATR so that it compares across tickers.
+            # Conviction grades a dip by RSI. On the broad backtest a dip with RSI<30
+            # returned +5.6% over 60 days and one with RSI 40 or more +3.3%, the same
+            # as the +3.2% baseline. So a WEAK dip is no better than no signal. The
+            # extra return at low RSI comes with worse tails and vanishes against
+            # stocks of equal volatility: it pays for risk, it is not a free edge.
+            # A dip fires on only a minority of days, so the rest of the time the
+            # column reports the distance left to one, measured in ATR so that it
+            # compares across tickers.
             if "BUY" in price_signal:
                 if current_rsi < 30:
                     conviction = "HIGH"
                 elif current_rsi < 40:
                     conviction = "MEDIUM"
                 else:
-                    conviction = "LOW"
+                    conviction = "WEAK"
             elif pd.notna(mod_dip) and pd.notna(atr) and atr > 0:
                 conviction = f"{(current_price - mod_dip) / atr:.1f} ATR"
             else:
@@ -225,6 +296,7 @@ def get_financial_data(tickers):
                 "Ext": extended,
                 "Signal": price_signal,
                 "Conviction": conviction,
+                "Next Event": next_event(record_events.get(ticker), today),
                 "RSI (14)": round(current_rsi, 2),
                 "RSI Sig": rsi_signal,
                 "Mod Dip": round(mod_dip, 2),
