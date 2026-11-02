@@ -27,6 +27,11 @@ REQUIRED_COLUMNS = {
 
 SHARED = watchlist.universe()
 
+# The browser reports what it saved only after the first run of a session has
+# drawn the page, so that run uses the defaults and the next one, which the
+# browser triggers straight away, swaps in the saved choices once.
+store_ready = browser_store.sync()
+
 if "watchlist" not in st.session_state:
     st.session_state.watchlist = watchlist.saved_or_default()
 if "show_editor" not in st.session_state:
@@ -40,11 +45,23 @@ OPTIONAL_COLUMNS = [
     "Strong Dip", "Mod TP", "Strong TP", "Upside %", "Target Median", "Target Low",
     "Target High", "Analyst Rec",
 ]
-if "visible_columns" not in st.session_state:
+
+
+def saved_visible_columns():
     hidden = browser_store.read("hidden_columns", default=[])
     if not isinstance(hidden, list):
         hidden = []
-    st.session_state.visible_columns = [c for c in OPTIONAL_COLUMNS if c not in hidden]
+    return [c for c in OPTIONAL_COLUMNS if c not in hidden]
+
+
+if "visible_columns" not in st.session_state:
+    st.session_state.visible_columns = saved_visible_columns()
+
+# Widgets are not drawn yet at this point, so their state can still be set.
+if store_ready and not st.session_state.get("saved_choices_applied"):
+    st.session_state.saved_choices_applied = True
+    st.session_state.watchlist = watchlist.saved_or_default()
+    st.session_state.visible_columns = saved_visible_columns()
 
 
 # Events further out than this are listed but not coloured; at EVENT_ALERT_DAYS or
@@ -126,7 +143,16 @@ should_refresh = (
     or st.session_state.get("last_tickers") != tickers
 )
 
-if should_refresh and not tickers:
+# On a session's very first run the saved watchlist is not known yet, and fetching
+# the default list would be wasted: the browser's answer reruns the script at once.
+# Only that one run waits, so a browser that never answers still gets the defaults
+# on the next interaction.
+st.session_state.script_runs = st.session_state.get("script_runs", 0) + 1
+waiting_for_browser = not store_ready and st.session_state.script_runs == 1
+
+if waiting_for_browser:
+    st.caption("Loading your saved watchlist...")
+elif should_refresh and not tickers:
     st.session_state.df_data, st.session_state.errors, st.session_state.meta = pd.DataFrame(), [], {}
     st.session_state.last_tickers = tickers
 elif should_refresh:
@@ -369,6 +395,8 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
     else:
         st.session_state.panel_ticker = None
         st.caption("Select a row for that ticker's chart, upcoming events, fundamentals and news.")
+elif waiting_for_browser:
+    pass
 elif not tickers:
     st.info("Your watchlist is empty. Open **Edit tickers** to pick some.")
 else:
@@ -506,6 +534,3 @@ if scroll_target:
         """,
         height=1,
     )
-
-# Last, so every setting changed during this run is saved in one go.
-browser_store.flush()

@@ -15,7 +15,7 @@ Decided after `docs/backtest-broad-universe.md`:
   since it did no better than an average day.
 - A `↓` after a signal marks a price below its 200-day average. Information, not a
   filter: the test could not settle whether a filter helps.
-- A `Columns` menu hides and shows columns; the choice is kept in a cookie
+- A `Columns` menu hides and shows columns; the choice is kept in the browser
   (`browser_store.py`), which is also how the watchlist will be remembered.
 
 ## 1. Next-event column (done)
@@ -76,7 +76,7 @@ restart, so the app cannot save the list locally. Instead:
 - Input is validated as a ticker symbol before anything is written.
 
 **Extras (per user).** Anyone can add tickers outside the universe. They are stored
-in that user's cookie and are not shared.
+in that user's browser and are not shared.
 
 - Prices and signals work for any symbol, since the price history endpoint answers
   Streamlit Cloud.
@@ -85,10 +85,12 @@ in that user's cookie and are not shared.
   quote endpoint from Streamlit Cloud. Such rows are marked as limited data rather
   than showing blanks that look like errors.
 
-**Remembering the choice.** The selection and the extras are saved per browser in a
-cookie: read with `st.context.cookies`, written with a small script like the
-existing scroll helper. If Streamlit Cloud's iframe blocks the cookie, fall back to a
-localStorage component. No database and no user login.
+**Remembering the choice.** The selection and the extras are saved per browser in
+localStorage, through a small `st.components.v2` component that reports the saved
+values back to Python (`browser_store.py`). The first version used cookies read with
+`st.context.cookies`; that worked locally but forgot everything on Streamlit
+Community Cloud, whose proxy strips cookies before they reach the app. Cookies left
+by that version are still read as a fallback. No database and no user login.
 
 **Secrets this needs on Streamlit Cloud:** `FINNHUB_API_KEY`, `ADMIN_PASSWORD`, and
 `GITHUB_TOKEN` (the fine-grained token above).
