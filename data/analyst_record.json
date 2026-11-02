@@ -154,6 +154,7 @@
         "date": "2026-12-17",
         "eps_estimate": 3.9902,
         "finnhub": "2026-12-16",
+        "hour": "bmo",
         "revenue_estimate": 19588513841,
         "yahoo": "2026-12-17"
       }
@@ -338,6 +339,7 @@
         "confirmed": true,
         "date": "2027-01-15",
         "finnhub": "2027-01-11",
+        "hour": "bmo",
         "yahoo": "2027-01-15"
       }
     },
@@ -346,6 +348,7 @@
         "confirmed": true,
         "date": "2026-11-07",
         "finnhub": "2026-11-02",
+        "hour": "amc",
         "yahoo": "2026-11-07"
       }
     },
@@ -358,7 +361,7 @@
         "date": "2027-01-14",
         "eps_estimate": 2.3856,
         "finnhub": "2027-01-14",
-        "hour": "amc",
+        "hour": "bmo",
         "revenue_estimate": 22834785308,
         "yahoo": "2027-01-14"
       },
@@ -375,6 +378,7 @@
         "date": "2027-01-28",
         "eps_estimate": 6.7339,
         "finnhub": "2027-01-27",
+        "hour": "bmo",
         "revenue_estimate": 21147003411,
         "yahoo": "2027-01-28"
       }
@@ -425,6 +429,7 @@
         "date": "2026-12-10",
         "eps_estimate": 5.0319,
         "finnhub": "2026-12-10",
+        "hour": "amc",
         "revenue_estimate": 75703801831,
         "yahoo": "2026-12-10"
       }
@@ -444,6 +449,7 @@
         "confirmed": true,
         "date": "2026-11-12",
         "finnhub": "2026-11-18",
+        "hour": "amc",
         "yahoo": "2026-11-12"
       }
     },
@@ -486,7 +492,7 @@
         "date": "2026-11-25",
         "eps_estimate": 4.1688,
         "finnhub": "2026-11-25",
-        "hour": "amc",
+        "hour": "bmo",
         "revenue_estimate": 10677445374,
         "yahoo": "2026-11-25"
       }
@@ -497,6 +503,7 @@
         "date": "2026-11-24",
         "eps_estimate": 6.682,
         "finnhub": "2026-11-24",
+        "hour": "amc",
         "revenue_estimate": 50148620473,
         "yahoo": "2026-11-24"
       }
@@ -592,6 +599,7 @@
         "date": "2027-01-27",
         "eps_estimate": 6.6061,
         "finnhub": "2027-01-26",
+        "hour": "bmo",
         "revenue_estimate": 13884902785,
         "yahoo": "2027-01-27"
       }
@@ -621,7 +629,7 @@
         "date": "2027-01-27",
         "eps_estimate": 2.6205,
         "finnhub": "2027-01-27",
-        "hour": "amc",
+        "hour": "bmo",
         "revenue_estimate": 46093525128,
         "yahoo": "2027-01-27"
       },
@@ -663,6 +671,7 @@
         "confirmed": true,
         "date": "2027-01-19",
         "finnhub": null,
+        "hour": "bmo",
         "yahoo": "2027-01-19"
       },
       "ex_dividend": {
@@ -675,6 +684,7 @@
         "date": "2026-11-17",
         "eps_estimate": 3.952,
         "finnhub": "2026-11-17",
+        "hour": "bmo",
         "revenue_estimate": 44033075934,
         "yahoo": "2026-11-17"
       }
@@ -711,6 +721,7 @@
         "date": "2026-11-19",
         "eps_estimate": 2.7085,
         "finnhub": "2026-11-19",
+        "hour": "amc",
         "revenue_estimate": 4391457102,
         "yahoo": "2026-11-19"
       }
@@ -734,7 +745,7 @@
         "date": "2027-01-26",
         "eps_estimate": 2.9384,
         "finnhub": "2027-01-26",
-        "hour": "amc",
+        "hour": "bmo",
         "revenue_estimate": 26696618182,
         "yahoo": "2027-01-26"
       },
@@ -748,7 +759,7 @@
         "date": "2027-01-14",
         "eps_estimate": 5.9106,
         "finnhub": "2027-01-14",
-        "hour": "amc",
+        "hour": "bmo",
         "revenue_estimate": 51785108516,
         "yahoo": "2027-01-14"
       }
@@ -1034,6 +1045,7 @@
         "confirmed": true,
         "date": "2026-12-14",
         "finnhub": "2026-12-08",
+        "hour": "amc",
         "yahoo": "2026-12-14"
       }
     },
@@ -1305,7 +1317,7 @@
         "date": "2027-01-19",
         "eps_estimate": 1.4233,
         "finnhub": "2027-01-19",
-        "hour": "amc",
+        "hour": "bmo",
         "revenue_estimate": 8159816765,
         "yahoo": "2027-01-19"
       }
@@ -1345,7 +1357,7 @@
         "date": "2027-01-14",
         "eps_estimate": 1.8849,
         "finnhub": "2027-01-14",
-        "hour": "amc",
+        "hour": "bmo",
         "revenue_estimate": 22571090008,
         "yahoo": "2027-01-14"
       },
@@ -1362,6 +1374,7 @@
         "date": "2026-11-19",
         "eps_estimate": 0.6427,
         "finnhub": "2026-11-19",
+        "hour": "bmo",
         "revenue_estimate": 189206226646,
         "yahoo": "2026-11-19"
       },
@@ -1387,7 +1400,7 @@
     }
   },
   "events_from": "2026-11-02",
-  "generated": "2026-11-02T22:21:51+00:00",
+  "generated": "2026-11-02T22:32:34+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 38,
@@ -1401,9 +1414,9 @@
       "numberOfAnalystOpinions": 26,
       "recommendationKey": "buy",
       "targetHighPrice": 350.0,
-      "targetLowPrice": 200.0,
-      "targetMeanPrice": 298.5,
-      "targetMedianPrice": 295.0
+      "targetLowPrice": 237.0,
+      "targetMeanPrice": 305.57693,
+      "targetMedianPrice": 314.0
     },
     "ABT": {
       "numberOfAnalystOpinions": 26,
@@ -1560,10 +1573,10 @@
     "CAT": {
       "numberOfAnalystOpinions": 26,
       "recommendationKey": "buy",
-      "targetHighPrice": 1150.0,
+      "targetHighPrice": 1044.68,
       "targetLowPrice": 575.0,
-      "targetMeanPrice": 859.52924,
-      "targetMedianPrice": 869.5
+      "targetMeanPrice": 838.37537,
+      "targetMedianPrice": 827.5
     },
     "CMCSA": {
       "numberOfAnalystOpinions": 22,
@@ -1826,8 +1839,8 @@
       "recommendationKey": "buy",
       "targetHighPrice": 1650.0,
       "targetLowPrice": 930.0,
-      "targetMeanPrice": 1421.0565,
-      "targetMedianPrice": 1450.0
+      "targetMeanPrice": 1426.9186,
+      "targetMedianPrice": 1497.0
     },
     "LMT": {
       "numberOfAnalystOpinions": 21,
