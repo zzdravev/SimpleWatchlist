@@ -152,7 +152,9 @@
       "earnings": {
         "confirmed": true,
         "date": "2026-12-17",
+        "eps_estimate": 3.9902,
         "finnhub": "2026-12-16",
+        "revenue_estimate": 19588513841,
         "yahoo": "2026-12-17"
       }
     },
@@ -260,7 +262,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-28",
+        "date": "2027-01-29",
         "eps_estimate": 4.3241,
         "finnhub": "2027-01-28",
         "revenue_estimate": 20993063786,
@@ -270,7 +272,7 @@
     "BA": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-25",
+        "date": "2027-01-26",
         "eps_estimate": -0.8401,
         "finnhub": "2027-01-25",
         "revenue_estimate": 26385311313,
@@ -308,7 +310,7 @@
     "BLK": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-13",
+        "date": "2027-01-14",
         "eps_estimate": 15.6432,
         "finnhub": "2027-01-13",
         "revenue_estimate": 8058219350,
@@ -371,7 +373,9 @@
       "earnings": {
         "confirmed": true,
         "date": "2027-01-28",
+        "eps_estimate": 6.7339,
         "finnhub": "2027-01-27",
+        "revenue_estimate": 21147003411,
         "yahoo": "2027-01-28"
       }
     },
@@ -381,7 +385,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-27",
+        "date": "2027-01-28",
         "eps_estimate": 0.623,
         "finnhub": "2027-01-27",
         "revenue_estimate": 30712364714,
@@ -395,7 +399,9 @@
       "earnings": {
         "confirmed": false,
         "date": "2027-01-19",
+        "eps_estimate": 4.9629,
         "finnhub": "2027-01-20",
+        "revenue_estimate": 16774054285,
         "yahoo": "2027-01-19"
       }
     },
@@ -426,7 +432,7 @@
     "CRM": {
       "earnings": {
         "confirmed": false,
-        "date": "2026-12-01",
+        "date": "2026-12-02",
         "eps_estimate": 3.4717,
         "finnhub": "2026-12-01",
         "revenue_estimate": 11570800208,
@@ -461,7 +467,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-28",
+        "date": "2027-01-29",
         "eps_estimate": 5.4522,
         "finnhub": "2027-01-28",
         "revenue_estimate": 62443833699,
@@ -498,7 +504,7 @@
     "DHR": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 2.5005,
         "finnhub": "2027-01-26",
         "revenue_estimate": 7573441782,
@@ -560,7 +566,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 4.6858,
         "finnhub": "2027-01-26",
         "revenue_estimate": 15210041600,
@@ -570,7 +576,7 @@
     "GE": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-20",
+        "date": "2027-01-21",
         "eps_estimate": 2.1052,
         "finnhub": "2027-01-20",
         "revenue_estimate": 13713888186,
@@ -584,7 +590,9 @@
       "earnings": {
         "confirmed": true,
         "date": "2027-01-27",
+        "eps_estimate": 6.6061,
         "finnhub": "2027-01-26",
+        "revenue_estimate": 13884902785,
         "yahoo": "2027-01-27"
       }
     },
@@ -677,7 +685,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 4.6731,
         "finnhub": "2027-01-26",
         "revenue_estimate": 20584185587,
@@ -710,7 +718,7 @@
     "ISRG": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-20",
+        "date": "2027-01-21",
         "eps_estimate": 3.01,
         "finnhub": "2027-01-20",
         "revenue_estimate": 3301083324,
@@ -800,7 +808,9 @@
       "earnings": {
         "confirmed": false,
         "date": "2027-01-26",
+        "eps_estimate": 8.2852,
         "finnhub": "2027-01-27",
+        "revenue_estimate": 22876318492,
         "yahoo": "2027-01-26"
       },
       "ex_dividend": {
@@ -824,7 +834,7 @@
     "LRCX": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 2.3877,
         "finnhub": "2027-01-26",
         "revenue_estimate": 8800290352,
@@ -837,7 +847,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-27",
+        "date": "2027-01-28",
         "eps_estimate": 5.2972,
         "finnhub": "2027-01-27",
         "revenue_estimate": 10220945831,
@@ -882,7 +892,7 @@
     "META": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 8.5691,
         "finnhub": "2027-01-26",
         "revenue_estimate": 76707087764,
@@ -892,7 +902,7 @@
     "MMM": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-18",
+        "date": "2027-01-19",
         "eps_estimate": 2.0538,
         "finnhub": "2027-01-18",
         "revenue_estimate": 6412958842,
@@ -938,7 +948,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 4.9704,
         "finnhub": "2027-01-26",
         "revenue_estimate": 98542884012,
@@ -977,7 +987,7 @@
     "NFLX": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-18",
+        "date": "2027-01-19",
         "eps_estimate": 0.6966,
         "finnhub": "2027-01-18",
         "revenue_estimate": 13712561403,
@@ -987,7 +997,7 @@
     "NOW": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 1.1,
         "finnhub": "2027-01-26",
         "revenue_estimate": 4410055041,
@@ -1070,7 +1080,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-20",
+        "date": "2027-01-21",
         "eps_estimate": 1.8691,
         "finnhub": "2027-01-20",
         "revenue_estimate": 23537261495,
@@ -1135,7 +1145,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 0.7662,
         "finnhub": "2027-01-26",
         "revenue_estimate": 9585435138,
@@ -1194,7 +1204,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 0.5519,
         "finnhub": "2027-01-26",
         "revenue_estimate": 35330808776,
@@ -1204,7 +1214,7 @@
     "TMO": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-27",
+        "date": "2027-01-28",
         "eps_estimate": 7.1936,
         "finnhub": "2027-01-27",
         "revenue_estimate": 12977552418,
@@ -1230,7 +1240,7 @@
     "TSLA": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-26",
+        "date": "2027-01-27",
         "eps_estimate": 0.4629,
         "finnhub": "2027-01-26",
         "revenue_estimate": 29641523258,
@@ -1243,7 +1253,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-25",
+        "date": "2027-01-26",
         "eps_estimate": 2.6504,
         "finnhub": "2027-01-25",
         "revenue_estimate": 6106717085,
@@ -1272,7 +1282,7 @@
     "UNP": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-25",
+        "date": "2027-01-26",
         "eps_estimate": 3.3403,
         "finnhub": "2027-01-25",
         "revenue_estimate": 7178790665,
@@ -1282,7 +1292,7 @@
     "UPS": {
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-25",
+        "date": "2027-01-26",
         "eps_estimate": 2.7922,
         "finnhub": "2027-01-25",
         "revenue_estimate": 25928977135,
@@ -1307,7 +1317,9 @@
       "earnings": {
         "confirmed": false,
         "date": "2027-01-26",
+        "eps_estimate": 3.7005,
         "finnhub": "2027-01-27",
+        "revenue_estimate": 12448968297,
         "yahoo": "2027-01-26"
       }
     },
@@ -1363,7 +1375,7 @@
       },
       "earnings": {
         "confirmed": false,
-        "date": "2027-01-28",
+        "date": "2027-01-29",
         "eps_estimate": 3.9981,
         "finnhub": "2027-01-28",
         "revenue_estimate": 110366421092,
@@ -1375,7 +1387,7 @@
     }
   },
   "events_from": "2026-11-02",
-  "generated": "2026-11-02T22:18:56+00:00",
+  "generated": "2026-11-02T22:21:51+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 38,
@@ -1804,9 +1816,9 @@
     "LIN": {
       "numberOfAnalystOpinions": 27,
       "recommendationKey": "buy",
-      "targetHighPrice": 591.0,
+      "targetHighPrice": 595.0,
       "targetLowPrice": 400.0,
-      "targetMeanPrice": 549.03705,
+      "targetMeanPrice": 549.37036,
       "targetMedianPrice": 556.0
     },
     "LLY": {
