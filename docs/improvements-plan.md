@@ -18,7 +18,7 @@ Decided after `docs/backtest-broad-universe.md`:
 - A `Columns` menu hides and shows columns; the choice is kept in a cookie
   (`browser_store.py`), which is also how the watchlist will be remembered.
 
-## 1. Next-event column
+## 1. Next-event column (done)
 
 One column showing the nearest upcoming event per ticker, e.g. `Earnings · 9d` or
 `Ex-div · 4d`.
@@ -34,7 +34,7 @@ One column showing the nearest upcoming event per ticker, e.g. `Earnings · 9d` 
 - Collected by the daily CI job alongside the analyst record, since Yahoo refuses the
   quote endpoint from Streamlit Cloud.
 
-## 2. Ticker detail panel
+## 2. Ticker detail panel (done)
 
 Selecting a row opens a panel below the table (Streamlit row selection; a cell link
 can only open an external page).
@@ -47,6 +47,11 @@ can only open an external page).
 - Upcoming events in full: both earnings and ex-dividend, with EPS and revenue
   estimates.
 - External links: Yahoo Finance, TradingView, the company website.
+
+Built as planned, with Finnhub fetched live when a row is opened (cached for hours,
+news for 30 minutes) rather than collected in CI: it answers Streamlit Cloud, and
+one ticker at a time costs five calls. Needs `FINNHUB_API_KEY` in Streamlit secrets;
+without it the panel still shows the chart, returns, events and links.
 
 ## 3. Personal watchlists
 
