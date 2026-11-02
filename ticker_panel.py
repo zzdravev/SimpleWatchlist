@@ -65,6 +65,8 @@ def render_events(events, today, generated):
                     details.append(f"window to {date.fromisoformat(event['latest']).strftime('%d %b')}")
             sources = [f"{src} {date.fromisoformat(event[key]).strftime('%d %b')}"
                        for src, key in (("Yahoo", "yahoo"), ("Finnhub", "finnhub")) if event.get(key)]
+            if event.get("finnhub") and not event.get("yahoo"):
+                details.append("from Finnhub only, whose dates often run a day early")
             # A one-day gap is Finnhub running early, not a real disagreement.
             if len(sources) == 2 and abs((date.fromisoformat(event["yahoo"])
                                           - date.fromisoformat(event["finnhub"])).days) > 1:

@@ -53,7 +53,7 @@ news for 30 minutes) rather than collected in CI: it answers Streamlit Cloud, an
 one ticker at a time costs five calls. Needs `FINNHUB_API_KEY` in Streamlit secrets;
 without it the panel still shows the chart, returns, events and links.
 
-## 3. Personal watchlists
+## 3. Personal watchlists (done)
 
 Two layers: a shared universe that the owner maintains, and per-user extras.
 
@@ -93,6 +93,13 @@ localStorage component. No database and no user login.
 **Secrets this needs on Streamlit Cloud:** `FINNHUB_API_KEY`, `ADMIN_PASSWORD`, and
 `GITHUB_TOKEN` (the fine-grained token above).
 
+Built as planned. The picker is a multiselect over the universe that also takes any
+other symbol (`watchlist.py`); extras get a live Finnhub earnings date for US
+listings and are named under the table instead of raising a warning. The admin
+panel (`universe_admin.py`) checks that Yahoo has prices for a new symbol, fills
+name and sector from Finnhub, and commits with the file's current SHA, so a
+concurrent edit is refused rather than overwritten.
+
 ## Data sources, as probed on 2 November 2026
 
 Finnhub free tier, called with a real key against this watchlist:
@@ -121,6 +128,3 @@ Two pitfalls found:
 The key is stored as the `FINNHUB_API_KEY` repository secret for CI. It will also go
 into Streamlit secrets if any of this is fetched live.
 
-## Waiting on
-
-- The extra tickers to add to the S&P 100 for the initial universe.
