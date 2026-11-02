@@ -37,13 +37,22 @@ jobs:
         shell: bash
         run: python -W ignore scripts/backtest_broad_universe.py 2>&1 | tee backtest-log.txt
 
+      # The per-signal file is about 20 MB, too large to keep in the repository, so it is
+      # attached to the run instead of committed.
+      - name: Attach per-signal results
+        uses: actions/upload-artifact@v4
+        with:
+          name: backtest-broad-universe-signals
+          path: docs/backtest-broad-universe-signals.csv.gz
+          retention-days: 90
+
       - name: Commit results
         run: |
           mkdir -p docs
           mv backtest-log.txt docs/backtest-broad-universe-log.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/backtest-broad-universe-*.csv docs/backtest-broad-universe-*.csv.gz \
+          git add docs/backtest-broad-universe-*.csv \
                   docs/backtest-broad-universe-tables.md docs/backtest-broad-universe-results.json \
                   docs/backtest-broad-universe-log.txt docs/backtest-narrow-replication-signals.csv
           if git diff --staged --quiet; then

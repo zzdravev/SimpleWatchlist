@@ -1,9 +1,14 @@
 # Signal logic on a broad universe: results
 
 Answer to `docs/backtest-brief.md`. The app's code was not changed. The full generated
-tables are in `docs/backtest-broad-universe-tables.md`, the per-signal rows in
-`docs/backtest-broad-universe-signals.csv.gz`, and the script is
+tables are in `docs/backtest-broad-universe-tables.md`, and the script is
 `scripts/backtest_broad_universe.py`.
+
+The per-signal rows (`backtest-broad-universe-signals.csv.gz`, about 20 MB) are too large
+to keep in the repository. Each workflow run attaches them as the artifact
+`backtest-broad-universe-signals` for 90 days, and running the script locally writes them
+to `docs/`, which git ignores. The smaller CSVs (baseline by day, coverage per ticker, the
+replication signals) are committed.
 
 ## Verdicts
 
