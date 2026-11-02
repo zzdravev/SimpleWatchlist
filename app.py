@@ -109,7 +109,9 @@ def render_event_panel(ticker, events, today, generated):
                     details.append(f"window to {date.fromisoformat(event['latest']).strftime('%d %b')}")
             sources = [f"{src} {date.fromisoformat(event[key]).strftime('%d %b')}"
                        for src, key in (("Yahoo", "yahoo"), ("Finnhub", "finnhub")) if event.get(key)]
-            if len(sources) == 2 and event["yahoo"] != event["finnhub"]:
+            # A one-day gap is Finnhub running early, not a real disagreement.
+            if len(sources) == 2 and abs((date.fromisoformat(event["yahoo"])
+                                          - date.fromisoformat(event["finnhub"])).days) > 1:
                 details.append("sources differ: " + ", ".join(sources))
             if isinstance(event.get("eps_estimate"), (int, float)):
                 details.append(f"EPS est. {event['eps_estimate']:.2f}")
