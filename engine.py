@@ -3,7 +3,8 @@ import json
 import pandas as pd
 import yfinance as yf
 import numpy as np
-from datetime import datetime
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -38,6 +39,39 @@ def load_analyst_record():
             return json.load(handle)
     except (OSError, ValueError):
         return {}
+
+
+EVENT_LABELS = {"earnings": "Earnings", "ex_dividend": "Ex-div"}
+
+
+def market_today():
+    """Today's date where the US market is, which is what event countdowns refer to."""
+    return datetime.now(ZoneInfo("America/New_York")).date()
+
+
+def next_event(entry, today):
+    """Label for the nearest upcoming earnings or ex-dividend date, e.g. "Earnings · ~9d".
+
+    A tilde marks an earnings date the company has not confirmed. Days are calendar
+    days, counted at render time from the stored date, so a record that is a day old
+    still counts down correctly. "-" when nothing is known within the horizon.
+    """
+    candidates = []
+    for kind in EVENT_LABELS:
+        event = (entry or {}).get(kind)
+        try:
+            days = (date.fromisoformat(event["date"]) - today).days
+        except (TypeError, KeyError, ValueError):
+            continue
+        if days >= 0:
+            candidates.append((days, kind, event))
+    if not candidates:
+        return "-"
+    days, kind, event = min(candidates, key=lambda c: c[0])
+    when = "today" if days == 0 else f"{days}d"
+    if kind == "earnings" and not event.get("confirmed"):
+        when = "~" + when
+    return f"{EVENT_LABELS[kind]} · {when}"
 
 
 def _wilder_rma(series, period):
@@ -88,8 +122,13 @@ def get_financial_data(tickers):
     # Tickers the record job looked at, including those that legitimately have no
     # analyst coverage, so an ETF is not reported as a failure.
     record_checked = set(record.get("checked", record_tickers))
+    # Upcoming events exist only in the record: Yahoo's live quote is refused on the
+    # hosted app, and the events change on the order of days anyway.
+    record_events = record.get("events", {})
+    today = market_today()
     meta = {"record_generated": record.get("generated"), "record_used": False,
-            "quotes_refused": False, "last_close": None}
+            "quotes_refused": False, "last_close": None,
+            "events": {t: record_events[t] for t in tickers if t in record_events}}
 
     raw_data = yf.download(tickers, period="1y", interval="1d", group_by="ticker", auto_adjust=True)
 
@@ -257,6 +296,7 @@ def get_financial_data(tickers):
                 "Ext": extended,
                 "Signal": price_signal,
                 "Conviction": conviction,
+                "Next Event": next_event(record_events.get(ticker), today),
                 "RSI (14)": round(current_rsi, 2),
                 "RSI Sig": rsi_signal,
                 "Mod Dip": round(mod_dip, 2),

@@ -1,9 +1,10 @@
+import re
 from datetime import date
 
 import streamlit as st
 import pandas as pd
 import browser_store
-from engine import DEFAULT_TICKERS, get_financial_data
+from engine import DEFAULT_TICKERS, get_financial_data, market_today
 
 
 def short_date(value):
@@ -23,7 +24,7 @@ IMPLAUSIBLE_UPSIDE = 200
 # A table held in session state from an earlier version of the code can be missing
 # columns this script now expects, so check the schema instead of crashing on it.
 REQUIRED_COLUMNS = {
-    "Ticker", "Price", "Ext", "Signal", "Conviction", "RSI (14)", "RSI Sig",
+    "Ticker", "Price", "Ext", "Signal", "Conviction", "Next Event", "RSI (14)", "RSI Sig",
     "Mod Dip", "Strong Dip", "Mod TP", "Strong TP", "Upside %",
     "Target Median", "Target Low", "Target High", "Analyst Rec", "Market",
 }
@@ -37,7 +38,7 @@ if "show_editor" not in st.session_state:
 # saved as the hidden set rather than the visible one, so a column added in a later
 # version shows up for returning visitors instead of being hidden by default.
 OPTIONAL_COLUMNS = [
-    "Price", "Ext", "Signal", "Conviction", "RSI (14)", "RSI Sig", "Mod Dip",
+    "Price", "Ext", "Signal", "Conviction", "Next Event", "RSI (14)", "RSI Sig", "Mod Dip",
     "Strong Dip", "Mod TP", "Strong TP", "Upside %", "Target Median", "Target Low",
     "Target High", "Analyst Rec",
 ]
@@ -46,6 +47,96 @@ if "visible_columns" not in st.session_state:
     if not isinstance(hidden, list):
         hidden = []
     st.session_state.visible_columns = [c for c in OPTIONAL_COLUMNS if c not in hidden]
+
+
+# Events further out than this are listed but not coloured; at EVENT_ALERT_DAYS or
+# fewer the cell turns solid red.
+EVENT_HORIZON_DAYS = 30
+EVENT_ALERT_DAYS = 3
+
+
+def _blend(stops, t):
+    """Colour at position t (0..1) along evenly spaced RGB stops."""
+    t = min(max(t, 0.0), 1.0) * (len(stops) - 1)
+    i = min(int(t), len(stops) - 2)
+    frac = t - i
+    return tuple(round(a + (b - a) * frac) for a, b in zip(stops[i], stops[i + 1]))
+
+
+def event_days(label):
+    """Days until the event in a "Next Event" label, or None if there is none."""
+    match = re.search(r"· ~?(today|\d+)d?$", str(label))
+    if not match:
+        return None
+    return 0 if match.group(1) == "today" else int(match.group(1))
+
+
+def format_money(value):
+    if not isinstance(value, (int, float)):
+        return None
+    for size, suffix in ((1e12, "T"), (1e9, "B"), (1e6, "M")):
+        if abs(value) >= size:
+            return f"${value / size:.1f}{suffix}"
+    return f"${value:,.0f}"
+
+
+def render_event_panel(ticker, events, today, generated):
+    """Upcoming events for one ticker, shown under the table when its row is selected."""
+    st.markdown(f"##### {ticker} · upcoming events")
+    events = events or {}
+    rows = []
+    names = (("earnings", "Earnings"), ("ex_dividend", "Ex-dividend"),
+             ("dividend_payment", "Dividend payment"))
+    for kind, name in names:
+        event = events.get(kind)
+        if not event:
+            continue
+        when = date.fromisoformat(event["date"])
+        days = (when - today).days
+        if days < 0:
+            continue
+        details = []
+        if kind == "earnings":
+            if event.get("confirmed"):
+                status = "Confirmed"
+                hour = {"bmo": "before the open", "amc": "after the close"}.get(event.get("hour"))
+                if hour:
+                    details.append(hour)
+            else:
+                status = "Estimated"
+                if event.get("latest"):
+                    details.append(f"window to {date.fromisoformat(event['latest']).strftime('%d %b')}")
+            sources = [f"{src} {date.fromisoformat(event[key]).strftime('%d %b')}"
+                       for src, key in (("Yahoo", "yahoo"), ("Finnhub", "finnhub")) if event.get(key)]
+            if len(sources) == 2 and event["yahoo"] != event["finnhub"]:
+                details.append("sources differ: " + ", ".join(sources))
+            if isinstance(event.get("eps_estimate"), (int, float)):
+                details.append(f"EPS est. {event['eps_estimate']:.2f}")
+            revenue = format_money(event.get("revenue_estimate"))
+            if revenue:
+                details.append(f"revenue est. {revenue}")
+        elif kind == "ex_dividend":
+            status = "Announced"
+            details.append("buy before this date to receive the next dividend")
+        else:
+            status = "Announced"
+        rows.append({
+            "Event": name,
+            "Date": when.strftime("%a %d %b %Y"),
+            "In": "today" if days == 0 else f"{days} days",
+            "Status": status,
+            "Details": " · ".join(details),
+        })
+    if rows:
+        st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+    else:
+        st.caption("No earnings or dividend dates known for the next 120 days.")
+    if generated:
+        st.caption(
+            f"Collected {short_date(generated)} from Yahoo and Finnhub. An estimated earnings "
+            "date is a projection until the company confirms it; where the two sources "
+            "disagree, the earlier date is used."
+        )
 
 
 # Streamlit generates a .st-key-<key> class for keyed containers; that is the
@@ -163,6 +254,18 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
         "SELL": ("#ffcdd2", "#b71c1c"),
     }
 
+    def highlight_event(val):
+        days = event_days(val)
+        if days is None or days > EVENT_HORIZON_DAYS:
+            return ""
+        if days <= EVENT_ALERT_DAYS:
+            return "background-color: #e53935; color: white; font-weight: bold;"
+        # Green far out, amber halfway, light red approaching the alert threshold.
+        stops = ((200, 230, 201), (255, 224, 130), (239, 154, 154))
+        position = (EVENT_HORIZON_DAYS - days) / (EVENT_HORIZON_DAYS - EVENT_ALERT_DAYS)
+        r, g, b = _blend(stops, position)
+        return f"background-color: rgb({r}, {g}, {b}); color: #263238;"
+
     def highlight_analyst_rec(val):
         # Values look like "STRONG_BUY (59)"; exact lookup avoids BUY matching STRONG_BUY
         colors = analyst_rec_colors.get(str(val).split(" (")[0])
@@ -215,6 +318,15 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
                  "measured in ATR so tickers of different volatility compare. Smaller is "
                  "closer; it is a watch list, not a signal.",
         ),
+        "Next Event": st.column_config.TextColumn(
+            width="medium",
+            help="The nearest earnings report or ex-dividend date, in calendar days. "
+                 f"Coloured from green at {EVENT_HORIZON_DAYS} days to red at "
+                 f"{EVENT_ALERT_DAYS} or fewer. A tilde (~) marks an earnings date the "
+                 "company has not confirmed yet. Select the row for details. A dip just "
+                 "before earnings is often the market positioning for the report rather "
+                 "than an opportunity.",
+        ),
         "RSI (14)": st.column_config.NumberColumn(
             format="%.2f",
             help="Relative Strength Index over 14 days with Wilder smoothing, the same figure "
@@ -257,6 +369,7 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
         .map(highlight_signals, subset=["Signal"])
         .map(highlight_rsi_signal, subset=["RSI Sig"])
         .map(highlight_conviction, subset=["Conviction"])
+        .map(highlight_event, subset=["Next Event"])
         .map(highlight_analyst_rec, subset=["Analyst Rec"])
         .map(highlight_upside, subset=["Upside %"])
     )
@@ -277,9 +390,19 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
     if meta.get("quotes_refused"):
         parts.append("Ext unavailable on this deployment")
     st.caption(" · ".join(parts))
-    st.dataframe(styled_df, width="stretch", height=560, hide_index=True, row_height=28,
-                 column_config=column_config,
-                 column_order=["Ticker", *st.session_state.visible_columns])
+    table = st.dataframe(styled_df, width="stretch", height=560, hide_index=True, row_height=28,
+                         column_config=column_config,
+                         column_order=["Ticker", *st.session_state.visible_columns],
+                         key="watchlist_table", on_select="rerun", selection_mode="single-row")
+
+    selected = table.selection.rows
+    if selected and selected[0] < len(df):
+        ticker = df.iloc[selected[0]]["Ticker"]
+        with st.container(border=True):
+            render_event_panel(ticker, meta.get("events", {}).get(ticker), market_today(),
+                               meta.get("record_generated"))
+    else:
+        st.caption("Select a row to see that ticker's upcoming events.")
 else:
     st.warning("No data found for the selected tickers.")
 
@@ -345,9 +468,15 @@ after a stock has already run, and are almost always bullish. They are **not** p
 signal logic, and they are worth reading mainly as a spread — a wide `Target Low` to
 `Target High` range means analysts disagree, so the median tells you little.
 
-**What this does not do.** It knows nothing about earnings, valuation, debt, news or
-anything fundamental. It measures how a price sits relative to its own recent range, and
-those relationships hold on average, not in any individual case.
+**Upcoming events.** `Next Event` counts down to the nearest earnings report or
+ex-dividend date, turning from green at 30 days to red at 3 or fewer. Select a row to see
+all of that ticker's known dates. A dip in the days before earnings is often the market
+positioning for the report, which is a different situation from the sell-offs the
+backtest measured.
+
+**What this does not do.** Apart from those dates it knows nothing about earnings,
+valuation, debt, news or anything fundamental. It measures how a price sits relative to
+its own recent range, and those relationships hold on average, not in any individual case.
 """
     )
 
