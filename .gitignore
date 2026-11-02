@@ -4,3 +4,5 @@ __pycache__/
 .env
 .streamlit/secrets.toml
 .DS_Stored
+.cache/
+docs/backtest-broad-universe-signals.csv.gz
