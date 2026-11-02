@@ -1400,7 +1400,7 @@
     }
   },
   "events_from": "2026-11-02",
-  "generated": "2026-11-02T22:32:34+00:00",
+  "generated": "2026-11-02T22:39:24+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 38,
@@ -1447,7 +1447,7 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 900.0,
       "targetLowPrice": 358.0,
-      "targetMeanPrice": 627.5405,
+      "targetMeanPrice": 626.86487,
       "targetMedianPrice": 610.0
     },
     "AMD": {
@@ -1455,7 +1455,7 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 1250.0,
       "targetLowPrice": 430.0,
-      "targetMeanPrice": 645.82446,
+      "targetMeanPrice": 646.74286,
       "targetMedianPrice": 641.0
     },
     "AMGN": {
@@ -1918,8 +1918,8 @@
       "numberOfAnalystOpinions": 11,
       "recommendationKey": "hold",
       "targetHighPrice": 85.0,
-      "targetLowPrice": 58.0,
-      "targetMeanPrice": 73.27273,
+      "targetLowPrice": 59.0,
+      "targetMeanPrice": 73.45455,
       "targetMedianPrice": 73.0
     },
     "MRK": {
@@ -2055,7 +2055,7 @@
       "recommendationKey": "hold",
       "targetHighPrice": 400.0,
       "targetLowPrice": 100.0,
-      "targetMeanPrice": 196.3,
+      "targetMeanPrice": 195.96667,
       "targetMedianPrice": 180.0
     },
     "RTX": {
@@ -2071,7 +2071,7 @@
       "recommendationKey": "buy",
       "targetHighPrice": 141.0,
       "targetLowPrice": 82.0,
-      "targetMeanPrice": 110.65517,
+      "targetMeanPrice": 110.75862,
       "targetMedianPrice": 110.0
     },
     "SCHW": {
