@@ -268,8 +268,8 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
     price_help = "Price level derived from the last 20 regular-session closes."
     column_config = {
         "Ticker": st.column_config.TextColumn(
-            help="Yahoo Finance symbol. Select the row for the ticker's chart, events, "
-                 "fundamentals and news."),
+            help="Yahoo Finance symbol. Click it for the ticker's chart, events, "
+                 "fundamentals and news below the table."),
         "Price": st.column_config.NumberColumn(
             format="%.2f",
             help="Last regular-session close. Extended hours are excluded so the indicators stay comparable.",
@@ -296,11 +296,10 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
                  "closer; it is a watch list, not a signal.",
         ),
         "Next Event": st.column_config.TextColumn(
-            width="medium",
             help="The nearest earnings report or ex-dividend date, in calendar days. "
                  f"Coloured from green at {EVENT_HORIZON_DAYS} days to red at "
                  f"{EVENT_ALERT_DAYS} or fewer. A tilde (~) marks an earnings date the "
-                 "company has not confirmed yet. Select the row for details. A dip just "
+                 "company has not confirmed yet. Click the ticker for details. A dip just "
                  "before earnings is often the market positioning for the report rather "
                  "than an opportunity.",
         ),
@@ -340,8 +339,32 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
         ),
     }
 
+    # The table selects single cells, so a click on a symbol opens its panel the way a
+    # link would, with no checkbox column suggesting several can be picked. The
+    # selection is read before the table is drawn so the open ticker can be marked.
+    # Clicks elsewhere in the table leave the panel as it is; clearing the selection
+    # (Esc) closes it.
+    cells = st.session_state.get("watchlist_table", {}).get("selection", {}).get("cells", [])
+    clicked = next((df.iloc[r]["Ticker"] for r, col in cells
+                    if col == "Ticker" and 0 <= r < len(df)), None)
+    if clicked:
+        # The panel opens below a tall table, so bring it into view once per new pick.
+        if st.session_state.get("panel_ticker") != clicked:
+            st.session_state.scroll_target = PANEL_SELECTOR
+        st.session_state.panel_ticker = clicked
+    elif not cells or st.session_state.get("panel_ticker") not in set(df["Ticker"]):
+        st.session_state.panel_ticker = None
+    open_ticker = st.session_state.panel_ticker
+
+    def style_ticker(val):
+        # Link colours, so the symbol reads as something to click.
+        if val == open_ticker:
+            return "background-color: #e3f2fd; color: #0d47a1; font-weight: bold;"
+        return "color: #1565c0; font-weight: bold;"
+
     styled_df = (
         df.style
+        .map(style_ticker, subset=["Ticker"])
         .map(highlight_extended, subset=["Ext"])
         .map(highlight_signals, subset=["Signal"])
         .map(highlight_rsi_signal, subset=["RSI Sig"])
@@ -373,19 +396,14 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
             f"Outside the shared list: {', '.join(uncovered)}. Prices and signals as usual; no "
             "analyst targets or dividend dates, and earnings dates only for US listings."
         )
-    table = st.dataframe(styled_df, width="stretch", height=560, hide_index=True, row_height=28,
+    st.dataframe(styled_df, width="stretch", height=560, hide_index=True, row_height=28,
                          column_config=column_config,
                          column_order=["Ticker", *st.session_state.visible_columns],
-                         key="watchlist_table", on_select="rerun", selection_mode="single-row")
+                         key="watchlist_table", on_select="rerun", selection_mode="single-cell")
 
-    selected = table.selection.rows
-    if selected and selected[0] < len(df):
-        row = df.iloc[selected[0]]
-        ticker = row["Ticker"]
-        # The panel opens below a tall table, so bring it into view once per new pick.
-        if st.session_state.get("panel_ticker") != ticker:
-            st.session_state.panel_ticker = ticker
-            st.session_state.scroll_target = PANEL_SELECTOR
+    if open_ticker:
+        row = df[df["Ticker"] == open_ticker].iloc[0]
+        ticker = open_ticker
         with st.container(border=True, key="ticker-panel"):
             ticker_panel.render(
                 ticker, row.to_dict(), meta.get("history", {}).get(ticker),
@@ -393,8 +411,7 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
                 meta.get("record_generated"), name=SHARED.get(ticker, {}).get("name"),
             )
     else:
-        st.session_state.panel_ticker = None
-        st.caption("Select a row for that ticker's chart, upcoming events, fundamentals and news.")
+        st.caption("Click a ticker for its chart, upcoming events, fundamentals and news.")
 elif waiting_for_browser:
     pass
 elif not tickers:
@@ -479,8 +496,8 @@ signal logic, and they are worth reading mainly as a spread — a wide `Target L
 `Target High` range means analysts disagree, so the median tells you little.
 
 **Upcoming events.** `Next Event` counts down to the nearest earnings report or
-ex-dividend date, turning from green at 30 days to red at 3 or fewer. Select a row to open
-that ticker's panel: a year of prices with its bands and dip levels, returns over
+ex-dividend date, turning from green at 30 days to red at 3 or fewer. Click a ticker to open
+its panel: a year of prices with its bands and dip levels, returns over
 standard windows, every known date, fundamentals and analyst ratings, and recent
 headlines. A dip in the days before earnings is often the market
 positioning for the report, which is a different situation from the sell-offs the

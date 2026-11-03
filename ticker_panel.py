@@ -1,4 +1,4 @@
-"""The detail panel shown under the table when a row is selected.
+"""The detail panel shown under the table when its ticker is clicked.
 
 Price history comes from the download the table already made, so the chart and the
 returns work everywhere. Company details, earnings history, analyst trends and news
