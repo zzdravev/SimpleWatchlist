@@ -12,6 +12,19 @@ from ticker_panel import short_date
 
 st.set_page_config(page_title="Simple Watchlist", layout="wide")
 
+# Streamlit's header bar, which on Community Cloud also carries the Fork and GitHub
+# buttons, stays fixed over the top of the page: after a scroll it covered the
+# panel's own buttons. It is hidden, and the room the page kept free for it is given
+# back. Its menu held only Rerun, Settings and Print, which the page and the browser
+# already cover.
+st.html("""
+<style>
+    header[data-testid="stHeader"] { display: none; }
+    [data-testid="stMainBlockContainer"] { padding-top: 2rem; }
+    .st-key-app-top, .st-key-ticker-panel, .st-key-ticker-editor { scroll-margin-top: 1rem; }
+</style>
+""")
+
 
 # Analyst targets go stale without being withdrawn: PARA once showed a $24 target
 # against a $0.93 price (+2480%). Past this point the target says nothing useful.
