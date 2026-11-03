@@ -108,13 +108,12 @@
   "events": {
     "AAPL": {
       "earnings": {
-        "confirmed": true,
-        "date": "2026-11-02",
-        "eps_estimate": 2.0267,
-        "finnhub": "2026-11-02",
-        "hour": "amc",
-        "revenue_estimate": 115660327009,
-        "yahoo": "2026-11-02"
+        "confirmed": false,
+        "date": "2027-01-28",
+        "eps_estimate": 2.9377,
+        "finnhub": "2027-01-27",
+        "revenue_estimate": 155609523242,
+        "yahoo": "2027-01-28"
       }
     },
     "ABBV": {
@@ -320,9 +319,6 @@
       }
     },
     "BMY": {
-      "dividend_payment": {
-        "date": "2026-11-02"
-      },
       "earnings": {
         "confirmed": false,
         "date": "2027-02-03",
@@ -348,7 +344,7 @@
       "earnings": {
         "confirmed": true,
         "date": "2026-11-07",
-        "finnhub": "2026-11-02",
+        "finnhub": "2027-02-26",
         "hour": "amc",
         "yahoo": "2026-11-07"
       }
@@ -365,9 +361,6 @@
         "hour": "bmo",
         "revenue_estimate": 22834785308,
         "yahoo": "2027-01-14"
-      },
-      "ex_dividend": {
-        "date": "2026-11-02"
       }
     },
     "CAT": {
@@ -440,7 +433,7 @@
         "confirmed": false,
         "date": "2026-12-02",
         "eps_estimate": 3.4717,
-        "finnhub": "2026-12-01",
+        "finnhub": "2026-12-02",
         "revenue_estimate": 11570800208,
         "yahoo": "2026-12-02"
       }
@@ -455,9 +448,6 @@
       }
     },
     "CVS": {
-      "dividend_payment": {
-        "date": "2026-11-02"
-      },
       "earnings": {
         "confirmed": true,
         "date": "2026-11-04",
@@ -1032,13 +1022,12 @@
         "date": "2026-11-13"
       },
       "earnings": {
-        "confirmed": true,
-        "date": "2026-11-02",
-        "eps_estimate": 0.4271,
-        "finnhub": "2026-11-02",
-        "hour": "amc",
-        "revenue_estimate": 1549572606,
-        "yahoo": "2026-11-02"
+        "confirmed": false,
+        "date": "2027-02-22",
+        "eps_estimate": 0.4386,
+        "finnhub": "2027-02-22",
+        "revenue_estimate": 1591465455,
+        "yahoo": null
       }
     },
     "ORCL": {
@@ -1102,13 +1091,12 @@
     },
     "PLTR": {
       "earnings": {
-        "confirmed": true,
-        "date": "2026-11-02",
-        "eps_estimate": 0.4182,
-        "finnhub": "2026-11-02",
-        "hour": "amc",
-        "revenue_estimate": 2226152254,
-        "yahoo": "2026-11-02"
+        "confirmed": false,
+        "date": "2027-02-01",
+        "eps_estimate": 0.4719,
+        "finnhub": "2027-02-01",
+        "revenue_estimate": 2504704778,
+        "yahoo": "2027-02-01"
       }
     },
     "PM": {
@@ -1212,9 +1200,6 @@
       }
     },
     "T": {
-      "dividend_payment": {
-        "date": "2026-11-02"
-      },
       "earnings": {
         "confirmed": false,
         "date": "2027-01-27",
@@ -1337,9 +1322,6 @@
       }
     },
     "VZ": {
-      "dividend_payment": {
-        "date": "2026-11-02"
-      },
       "earnings": {
         "confirmed": false,
         "date": "2027-01-28",
@@ -1400,8 +1382,8 @@
       }
     }
   },
-  "events_from": "2026-11-02",
-  "generated": "2026-11-02T23:33:20+00:00",
+  "events_from": "2026-11-03",
+  "generated": "2026-11-03T13:10:59+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 38,
@@ -1436,12 +1418,12 @@
       "targetMedianPrice": 232.5
     },
     "ADBE": {
-      "numberOfAnalystOpinions": 32,
+      "numberOfAnalystOpinions": 33,
       "recommendationKey": "hold",
       "targetHighPrice": 373.0,
-      "targetLowPrice": 195.0,
-      "targetMeanPrice": 272.31375,
-      "targetMedianPrice": 260.5
+      "targetLowPrice": 140.0,
+      "targetMeanPrice": 268.30423,
+      "targetMedianPrice": 260.0
     },
     "AMAT": {
       "numberOfAnalystOpinions": 37,
@@ -1480,7 +1462,7 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 405.0,
       "targetLowPrice": 230.0,
-      "targetMeanPrice": 327.09344,
+      "targetMeanPrice": 327.0762,
       "targetMedianPrice": 330.0
     },
     "ANET": {
@@ -1600,7 +1582,7 @@
       "recommendationKey": "buy",
       "targetHighPrice": 189.0,
       "targetLowPrice": 126.0,
-      "targetMeanPrice": 151.48148,
+      "targetMeanPrice": 151.55556,
       "targetMedianPrice": 150.0
     },
     "COST": {
@@ -1875,8 +1857,8 @@
       "recommendationKey": "strong_buy",
       "targetHighPrice": 800.0,
       "targetLowPrice": 550.0,
-      "targetMeanPrice": 701.9841,
-      "targetMedianPrice": 712.0
+      "targetMeanPrice": 706.0381,
+      "targetMedianPrice": 725.0
     },
     "MCD": {
       "numberOfAnalystOpinions": 28,
@@ -2049,9 +2031,9 @@
     "PM": {
       "numberOfAnalystOpinions": 15,
       "recommendationKey": "buy",
-      "targetHighPrice": 230.0,
+      "targetHighPrice": 240.0,
       "targetLowPrice": 175.0,
-      "targetMeanPrice": 210.8,
+      "targetMeanPrice": 211.46667,
       "targetMedianPrice": 215.0
     },
     "QCOM": {
