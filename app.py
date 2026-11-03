@@ -92,6 +92,9 @@ EDITOR_SELECTOR = ".st-key-ticker-editor"
 TOP_SELECTOR = ".st-key-app-top"
 PANEL_SELECTOR = ".st-key-ticker-panel"
 
+# A hidden table column that a cleared selection points at; see the table code.
+RESET_COLUMN = "_reset"
+
 
 def toggle_editor():
     st.session_state.show_editor = not st.session_state.show_editor
@@ -109,6 +112,21 @@ def save_watchlist():
     st.session_state.watchlist = valid
     st.session_state.rejected_tickers = rejected
     watchlist.save(valid)
+
+
+def back_to_table():
+    st.session_state.scroll_target = TOP_SELECTOR
+
+
+def close_panel():
+    st.session_state.panel_ticker = None
+    st.session_state.scroll_target = TOP_SELECTOR
+
+
+def panel_actions():
+    st.button("\u2191 Table", key="panel_back", width="stretch", on_click=back_to_table,
+              help="Back to the table; the panel stays open.")
+    st.button("Close", key="panel_close", width="stretch", on_click=close_panel)
 
 
 def request_refresh(scroll_to_top=False):
@@ -177,6 +195,8 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
     # "Market" drives the status caption rather than a column of its own
     market_states = sorted({s for s in df["Market"] if s and s != "UNKNOWN"})
     df = df.drop(columns=["Market"])
+    # Never shown (it is not in column_order); only there to clear the selection, below.
+    df[RESET_COLUMN] = ""
 
     def highlight_extended(val):
         # Pastel: extended-hours moves are context, not a signal
@@ -341,18 +361,28 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
 
     # The table selects single cells, so a click on a symbol opens its panel the way a
     # link would, with no checkbox column suggesting several can be picked. The
-    # selection is read before the table is drawn so the open ticker can be marked.
-    # Clicks elsewhere in the table leave the panel as it is; clearing the selection
-    # (Esc) closes it.
+    # selection is read before the table is drawn so the open ticker can be marked,
+    # then cleared: a cell that stayed selected would make a second click on the same
+    # symbol do nothing, not even bring the panel back into view. Clicks elsewhere in
+    # the table leave the panel as it is; its Close button closes it.
     cells = st.session_state.get("watchlist_table", {}).get("selection", {}).get("cells", [])
+    cells = [(r, col) for r, col in cells if col != RESET_COLUMN]
     clicked = next((df.iloc[r]["Ticker"] for r, col in cells
                     if col == "Ticker" and 0 <= r < len(df)), None)
+    if cells:
+        # The browser skips a cleared selection identical to the last one it was
+        # sent, so a plain empty one would work once only. Every other clear points
+        # at a cell of the hidden column instead: the browser cannot show it, so the
+        # table ends up with nothing selected either way.
+        flip = not st.session_state.get("selection_reset_flip", False)
+        st.session_state.selection_reset_flip = flip
+        st.session_state.watchlist_table = {"selection": {
+            "rows": [], "columns": [], "cells": [(0, RESET_COLUMN)] if flip else []}}
     if clicked:
-        # The panel opens below a tall table, so bring it into view once per new pick.
-        if st.session_state.get("panel_ticker") != clicked:
-            st.session_state.scroll_target = PANEL_SELECTOR
+        # The panel opens below a tall table, so bring it into view on every click.
         st.session_state.panel_ticker = clicked
-    elif not cells or st.session_state.get("panel_ticker") not in set(df["Ticker"]):
+        st.session_state.scroll_target = PANEL_SELECTOR
+    elif st.session_state.get("panel_ticker") not in set(df["Ticker"]):
         st.session_state.panel_ticker = None
     open_ticker = st.session_state.panel_ticker
 
@@ -409,6 +439,7 @@ if "df_data" in st.session_state and not st.session_state.df_data.empty:
                 ticker, row.to_dict(), meta.get("history", {}).get(ticker),
                 meta.get("events", {}).get(ticker), market_today(),
                 meta.get("record_generated"), name=SHARED.get(ticker, {}).get("name"),
+                actions=panel_actions,
             )
     else:
         st.caption("Click a ticker for its chart, upcoming events, fundamentals and news.")
@@ -527,6 +558,10 @@ st.caption(
 
 scroll_target = st.session_state.pop("scroll_target", None)
 if scroll_target:
+    # Streamlit keeps an iframe whose content has not changed instead of reloading
+    # it, so an identical script would only scroll the first time. The counter makes
+    # every request a new document.
+    st.session_state.scroll_requests = st.session_state.get("scroll_requests", 0) + 1
     focus_editor = "true" if scroll_target == EDITOR_SELECTOR else "false"
     # A tall panel should open at its top; short targets read best centred.
     block = "start" if scroll_target == PANEL_SELECTOR else "center"
@@ -534,6 +569,7 @@ if scroll_target:
     st.iframe(
         f"""
         <script>
+            // request {st.session_state.scroll_requests}
             setTimeout(function () {{
                 try {{
                     const doc = window.parent.document;

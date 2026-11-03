@@ -300,18 +300,25 @@ def render_news(ticker):
     st.caption("Headlines from Finnhub. Links open the original article.")
 
 
-def render(ticker, row, history, events, today, generated, name=None):
-    """The whole panel for one selected ticker."""
+def render(ticker, row, history, events, today, generated, name=None, actions=None):
+    """The whole panel for one selected ticker.
+
+    actions, if given, draws the panel's buttons at the right of the heading.
+    """
     profile = finnhub_client.profile(ticker)
     title = (profile or {}).get("name") or name or ""
     heading = f"##### {ticker}{' · ' + title if title else ''}"
     logo = (profile or {}).get("logo")
-    if logo and logo.startswith("https://"):
-        logo_col, title_col = st.columns([1, 14], vertical_alignment="center")
-        logo_col.image(logo, width=40)
-        title_col.markdown(heading)
-    else:
-        st.markdown(heading)
+    has_logo = bool(logo and logo.startswith("https://"))
+    widths = ([1] if has_logo else []) + ([11, 3] if actions else [14])
+    cols = st.columns(widths, vertical_alignment="center")
+    if has_logo:
+        cols.pop(0).image(logo, width=40)
+    cols[0].markdown(heading)
+    if actions:
+        with cols[1]:
+            with st.container(horizontal=True, horizontal_alignment="right"):
+                actions()
 
     facts = []
     if profile:
