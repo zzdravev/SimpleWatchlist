@@ -115,6 +115,15 @@ def _num(value, digits=2):
     return f"{value:.{digits}f}"
 
 
+def _calendar_quarter(period):
+    """'2026-09-30' -> 'Q3 2026': the calendar quarter Finnhub files the report under."""
+    try:
+        d = date.fromisoformat(str(period)[:10])
+    except ValueError:
+        return "N/A"
+    return f"Q{(d.month - 1) // 3 + 1} {d.year}"
+
+
 def external_links(ticker, profile):
     """Yahoo Finance, TradingView and the company's own site."""
     links = [f"[Yahoo Finance](https://finance.yahoo.com/quote/{quote(ticker)})"]
@@ -260,12 +269,18 @@ def render_fundamentals(ticker):
     with right:
         st.markdown("**Last four reports**")
         if history:
-            table = pd.DataFrame([{
-                "Quarter": f"Q{h.get('quarter')} {h.get('year')}",
+            rows = [{
+                "Quarter": _calendar_quarter(h.get("period")),
+                "Fiscal": f"FQ{h.get('quarter')} {h.get('year')}",
                 "EPS estimate": _num(h.get("estimate")),
                 "EPS actual": _num(h.get("actual")),
                 "Surprise": _pct(h.get("surprisePercent")),
-            } for h in history[:4]])
+            } for h in history[:4]]
+            table = pd.DataFrame(rows)
+            # Finnhub's year and quarter are the company's fiscal ones (NVIDIA's FY2027
+            # is mostly calendar 2026); show them only where they differ from the calendar.
+            if all(r["Fiscal"] == "F" + r["Quarter"] for r in rows):
+                table = table.drop(columns="Fiscal")
             st.dataframe(table, hide_index=True, width="stretch")
         else:
             st.caption("No earnings history.")
