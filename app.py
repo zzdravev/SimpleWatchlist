@@ -114,6 +114,10 @@ def toggle_editor():
     st.session_state.scroll_target = EDITOR_SELECTOR if st.session_state.show_editor else None
 
 
+def toggle_admin():
+    st.session_state.show_admin = not st.session_state.get("show_admin", False)
+
+
 def save_columns():
     visible = set(st.session_state.visible_columns)
     browser_store.write("hidden_columns", [c for c in OPTIONAL_COLUMNS if c not in visible])
@@ -491,9 +495,10 @@ if st.session_state.show_editor:
 
 st.divider()
 
-with st.expander("How to read this table"):
-    st.markdown(
-        """
+with st.container(horizontal=True, vertical_alignment="top", key="guide-row"):
+    with st.expander("How to read this table"):
+        st.markdown(
+            """
 The table scans a watchlist for **dips worth buying into**, in the spirit of dollar-cost
 averaging. Every indicator is computed from the last year of daily closes.
 
@@ -558,10 +563,15 @@ the default.
 valuation, debt, news or anything fundamental. It measures how a price sits relative to
 its own recent range, and those relationships hold on average, not in any individual case.
 """
-    )
+        )
+    # Rarely used and only by the maintainer, so it is a bare icon beside the guide.
+    st.button("", icon=":material/settings:", key="admin_toggle", on_click=toggle_admin,
+              help="Manage the shared list")
 
-with st.expander("Manage the shared list"):
-    universe_admin.render(SHARED)
+if st.session_state.get("show_admin"):
+    with st.container(border=True, key="admin-panel"):
+        st.markdown("**Manage the shared list**")
+        universe_admin.render(SHARED)
 
 st.button("\u2191 Table", key="bottom_back", on_click=back_to_table, help="Back to the top of the table.")
 
