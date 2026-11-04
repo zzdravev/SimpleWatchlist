@@ -563,6 +563,8 @@ its own recent range, and those relationships hold on average, not in any indivi
 with st.expander("Manage the shared list"):
     universe_admin.render(SHARED)
 
+st.button("\u2191 Table", key="bottom_back", on_click=back_to_table, help="Back to the top of the table.")
+
 st.caption(
     "Technical indicators for research only, not financial advice. Signals are derived from "
     "past prices and say nothing certain about future returns. Data comes from Yahoo Finance "
