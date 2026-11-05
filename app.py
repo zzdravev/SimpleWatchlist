@@ -7,7 +7,7 @@ import finnhub_client
 import ticker_panel
 import universe_admin
 import watchlist
-from engine import get_financial_data, market_today
+from engine import DEFAULT_TICKERS, get_financial_data, market_today
 from ticker_panel import short_date
 
 st.set_page_config(page_title="Simple Watchlist", layout="wide")
@@ -74,6 +74,7 @@ if "visible_columns" not in st.session_state:
 if store_ready and not st.session_state.get("saved_choices_applied"):
     st.session_state.saved_choices_applied = True
     st.session_state.watchlist = watchlist.saved_or_default()
+    st.session_state.picker_version = st.session_state.get("picker_version", 0) + 1
     st.session_state.visible_columns = saved_visible_columns()
 
 
@@ -123,12 +124,69 @@ def save_columns():
     browser_store.write("hidden_columns", [c for c in OPTIONAL_COLUMNS if c not in visible])
 
 
+# st.session_state.watchlist is the list itself; the multiselect only edits it. The
+# multiselect in the browser ignores a new value that differs from its own only in
+# order, and then sends its old order back on the next run, so whenever code changes
+# the list it gets a fresh key and is drawn anew from the list.
+def picker_key():
+    return f"watchlist_picker_{st.session_state.get('picker_version', 0)}"
+
+
+def set_watchlist(tickers):
+    st.session_state.watchlist = list(tickers)
+    st.session_state.picker_version = st.session_state.get("picker_version", 0) + 1
+    watchlist.save(tickers)
+
+
 def save_watchlist():
-    valid, rejected = watchlist.normalise(st.session_state.watchlist)
+    valid, rejected = watchlist.normalise(st.session_state[picker_key()])
+    # The multiselect's clear-all icon empties the list in one click, which is easy
+    # to hit by accident, so that change waits for a confirmation. Removing the last
+    # remaining ticker by its own x is a deliberate single removal and goes through.
+    if not valid and not rejected and len(st.session_state.watchlist) > 1:
+        st.session_state.confirm_change = "clear"
+        st.session_state.picker_version = st.session_state.get("picker_version", 0) + 1
+        return
+    st.session_state.pop("confirm_change", None)
     # Allowed inside a callback: it runs before the widget is drawn again.
+    st.session_state[picker_key()] = valid
     st.session_state.watchlist = valid
     st.session_state.rejected_tickers = rejected
     watchlist.save(valid)
+
+
+def ask_reset():
+    st.session_state.confirm_change = "reset"
+
+
+def confirm_change():
+    change = st.session_state.pop("confirm_change", None)
+    if change == "clear":
+        set_watchlist([])
+    elif change == "reset":
+        set_watchlist(DEFAULT_TICKERS)
+
+
+def cancel_change():
+    st.session_state.pop("confirm_change", None)
+
+
+def move_ticker(step):
+    """Move the ticker picked under Order: step is -1, 1, "top" or "bottom"."""
+    picked = st.session_state.get("order_pick")
+    tickers = list(st.session_state.watchlist)
+    if picked not in tickers:
+        return
+    position = tickers.index(picked)
+    tickers.pop(position)
+    if step == "top":
+        position = 0
+    elif step == "bottom":
+        position = len(tickers)
+    else:
+        position = min(max(position + step, 0), len(tickers))
+    tickers.insert(position, picked)
+    set_watchlist(tickers)
 
 
 def back_to_table():
@@ -175,7 +233,8 @@ should_refresh = (
     st.session_state.pop("force_refresh", False)
     or "df_data" not in st.session_state
     or stale_schema
-    or st.session_state.get("last_tickers") != tickers
+    # Order alone needs no new download: the rows are put in watchlist order below.
+    or sorted(st.session_state.get("last_tickers") or []) != sorted(tickers)
 )
 
 # On a session's very first run the saved watchlist is not known yet, and fetching
@@ -208,6 +267,11 @@ if st.session_state.get("errors"):
 
 if "df_data" in st.session_state and not st.session_state.df_data.empty:
     df = st.session_state.df_data.copy()
+    # The data cache is keyed on the sorted tickers, so it can return rows in an
+    # earlier order; the table always follows the watchlist as it is now.
+    position = {t: i for i, t in enumerate(tickers)}
+    df = df.sort_values("Ticker", key=lambda col: col.map(position).fillna(len(position)),
+                        kind="stable").reset_index(drop=True)
 
     # "Market" drives the status caption rather than a column of its own
     market_states = sorted({s for s in df["Market"] if s and s != "UNKNOWN"})
@@ -472,10 +536,12 @@ if st.session_state.show_editor:
     with st.container(key="ticker-editor"):
         # Extras stay in the options so a saved one is still a valid value.
         options = list(SHARED) + watchlist.extras(st.session_state.watchlist, SHARED)
-        # persist_state keeps the value when the editor is collapsed; without it
-        # Streamlit drops the widget state and the watchlist resets to defaults.
+        # Seeded from the list on every fresh key, which also covers reopening the
+        # editor after Streamlit dropped the state of the hidden widget.
+        if picker_key() not in st.session_state:
+            st.session_state[picker_key()] = list(st.session_state.watchlist)
         st.multiselect(
-            "Your watchlist", options, key="watchlist", persist_state="session",
+            "Your watchlist", options, key=picker_key(),
             format_func=lambda t: watchlist.label(t, SHARED), on_change=save_watchlist,
             accept_new_options=True, max_selections=watchlist.MAX_TICKERS,
             placeholder="Search the S&P 100 or type any Yahoo symbol",
@@ -487,7 +553,40 @@ if st.session_state.show_editor:
         rejected = st.session_state.pop("rejected_tickers", None)
         if rejected:
             st.warning("Not a valid symbol, so not added: " + ", ".join(rejected))
-    st.button("Refresh", key="refresh_bottom", on_click=request_refresh, kwargs={"scroll_to_top": True})
+
+        change = st.session_state.get("confirm_change")
+        if change:
+            with st.container(border=True, key="confirm-change"):
+                if change == "clear":
+                    question = f"Remove all {len(st.session_state.watchlist)} tickers from your watchlist?"
+                    yes, no = "Remove all", "Keep them"
+                else:
+                    question = (f"Replace your watchlist with the default list of "
+                                f"{len(DEFAULT_TICKERS)} tickers? Your own choices will be gone.")
+                    yes, no = "Reset", "Keep mine"
+                st.markdown(question)
+                with st.container(horizontal=True):
+                    st.button(yes, key="change_yes", type="primary", on_click=confirm_change)
+                    st.button(no, key="change_no", on_click=cancel_change)
+
+        if len(st.session_state.watchlist) > 1:
+            st.pills("Order", st.session_state.watchlist, key="order_pick", selection_mode="single",
+                     help="Pick a ticker, then move it with the arrows. The table follows "
+                          "this order.")
+            nothing_picked = st.session_state.get("order_pick") not in st.session_state.watchlist
+            with st.container(horizontal=True, key="order-buttons"):
+                for icon, step, tip in ((":material/vertical_align_top:", "top", "To the top"),
+                                        (":material/arrow_upward:", -1, "Up one"),
+                                        (":material/arrow_downward:", 1, "Down one"),
+                                        (":material/vertical_align_bottom:", "bottom", "To the bottom")):
+                    st.button("", icon=icon, key=f"move_{step}", help=tip, on_click=move_ticker,
+                              args=(step,), disabled=nothing_picked)
+    with st.container(horizontal=True):
+        st.button("Refresh", key="refresh_bottom", on_click=request_refresh,
+                  kwargs={"scroll_to_top": True})
+        if st.session_state.watchlist != DEFAULT_TICKERS:
+            st.button("Reset to default", key="reset_default", on_click=ask_reset,
+                      help="Go back to the starting list every new visitor gets.")
     st.caption(
         "Analyst targets are 12-month forward estimates and are not part of the signal logic. "
         f"An upside above {IMPLAUSIBLE_UPSIDE}% is shown in grey: the target is most likely stale."
@@ -555,9 +654,10 @@ backtest measured.
 **Your watchlist.** `Edit tickers` picks from a shared list, the S&P 100 plus a few
 others, which is refreshed every morning with analyst figures and event dates. Any
 other Yahoo symbol can be typed in too; it gets prices, signals and, for US listings,
-an earnings date, but no analyst targets or dividend dates. The list and the columns
-you show are remembered in this browser only: another browser or device starts from
-the default.
+an earnings date, but no analyst targets or dividend dates. The table follows the
+list's order: pick a ticker under `Order` and move it with the arrows. `Reset to
+default` brings back the starting list. The list and the columns you show are
+remembered in this browser only: another browser or device starts from the default.
 
 **What this does not do.** Apart from those dates it knows nothing about earnings,
 valuation, debt, news or anything fundamental. It measures how a price sits relative to
