@@ -114,6 +114,9 @@
         "finnhub": "2027-01-27",
         "revenue_estimate": 155609523242,
         "yahoo": "2027-01-28"
+      },
+      "ex_dividend": {
+        "date": "2026-11-12"
       }
     },
     "ABBV": {
@@ -438,20 +441,21 @@
       "earnings": {
         "confirmed": true,
         "date": "2026-11-12",
-        "finnhub": "2026-11-18",
+        "eps_estimate": 1.3512,
+        "finnhub": "2026-11-12",
         "hour": "amc",
+        "revenue_estimate": 18479907548,
         "yahoo": "2026-11-12"
       }
     },
     "CVS": {
       "earnings": {
-        "confirmed": true,
-        "date": "2026-11-04",
-        "eps_estimate": 1.667,
-        "finnhub": "2026-11-04",
-        "hour": "bmo",
-        "revenue_estimate": 105741861120,
-        "yahoo": "2026-11-04"
+        "confirmed": false,
+        "date": "2027-02-08",
+        "eps_estimate": 1.2563,
+        "finnhub": "2027-02-08",
+        "revenue_estimate": 107932602630,
+        "yahoo": null
       }
     },
     "CVX": {
@@ -535,13 +539,12 @@
     },
     "EMR": {
       "earnings": {
-        "confirmed": true,
-        "date": "2026-11-04",
-        "eps_estimate": 1.8733,
-        "finnhub": "2026-11-04",
-        "hour": "bmo",
-        "revenue_estimate": 5169216117,
-        "yahoo": "2026-11-04"
+        "confirmed": false,
+        "date": "2027-02-02",
+        "eps_estimate": 1.6414,
+        "finnhub": "2027-02-01",
+        "revenue_estimate": 4646873650,
+        "yahoo": "2027-02-02"
       }
     },
     "FDX": {
@@ -816,9 +819,6 @@
       }
     },
     "LOW": {
-      "dividend_payment": {
-        "date": "2026-11-04"
-      },
       "earnings": {
         "confirmed": true,
         "date": "2026-11-18",
@@ -857,13 +857,12 @@
         "date": "2026-12-15"
       },
       "earnings": {
-        "confirmed": true,
-        "date": "2026-11-04",
-        "eps_estimate": 3.4184,
-        "finnhub": "2026-11-04",
-        "hour": "bmo",
-        "revenue_estimate": 7357417406,
-        "yahoo": "2026-11-04"
+        "confirmed": false,
+        "date": "2027-02-09",
+        "eps_estimate": 3.3109,
+        "finnhub": "2027-02-09",
+        "revenue_estimate": 7308765868,
+        "yahoo": null
       },
       "ex_dividend": {
         "date": "2026-12-01"
@@ -881,10 +880,13 @@
     },
     "MDT": {
       "earnings": {
-        "confirmed": false,
-        "date": "2026-11-17",
+        "confirmed": true,
+        "date": "2026-11-24",
+        "eps_estimate": 1.3447,
         "finnhub": "2026-11-24",
-        "yahoo": "2026-11-17"
+        "hour": "bmo",
+        "revenue_estimate": 9576144582,
+        "yahoo": "2026-11-24"
       }
     },
     "META": {
@@ -1039,8 +1041,10 @@
       "earnings": {
         "confirmed": true,
         "date": "2026-11-18",
-        "finnhub": "2026-11-12",
+        "eps_estimate": 0.9908,
+        "finnhub": "2026-11-18",
         "hour": "amc",
+        "revenue_estimate": 3372983960,
         "yahoo": "2026-11-18"
       }
     },
@@ -1108,13 +1112,12 @@
         "date": "2026-12-17"
       },
       "earnings": {
-        "confirmed": true,
-        "date": "2026-11-04",
-        "eps_estimate": 2.202,
-        "finnhub": "2026-11-04",
-        "hour": "amc",
-        "revenue_estimate": 10318265215,
-        "yahoo": "2026-11-04"
+        "confirmed": false,
+        "date": "2027-02-03",
+        "eps_estimate": 2.3409,
+        "finnhub": "2027-02-02",
+        "revenue_estimate": 10737296913,
+        "yahoo": "2027-02-03"
       },
       "ex_dividend": {
         "date": "2026-12-03"
@@ -1254,13 +1257,12 @@
     },
     "UBER": {
       "earnings": {
-        "confirmed": true,
-        "date": "2026-11-04",
-        "eps_estimate": 0.9838,
-        "finnhub": "2026-11-04",
-        "hour": "bmo",
-        "revenue_estimate": 14997971451,
-        "yahoo": "2026-11-04"
+        "confirmed": false,
+        "date": "2027-02-03",
+        "eps_estimate": 1.0843,
+        "finnhub": "2027-02-02",
+        "revenue_estimate": 15967744907,
+        "yahoo": "2027-02-03"
       }
     },
     "UNH": {
@@ -1376,8 +1378,8 @@
       }
     }
   },
-  "events_from": "2026-11-04",
-  "generated": "2026-11-04T13:26:04+00:00",
+  "events_from": "2026-11-05",
+  "generated": "2026-11-05T13:40:33+00:00",
   "tickers": {
     "AAPL": {
       "numberOfAnalystOpinions": 38,
